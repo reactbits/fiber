@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	devtool: 'source-map',
@@ -12,18 +14,29 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/demo/',
 	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin(),
-	],
+	resolve: {
+		extensions: ['', '.js', '.jsx', '.json', '.scss'],
+		modulesDirectories: ['node_modules', 'demo', 'src'],
+	},
 	module: {
 		loaders: [
 			{test: /\.json$/, loader: 'json'},
 			{test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/},
+			{
+        test: /(\.scss|\.css)$/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap')
+      },
 		],
 	},
-	resolve: {
-		extensions: ['', '.js', '.jsx'],
-		modulesDirectories: ['node_modules', 'demo', 'src'],
-	},
+	plugins: [
+		new ExtractTextPlugin('styles.css', { allChunks: true }),
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      }
+    }),
+	],
+	postcss: [autoprefixer],
 };
