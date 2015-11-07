@@ -10,13 +10,12 @@ module.exports = {
 		'./demo/index',
 	],
 	output: {
-		path: path.join(__dirname, 'demo'),
+		path: path.join(__dirname, 'build'),
 		filename: 'bundle.js',
-		publicPath: '/demo/',
+		publicPath: '/build/',
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx', '.json', '.scss'],
-		modulesDirectories: ['node_modules', 'demo', 'src'],
 	},
 	module: {
 		loaders: [

@@ -1,6 +1,7 @@
 process.env.UV_THREADPOOL_SIZE = 100;
 
 const express = require('express');
+const got = require('got');
 const webpack = require('webpack');
 const config = require('./webpack.config');
 
@@ -16,6 +17,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
+
+app.get('/uiface/random', function(req, res) {
+	res.header('Content-Type', 'application/json');
+  got.stream('http://uifaces.com/api/v1/random').pipe(res);
+});
 
 app.listen(port, '0.0.0.0', (err) => {
 	if (err) {
