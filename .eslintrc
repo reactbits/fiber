@@ -1,0 +1,19 @@
+{
+	"extends": "airbnb",
+
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+
+  rules: {
+  	"id-length": 0,
+  	"indent": [2, "tab"],
+  	"no-console": 0,
+  	"func-names": 0,
+  	"react/no-multi-comp": 0,
+  	"react/prop-types": 0
+  }
+}
