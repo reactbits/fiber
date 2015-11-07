@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
-import {Thread} from '../components';
+import Thread from '../components/thread';
 import EventEmitter from 'eventemitter3';
 import qwest from 'qwest';
 
 const eventSource = new EventEmitter();
 let messages = [];
 let users = [];
+
+function randomIndex(arr) {
+	return Math.floor(Math.random() * arr.length);
+}
 
 // load random users from uifaces.com
 const maxUsers = 10;
@@ -24,20 +28,21 @@ for (let i = 0; i < maxUsers; i++) {
 }
 
 // TODO support multiple sources
-const source = 'http://api.icndb.com/jokes/random';
+const source = '/jokes/random';
 
 function fetchQuote() {
 	qwest.get(source).then((xhr, response) => {
-		const body = response.body;
-		const content = body.value;
+		const data = response.value;
+		const i = randomIndex(users);
 		const msg = {
-			body: content,
-			avatar: '',
-			name: 'cat', // TODO generate name,
+			id: data.id,
+			body: data.joke,
+			avatar: users[i].image_urls.epic,
+			name: users[i].username,
 			time: '10:35 PM', // TODO generate timeline
 		};
 		messages.push(msg);
-		eventSource.fire('message', msg);
+		eventSource.emit('message', msg);
 	});
 }
 
@@ -65,11 +70,11 @@ export default class App extends Component {
 	}
 
 	componentDidMount() {
-		eventSource.on('message', this.handleMessage);
+		eventSource.on('message', this.handleMessage.bind(this));
 	}
 
 	componentWillUnmount() {
-		eventSource.off('message', this.handleMessage);
+		eventSource.off('message', this.handleMessage.bind(this));
 	}
 
 	handleMessage() {

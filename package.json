@@ -8,6 +8,7 @@
     "lint": "eslint --ext .js,.jsx .",
     "babel": "babel src --out-dir lib",
     "build:demo": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch",
     "test": "npm run lint"
   },
   "repository": {

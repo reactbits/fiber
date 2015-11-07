@@ -1,3 +1,4 @@
+import React from 'react';
 import Avatar from '../avatar';
 import Markdown from '../markdown';
 import moment from 'moment';
@@ -22,3 +23,4 @@ const Message = (props) => {
 };
 
 export default Message;
+export {Message};

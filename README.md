@@ -1,6 +1,6 @@
 # fiber
 
-React components to use in chat, email applications.
+React components to use in messaging applications.
 
 ## TODO
 

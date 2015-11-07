@@ -1,3 +1,4 @@
+import React from 'react';
 import Message from '../message';
 import style from './style';
 
@@ -23,3 +24,4 @@ const Thread = (props) => {
 };
 
 export default Thread;
+export {Thread};

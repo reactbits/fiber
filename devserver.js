@@ -23,6 +23,11 @@ app.get('/uiface/random', function(req, res) {
   got.stream('http://uifaces.com/api/v1/random').pipe(res);
 });
 
+app.get('/jokes/random', function(req, res) {
+	res.header('Content-Type', 'application/json');
+	got.stream('http://api.icndb.com/jokes/random').pipe(res);
+});
+
 app.listen(port, '0.0.0.0', (err) => {
 	if (err) {
 		console.log(err);
