@@ -7,7 +7,7 @@
     "start": "node devserver.js",
     "lint": "eslint --ext .js,.jsx .",
     "sass": "cpx './components/**/*.scss' ./lib",
-    "babel": "babel src --out-dir lib",
+    "babel": "babel components --out-dir lib",
     "build": "NODE_ENV=production npm run babel && npm run sass",
     "build:demo": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch",
