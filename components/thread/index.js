@@ -58,7 +58,7 @@ const Thread = (props) => {
 		if (moment.isDate(time) && (i === 0 || getDay(msg) !== getDay(messages[i - 1]))) {
 			items.push(<Day key={+time} message={msg}/>);
 		}
-		items.push(<Message key={msg.id} data={msg}/>);
+		items.push(<Message key={msg.id} data={msg} avatarSize={props.avatarSize}/>);
 	}
 	return (
 		<div className={'thread ' + style.thread}>

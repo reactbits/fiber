@@ -36,7 +36,7 @@ const Message = (props) => {
 	if (isToday(time)) timeClass += ` ${style.today}`;
 	return (
 		<div className={'message ' + style.message}>
-			{data.avatar ? <Avatar source={data.avatar}/> : null}
+			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize}/> : null}
 			<div className={style.header}>
 				{data.name ? <span className={'name ' + style.name}>{data.name}</span> : null}
 				{time ? <span className={timeClass}>{ts}</span> : null}

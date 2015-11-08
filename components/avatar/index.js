@@ -10,6 +10,7 @@ const avatarSize = {
 	small: 24,
 	sm: 24,
 	s: 24,
+	normal: 32,
 	medium: 32,
 	m: 32,
 	large: 40,
@@ -35,8 +36,9 @@ const Avatar = (props) => {
 	// TODO shadow
 	const className = style.avatar;
 	const url = avatarURL(props.source);
-	const avatarStyle = props.style || {};
+	const avatarStyle = Object.assign({}, props.style || {});
 	const size = mapSize(props.size);
+	avatarStyle.marginLeft = -(size + 8);
 	return (
 		<img
 			className={'avatar ' + className} style={avatarStyle}

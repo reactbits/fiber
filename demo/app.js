@@ -9,10 +9,12 @@ const eventSource = new EventEmitter();
 const messages = [];
 const users = [
 	{
-		username: 'sergeyt',
-		image_urls: {
-			epic: 'stodyshev@gmail.com',
-		},
+		name: 'sergeyt',
+		avatar: 'stodyshev@gmail.com',
+	},
+	{
+		name: 'sergeyt',
+		avatar: 'https://robohash.org/sergeyt',
 	},
 ];
 
@@ -50,11 +52,12 @@ function fetchQuote() {
 	qwest.get(source).then((xhr, response) => {
 		const data = response.value;
 		const i = randomIndex(users);
+		const user = users[i];
 		const msg = {
 			id: messages.length + 1,
 			body: data.joke,
-			avatar: users[i].image_urls.epic,
-			name: users[i].username,
+			name: user.name,
+			avatar: user.avatar,
 			time: nextDate(),
 		};
 		messages.push(msg);
@@ -71,7 +74,10 @@ const maxUsers = 10;
 
 function fetchUser() {
 	qwest.get('/uiface/random').then((xhr, response) => {
-		users.push(response);
+		users.push({
+			name: response.username,
+			avatar: 'https://robohash.org/' + response.username, // response.image_urls.epic,
+		});
 		if (users.length >= maxUsers) {
 			fetchQuote();
 		}
@@ -114,7 +120,7 @@ export default class App extends Component {
 					</Col>
 					<Col md={6}>
 						<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
-							<Thread messages={this.state.messages}/>
+							<Thread messages={this.state.messages} avatarSize={64}/>
 						</Panel>
 					</Col>
 				</Row>
