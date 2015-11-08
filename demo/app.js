@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Thread from '../components/thread';
+import {Row, Col, Panel} from 'react-bootstrap';
 import EventEmitter from 'eventemitter3';
 import qwest from 'qwest';
 import moment from 'moment';
@@ -105,8 +106,18 @@ export default class App extends Component {
 	render() {
 		// TODO render threads pane (e.g. for different quote sources)
 		return (
-			<div className="app">
-				<Thread topic="THE INTERNET CHUCK NORRIS DATABASE" messages={this.state.messages}/>
+			<div className="app container">
+				<Row>
+					<Col md={6}>
+						<Panel header="Channels">
+						</Panel>
+					</Col>
+					<Col md={6}>
+						<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
+							<Thread messages={this.state.messages}/>
+						</Panel>
+					</Col>
+				</Row>
 			</div>
 		);
 	}
