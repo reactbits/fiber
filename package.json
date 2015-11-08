@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node devserver.js",
     "lint": "eslint --ext .js,.jsx .",
+    "sass": "cpx './components/**/*.scss' ./lib",
     "babel": "babel src --out-dir lib",
+    "build": "NODE_ENV=production npm run babel && npm run sass",
     "build:demo": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch",
     "test": "npm run lint"
@@ -41,6 +43,7 @@
     "babel-loader": "^6.0.1",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
+    "cpx": "^1.2.1",
     "css-loader": "^0.22.0",
     "eslint": "^1.8.0",
     "eslint-config-airbnb": "^0.1.0",
