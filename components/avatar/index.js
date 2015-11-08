@@ -6,8 +6,6 @@ import _ from 'lodash';
 import is from './is';
 import gravatarURL from './gravatar';
 
-// TODO get gravatars if source is email
-
 const avatarSize = {
 	small: 24,
 	sm: 24,
