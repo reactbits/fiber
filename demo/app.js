@@ -16,6 +16,10 @@ const users = [
 		name: 'sergeyt',
 		avatar: 'https://robohash.org/sergeyt',
 	},
+	{
+		name: 'noavatar',
+		avatar: 'noavatar.png',
+	},
 ];
 
 function randomIndex(arr) {

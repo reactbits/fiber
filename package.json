@@ -29,10 +29,12 @@
   },
   "homepage": "https://github.com/reactbits/fiber#readme",
   "dependencies": {
+    "halogen": "^0.1.10",
     "lodash": "^3.10.1",
     "md5": "^2.0.0",
     "moment": "^2.10.6",
     "react": "^0.14.2",
+    "react-imageloader": "^2.1.0",
     "react-markdown2": "^0.4.0"
   },
   "devDependencies": {

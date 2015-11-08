@@ -1,4 +1,6 @@
 import React from 'react';
+import ImageLoader from 'react-imageloader';
+import Spinner from 'halogen/ClipLoader';
 import style from './style';
 import _ from 'lodash';
 import is from './is';
@@ -31,19 +33,46 @@ const avatarURL = (url) => {
 	return url;
 };
 
+function preloader() {
+	const style = {
+		marginLeft: 16,
+		marginTop: 16,
+	};
+  return (
+  	<div style={style}>
+  		<Spinner color="#4DAF7C" size="32px"/>
+  	</div>
+  );
+}
+
+const RandomAvatar = (props) => {
+	// TODO render random avatar
+	const size = props.size;
+	return (
+		<img src={gravatarURL(props.src)} width={size} height={size}/>
+	);
+};
+
 const Avatar = (props) => {
 	// TODO circled
 	// TODO shadow
 	const className = style.avatar;
-	const url = avatarURL(props.source);
-	const avatarStyle = Object.assign({}, props.style || {});
+	const src = avatarURL(props.source);
 	const size = mapSize(props.size);
-	avatarStyle.marginLeft = -(size + 8);
+	const avatarStyle = Object.assign({}, props.style || {}, {
+		marginLeft: -(size + 8),
+	});
+
+	const imgProps = {
+		width: size,
+		height: size,
+	};
+
 	return (
-		<img
-			className={'avatar ' + className} style={avatarStyle}
-			src={url} width={size} height={size}
-		/>
+		<ImageLoader className={`avatar ${className}`} style={avatarStyle}
+			src={src} wrapper={React.DOM.div} preloader={preloader} imgProps={imgProps}>
+			<RandomAvatar src={src} size={size}/>
+  	</ImageLoader>
 	);
 };
 
