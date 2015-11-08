@@ -35,11 +35,11 @@ function fetchQuote() {
 		const data = response.value;
 		const i = randomIndex(users);
 		const msg = {
-			id: data.id,
+			id: messages.length + 1,
 			body: data.joke,
 			avatar: users[i].image_urls.epic,
 			name: users[i].username,
-			time: '10:35 PM', // TODO generate timeline
+			time: new Date(), // TODO generate timeline
 		};
 		messages.push(msg);
 		eventSource.emit('message', msg);

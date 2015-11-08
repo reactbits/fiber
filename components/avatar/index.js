@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './style';
+import _ from 'lodash';
 
 // TODO get gravatars if source is email
 
@@ -14,16 +15,24 @@ const avatarSize = {
   xl: 64,
 };
 
+const defaultSize = 32;
+
+function mapSize(value) {
+    if (_.isString(value)) {
+      return avatarSize[value.toLowerCase()] || defaultSize;
+    }
+    return value || defaultSize;
+}
+
 const Avatar = (props) => {
-	// TODO render avatar
+	// TODO circled
+	// TODO shadow
+	const className = style.avatar;
 	const url = props.source;
-	const style = props.style || {};
+	const avatarStyle = props.style || {};
+	const size = mapSize(props.size);
 	return (
-		<img
-			className="avatar"
-			style={style}
-			src={url}
-		/>
+		<img className={className} style={avatarStyle} src={url} width={size} height={size}/>
 	);
 };
 

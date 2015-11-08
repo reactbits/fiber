@@ -9,13 +9,17 @@ import style from './style';
 // TODO button with menu (reply, delete, star, like, etc)
 
 const Message = (props) => {
+	const className = style.message;
 	const data = props.data || props;
+	// TODO option to display age or short time
+	const time = data.updated_at || data.created_at || data.time;
+	const age = time ? moment(time).fromNow() : '';
 	return (
-		<div className="message">
+		<div className={className}>
 			<Avatar source={data.avatar}/>
-			<div className="header">
-				<span className="name">{data.name}</span>
-				<span className="time">{data.time}</span>
+			<div className={style.header}>
+				<span className={style.name}>{data.name}</span>
+				<span className={style.time}>{age}</span>
 			</div>
 			<Markdown source={data.body}/>
 		</div>

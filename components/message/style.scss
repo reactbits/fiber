@@ -1,3 +1,16 @@
-.message {
+@import "../base";
 
+.message {
+	padding: 6px 30px 3px 70px;
+}
+
+.name {
+  color: #bbb;
+}
+
+.time {
+	color: #bbb;
+	font-size: 11px;
+	font-weight: 400;
+	margin: 0 0 0 6px;
 }
