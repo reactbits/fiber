@@ -115,7 +115,8 @@ export default class App extends Component {
 			<div className="app container">
 				<Row>
 					<Col md={6}>
-						<Panel header="Channels">
+						<Panel header="Topics">
+							<span>TODO list topics</span>
 						</Panel>
 					</Col>
 					<Col md={6}>
