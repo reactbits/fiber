@@ -14,7 +14,10 @@ const getTime = (msg) => {
 };
 
 const isToday = (value) => {
-	return moment.isDate(value) && moment(value).dayOfYear() === moment().dayOfYear();
+	if (!moment.isDate(value)) return false;
+	const now = moment();
+	const m = moment(value);
+	return m.year() === now.year() && m.dayOfYear() === now.dayOfYear();
 };
 
 const formatTime = (value) => {
