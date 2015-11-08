@@ -34,14 +34,14 @@ const avatarURL = (url) => {
 };
 
 function preloader() {
-	const style = {
+	const css = {
 		marginLeft: 16,
 		marginTop: 16,
 	};
-  return (
-  	<div style={style}>
-  		<Spinner color="#4DAF7C" size="32px"/>
-  	</div>
+	return (
+		<div style={css}>
+			<Spinner color="#4DAF7C" size="32px"/>
+		</div>
   );
 }
 
