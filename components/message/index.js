@@ -18,8 +18,7 @@ const isToday = (value) => {
 };
 
 const formatTime = (value) => {
-	if (!value || _.isString(value))
-		return '';
+	if (!value || _.isString(value)) return '';
 	if (isToday(value)) {
 		return moment(value).fromNow();
 	}
@@ -27,14 +26,13 @@ const formatTime = (value) => {
 };
 
 const Message = (props) => {
-	let className = style.message;
 	const data = props.data || props;
 	const time = getTime(data);
 	const ts = formatTime(time);
 	let timeClass = `time ${style.time}`;
 	if (isToday(time)) timeClass += ` ${style.today}`;
 	return (
-		<div className={'message ' + className}>
+		<div className={'message ' + style.message}>
 			{data.avatar ? <Avatar source={data.avatar}/> : null}
 			<div className={style.header}>
 				{data.name ? <span className={'name ' + style.name}>{data.name}</span> : null}

@@ -16,7 +16,7 @@ const Topic = (props) => {
 };
 
 const getDay = (msg) => {
-	var time = getTime(msg);
+	const time = getTime(msg);
 	return moment.isDate(time) ? moment(time).dayOfYear() : -1;
 };
 
@@ -25,7 +25,7 @@ const formatDay = (time) => {
 	const day = now.dayOfYear();
 	const m = moment(time);
 	// this year
-	if (m.year() == now.year()) {
+	if (m.year() === now.year()) {
 		if (m.dayOfYear() === day) {
 			// TODO localization
 			return 'Today';
@@ -35,7 +35,7 @@ const formatDay = (time) => {
 			return 'Yesterday';
 		}
 		// this week
-		if (m.week() == now.week()) {
+		if (m.week() === now.week()) {
 			return m.format('dddd');
 		}
 		return m.format('MMMM D, dddd');
