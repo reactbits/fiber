@@ -38,7 +38,10 @@ const Avatar = (props) => {
 	const avatarStyle = props.style || {};
 	const size = mapSize(props.size);
 	return (
-		<img className={className} style={avatarStyle} src={url} width={size} height={size}/>
+		<img
+			className={'avatar ' + className} style={avatarStyle}
+			src={url} width={size} height={size}
+		/>
 	);
 };
 

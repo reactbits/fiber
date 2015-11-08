@@ -1,26 +1,69 @@
 import React from 'react';
-import Message from '../message';
+import Message, {getTime} from '../message';
 import style from './style';
+import moment from 'moment';
 
-const Topic = (props) => {
-	const className = style.topic;
+const Text = (props) => {
 	return (
-		<div className={className}>
-		{props.text || ''}
+		<div className={props.className}>
+			{props.text || ''}
 		</div>
 	);
 };
 
+const Topic = (props) => {
+	return <Text className={'topic ' + style.topic} text={props.text}/>;
+};
+
+const getDay = (msg) => {
+	var time = getTime(msg);
+	return moment.isDate(time) ? moment(time).dayOfYear() : -1;
+};
+
+const formatDay = (time) => {
+	const now = moment();
+	const day = now.dayOfYear();
+	const m = moment(time);
+	// this year
+	if (m.year() == now.year()) {
+		if (m.dayOfYear() === day) {
+			// TODO localization
+			return 'Today';
+		}
+		if (m.dayOfYear() === day - 1) {
+			// TODO localization
+			return 'Yesterday';
+		}
+		// this week
+		if (m.week() == now.week()) {
+			return m.format('dddd');
+		}
+		return m.format('MMMM D, dddd');
+	}
+	return m.format('MMMM D YYYY, dddd');
+};
+
+const Day = (props) => {
+	const time = getTime(props.message || {});
+	const text = formatDay(time);
+	return <Text className={'day ' + style.day} text={text}/>;
+};
+
 const Thread = (props) => {
-	// TODO group messages by day
-	const className = style.thread;
-	const messages = (props.messages || []).map(msg => {
-		return <Message key={msg.id} data={msg}/>;
-	});
+	const messages = props.messages || [];
+	const items = [];
+	for (let i = 0; i < messages.length; i++) {
+		const msg = messages[i];
+		const time = getTime(msg);
+		if (moment.isDate(time) && (i === 0 || getDay(msg) !== getDay(messages[i - 1]))) {
+			items.push(<Day key={+time} message={msg}/>);
+		}
+		items.push(<Message key={msg.id} data={msg}/>);
+	}
 	return (
-		<div className={className}>
-			<Topic text={props.topic}/>
-			{messages}
+		<div className={'thread ' + style.thread}>
+			{props.topic ? <Topic text={props.topic}/> : null}
+			{items}
 		</div>
 	);
 };

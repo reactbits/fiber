@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Thread from '../components/thread';
 import EventEmitter from 'eventemitter3';
 import qwest from 'qwest';
+import moment from 'moment';
 
 const eventSource = new EventEmitter();
 const messages = [];
@@ -18,6 +19,29 @@ function randomIndex(arr) {
 	return Math.floor(Math.random() * arr.length);
 }
 
+const timeline = [
+	// previous year
+	moment().subtract(1, 'years').subtract(45, 'minutes').toDate(),
+	moment().subtract(1, 'years').subtract(53, 'minutes').toDate(),
+	// previous week
+	moment().subtract(7, 'days').subtract(45, 'minutes').toDate(),
+	moment().subtract(7, 'days').subtract(53, 'minutes').toDate(),
+	// yesterday
+	moment().subtract(2, 'days').subtract(45, 'minutes').toDate(),
+	moment().subtract(2, 'days').subtract(53, 'minutes').toDate(),
+	// today
+	moment().subtract(1, 'days').subtract(32, 'minutes').toDate(),
+	moment().subtract(1, 'days').subtract(42, 'minutes').toDate(),
+];
+
+function nextDate() {
+	const i = messages.length;
+	if (i < timeline.length) {
+		return timeline[i];
+	}
+	return new Date();
+}
+
 // TODO support multiple sources
 const source = '/jokes/random';
 
@@ -30,16 +54,16 @@ function fetchQuote() {
 			body: data.joke,
 			avatar: users[i].image_urls.epic,
 			name: users[i].username,
-			time: new Date(), // TODO generate timeline
+			time: nextDate(),
 		};
 		messages.push(msg);
 		eventSource.emit('message', msg);
+
+		if (messages.length < 100) {
+			setTimeout(fetchQuote, 1000);
+		}
 	});
 }
-
-const run = () => {
-	setInterval(fetchQuote, 1000);
-};
 
 // load random users from uifaces.com
 const maxUsers = 10;
@@ -48,7 +72,7 @@ function fetchUser() {
 	qwest.get('/uiface/random').then((xhr, response) => {
 		users.push(response);
 		if (users.length >= maxUsers) {
-			run();
+			fetchQuote();
 		}
 	});
 }
