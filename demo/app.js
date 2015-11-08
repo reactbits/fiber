@@ -4,27 +4,11 @@ import EventEmitter from 'eventemitter3';
 import qwest from 'qwest';
 
 const eventSource = new EventEmitter();
-let messages = [];
-let users = [];
+const messages = [];
+const users = [];
 
 function randomIndex(arr) {
 	return Math.floor(Math.random() * arr.length);
-}
-
-// load random users from uifaces.com
-const maxUsers = 10;
-
-function fetchUser() {
-	qwest.get('/uiface/random').then((xhr, response) => {
-		users.push(response);
-		if (users.length == maxUsers) {
-			run();
-		}
-	});
-}
-
-for (let i = 0; i < maxUsers; i++) {
-	fetchUser();
 }
 
 // TODO support multiple sources
@@ -50,23 +34,29 @@ const run = () => {
 	setInterval(fetchQuote, 1000);
 };
 
+// load random users from uifaces.com
+const maxUsers = 10;
+
+function fetchUser() {
+	qwest.get('/uiface/random').then((xhr, response) => {
+		users.push(response);
+		if (users.length === maxUsers) {
+			run();
+		}
+	});
+}
+
+for (let i = 0; i < maxUsers; i++) {
+	fetchUser();
+}
+
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			messages: messages
+			messages: messages,
 		};
-	}
-
-	render() {
-		// TODO render threads pane (e.g. for different quote sources)
-		const messages = this.state.messages || [];
-		return (
-			<div className="app">
-				<Thread topic="THE INTERNET CHUCK NORRIS DATABASE" messages={messages}/>
-			</div>
-		);
 	}
 
 	componentDidMount() {
@@ -79,5 +69,14 @@ export default class App extends Component {
 
 	handleMessage() {
 		this.setState({messages: messages});
+	}
+
+	render() {
+		// TODO render threads pane (e.g. for different quote sources)
+		return (
+			<div className="app">
+				<Thread topic="THE INTERNET CHUCK NORRIS DATABASE" messages={this.state.messages}/>
+			</div>
+		);
 	}
 }

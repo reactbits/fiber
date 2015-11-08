@@ -5,24 +5,21 @@ import _ from 'lodash';
 // TODO get gravatars if source is email
 
 const avatarSize = {
-  small: 24,
-  sm: 24,
-  s: 24,
-  medium: 32,
-  m: 32,
-  large: 40,
-  l: 40,
-  xl: 64,
+	small: 24,
+	sm: 24,
+	s: 24,
+	medium: 32,
+	m: 32,
+	large: 40,
+	l: 40,
+	xl: 64,
 };
 
 const defaultSize = 32;
 
-function mapSize(value) {
-    if (_.isString(value)) {
-      return avatarSize[value.toLowerCase()] || defaultSize;
-    }
-    return value || defaultSize;
-}
+const mapSize = (value) => {
+	return (_.isString(value) ? avatarSize[value.toLowerCase()] : value) || defaultSize;
+};
 
 const Avatar = (props) => {
 	// TODO circled
