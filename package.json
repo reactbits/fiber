@@ -28,6 +28,7 @@
   "homepage": "https://github.com/reactbits/fiber#readme",
   "dependencies": {
     "lodash": "^3.10.1",
+    "md5": "^2.0.0",
     "moment": "^2.10.6",
     "react": "^0.14.2",
     "react-markdown2": "^0.4.0"

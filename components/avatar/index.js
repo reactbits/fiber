@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './style';
 import _ from 'lodash';
+import is from './is';
+import gravatarURL from './gravatar';
 
 // TODO get gravatars if source is email
 
@@ -21,11 +23,18 @@ const mapSize = (value) => {
 	return (_.isString(value) ? avatarSize[value.toLowerCase()] : value) || defaultSize;
 };
 
+const avatarURL = (url) => {
+	if (is.email(url)) {
+		return gravatarURL(url);
+	}
+	return url;
+};
+
 const Avatar = (props) => {
 	// TODO circled
 	// TODO shadow
 	const className = style.avatar;
-	const url = props.source;
+	const url = avatarURL(props.source);
 	const avatarStyle = props.style || {};
 	const size = mapSize(props.size);
 	return (

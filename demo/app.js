@@ -5,7 +5,14 @@ import qwest from 'qwest';
 
 const eventSource = new EventEmitter();
 const messages = [];
-const users = [];
+const users = [
+	{
+		username: 'sergeyt',
+		image_urls: {
+			epic: 'stodyshev@gmail.com',
+		},
+	},
+];
 
 function randomIndex(arr) {
 	return Math.floor(Math.random() * arr.length);
@@ -40,7 +47,7 @@ const maxUsers = 10;
 function fetchUser() {
 	qwest.get('/uiface/random').then((xhr, response) => {
 		users.push(response);
-		if (users.length === maxUsers) {
+		if (users.length >= maxUsers) {
 			run();
 		}
 	});
