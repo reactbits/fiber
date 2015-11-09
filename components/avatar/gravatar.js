@@ -1,5 +1,6 @@
 import md5 from 'md5';
 import _ from 'lodash';
+import queryString from 'query-string';
 
 const defaultOptions = {
 	d: 'retro',
@@ -7,11 +8,6 @@ const defaultOptions = {
 
 function isHash(s) {
 	return /^[a-f0-9]{32}$/i.test((s || '').trim().toLowerCase());
-}
-
-function queryString(options) {
-	const str = _.map(options, (val, key) => key + '=' + encodeURIComponent(val)).join('&');
-	return str.length > 0 ? '?' + str : str;
 }
 
 // TODO cash gravatar URLs
@@ -24,7 +20,10 @@ export default function gravatarURL(email, size = 32, options = defaultOptions) 
 		url += md5(email.toLowerCase());
 	}
 
-	url += queryString(Object.assign({s: size}, options));
+	const qs = queryString.stringify(Object.assign({s: size}, options));
+	if (qs) {
+		url += '?' + qs;
+	}
 
 	return url;
 }
