@@ -1,5 +1,4 @@
 import md5 from 'md5';
-import _ from 'lodash';
 import queryString from 'query-string';
 
 const defaultOptions = {
