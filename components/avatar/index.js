@@ -54,7 +54,6 @@ const RandomAvatar = (props) => {
 const Avatar = (props) => {
 	// TODO circled
 	// TODO shadow
-	const className = style.avatar;
 	const src = avatarURL(props.source);
 	const size = mapSize(props.size);
 	const avatarStyle = Object.assign({}, props.style || {}, {
@@ -66,8 +65,12 @@ const Avatar = (props) => {
 		height: size,
 	};
 
+	if (props.name) {
+		imgProps.title = props.name;
+	}
+
 	return (
-		<ImageLoader className={`avatar ${className}`} style={avatarStyle}
+		<ImageLoader className={`avatar ${style.avatar}`} style={avatarStyle}
 			src={src} wrapper={React.DOM.div} preloader={preloader} imgProps={imgProps}>
 			<RandomAvatar src={src} size={size}/>
   	</ImageLoader>

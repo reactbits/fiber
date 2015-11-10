@@ -21,25 +21,54 @@ const isToday = (value) => {
 };
 
 const formatTime = (value) => {
-	if (!value || _.isString(value)) return '';
+	if (!value) {
+		return '';
+	}
+	if (_.isString(value)) {
+		return value;
+	}
 	if (isToday(value)) {
 		return moment(value).fromNow();
 	}
 	return moment(value).format('HH:mm');
 };
 
+const Age = (props) => {
+	const time = props.time;
+	const text = formatTime(time);
+
+	let className = `time ${style.time}`;
+	if (isToday(time)) {
+		className += ` ${style.today}`;
+	}
+
+	const attrs = {
+		className: className,
+	};
+
+	if (moment.isDate(time)) {
+		attrs.title = moment(time).format('ddd MMM D YYYY HH:mm:ss');
+	}
+
+	return (
+		<span {...attrs}>{text}</span>
+	);
+};
+
 const Message = (props) => {
 	const data = props.data || props;
 	const time = getTime(data);
+
 	const ts = formatTime(time);
 	let timeClass = `time ${style.time}`;
 	if (isToday(time)) timeClass += ` ${style.today}`;
+
 	return (
 		<div className={'message ' + style.message}>
-			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize}/> : null}
+			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize} name={data.name}/> : null}
 			<div className={style.header}>
 				{data.name ? <span className={'name ' + style.name}>{data.name}</span> : null}
-				{time ? <span className={timeClass}>{ts}</span> : null}
+				{time ? <Age time={time}/> : null}
 			</div>
 			<Markdown source={data.body}/>
 		</div>
