@@ -65,11 +65,15 @@ const Message = (props) => {
 	const data = props.data || props;
 	const time = getTime(data);
 	const likes = data.likes || 0;
+	// TODO support data.replies as promise
 	const replies = data.replies || [];
 	// TODO render admin badge
 	// TODO customize action glyph icons
 	// TODO spam icon
-	// TODO star icon
+	// TODO render replies on reply count click or message click
+	const replyElements = replies.map(d => {
+		return <Message data={d}/>;
+	});
 	return (
 		<div className={className} data-id={data.id}>
 			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize} name={data.name}/> : null}
@@ -90,6 +94,7 @@ const Message = (props) => {
 			<div className='body'>
 				<Markdown source={data.body}/>
 			</div>
+			{replyElements}
 		</div>
 	);
 };

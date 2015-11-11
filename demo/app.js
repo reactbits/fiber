@@ -77,7 +77,7 @@ function makeMessage() {
 function pushMessage(msg) {
 	messages.push(msg);
 	eventSource.emit('message', msg);
-	if (messages.length < 100) {
+	if (messages.length < 25) {
 		setTimeout(fetchQuote, 1000);
 	}
 }
@@ -86,6 +86,7 @@ function fetchQuote() {
 	makeMessage().then((msg) => {
 		const n = rnd(0, 3);
 		if (n > 0) {
+			// TODO async loading of replies
 			return Promise.all(_.range(n).map(makeMessage)).then((replies) => {
 				msg.replies = replies;
 				pushMessage(msg);
@@ -140,12 +141,12 @@ export default class App extends Component {
 		return (
 			<div className="app container">
 				<Row>
-					<Col md={6}>
+					<Col md={4}>
 						<Panel header="Topics">
 							<span>TODO list topics</span>
 						</Panel>
 					</Col>
-					<Col md={6}>
+					<Col md={8}>
 						<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
 							<Thread messages={this.state.messages} avatarSize={64}/>
 						</Panel>
