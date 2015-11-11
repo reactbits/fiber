@@ -66,6 +66,7 @@ const makeWrapper = (title) => {
 const Avatar = (props) => {
 	// TODO circled
 	// TODO shadow
+	const className = `avatar ${style.avatar} ${props.className}`;
 	const src = avatarURL(props.source);
 	const size = mapSize(props.size);
 	const avatarStyle = {
@@ -81,11 +82,24 @@ const Avatar = (props) => {
 	const wrapper = makeWrapper(props.name);
 
 	return (
-		<ImageLoader className={`avatar ${style.avatar}`} style={avatarStyle}
+		<ImageLoader className={className} style={avatarStyle}
 			src={src} wrapper={wrapper} preloader={preloader} imgProps={imgProps}>
 			<RandomAvatar src={src} size={size}/>
 		</ImageLoader>
 	);
+};
+
+Avatar.propTypes = {
+  className: React.PropTypes.string,
+  source: React.PropTypes.string,
+  size: React.PropTypes.string,
+  style: React.PropTypes.object,
+};
+
+Avatar.defaultProps = {
+	className: '',
+	size: 'normal',
+	style: {},
 };
 
 export default Avatar;

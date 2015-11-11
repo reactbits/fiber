@@ -50,6 +50,7 @@ const Day = (props) => {
 };
 
 const Thread = (props) => {
+	const className = `thread ${style.thread} ${props.className}`;
 	const messages = props.messages || [];
 	const items = [];
 	for (let i = 0; i < messages.length; i++) {
@@ -61,11 +62,23 @@ const Thread = (props) => {
 		items.push(<Message key={msg.id} data={msg} avatarSize={props.avatarSize}/>);
 	}
 	return (
-		<div className={'thread ' + style.thread}>
+		<div className={className}>
 			{props.topic ? <Topic text={props.topic}/> : null}
 			{items}
 		</div>
 	);
+};
+
+Thread.propTypes = {
+	className: React.PropTypes.string,
+	topic: React.PropTypes.string,
+	messages: React.PropTypes.array,
+};
+
+Thread.defaultProps = {
+	className: '',
+	topic: '',
+	messages: [],
 };
 
 export default Thread;

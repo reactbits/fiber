@@ -56,10 +56,11 @@ const Age = ({time}) => {
 };
 
 const Message = (props) => {
+	const className = `message ${style.message} ${props.className}`;
 	const data = props.data || props;
 	const time = getTime(data);
 	return (
-		<div className={'message ' + style.message}>
+		<div className={className}>
 			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize} name={data.name}/> : null}
 			<div className={style.header}>
 				{data.name ? <span className={'name ' + style.name}>{data.name}</span> : null}
@@ -68,6 +69,18 @@ const Message = (props) => {
 			<Markdown source={data.body}/>
 		</div>
 	);
+};
+
+Message.propTypes = {
+	className: React.PropTypes.string,
+	data: React.PropTypes.object,
+	avatarSize: React.PropTypes.string,
+};
+
+Message.defaultProps = {
+	className: '',
+	data: {},
+	avatarSize: '',
 };
 
 export default Message;
