@@ -4,6 +4,7 @@ import {Row, Col, Panel} from 'react-bootstrap';
 import EventEmitter from 'eventemitter3';
 import qwest from 'qwest';
 import moment from 'moment';
+import _ from 'lodash';
 
 const eventSource = new EventEmitter();
 const messages = [];
@@ -24,6 +25,10 @@ const users = [
 
 function randomIndex(arr) {
 	return Math.floor(Math.random() * arr.length);
+}
+
+function rnd(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const timeline = [
@@ -51,25 +56,42 @@ function nextDate() {
 
 // TODO support multiple sources
 const source = '/jokes/random';
+let nextId = 1;
 
-function fetchQuote() {
-	qwest.get(source).then((xhr, response) => {
+function makeMessage() {
+	return qwest.get(source).then((xhr, response) => {
 		const data = response.value;
 		const i = randomIndex(users);
 		const user = users[i];
-		const msg = {
-			id: messages.length + 1,
+		return {
+			id: nextId++,
 			body: data.joke,
 			name: user.name,
 			avatar: user.avatar,
 			time: nextDate(),
+			likes: rnd(0, 10),
 		};
-		messages.push(msg);
-		eventSource.emit('message', msg);
+	});
+}
 
-		if (messages.length < 100) {
-			setTimeout(fetchQuote, 1000);
+function pushMessage(msg) {
+	messages.push(msg);
+	eventSource.emit('message', msg);
+	if (messages.length < 100) {
+		setTimeout(fetchQuote, 1000);
+	}
+}
+
+function fetchQuote() {
+	makeMessage().then((msg) => {
+		const n = rnd(0, 3);
+		if (n > 0) {
+			return Promise.all(_.range(n).map(makeMessage)).then((replies) => {
+				msg.replies = replies;
+				pushMessage(msg);
+			});
 		}
+		pushMessage(msg);
 	});
 }
 

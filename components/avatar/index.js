@@ -92,7 +92,7 @@ const Avatar = (props) => {
 Avatar.propTypes = {
 	className: React.PropTypes.string,
 	source: React.PropTypes.string,
-	size: React.PropTypes.string,
+	size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 	style: React.PropTypes.object,
 };
 

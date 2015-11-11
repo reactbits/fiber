@@ -55,18 +55,41 @@ const Age = ({time}) => {
 	);
 };
 
+const UserName = (props) => {
+	const className = `name ${style.name}`;
+	return <span className={className}>{props.name}</span>;
+};
+
 const Message = (props) => {
 	const className = `message ${style.message} ${props.className}`;
 	const data = props.data || props;
 	const time = getTime(data);
+	const likes = data.likes || 0;
+	const replies = data.replies || [];
+	// TODO render admin badge
+	// TODO customize action glyph icons
+	// TODO spam icon
+	// TODO star icon
 	return (
-		<div className={className}>
+		<div className={className} data-id={data.id}>
 			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize} name={data.name}/> : null}
-			<div className={style.header}>
-				{data.name ? <span className={'name ' + style.name}>{data.name}</span> : null}
+			<div className={`meta ${style.meta}`}>
+				{data.name ? <UserName name={data.name}/> : null}
 				{time ? <Age time={time}/> : null}
+				<span className='actions'>
+					{replies.length > 0 ? <span className='glyphicon glyphicon-comment'>{replies.length}</span> : null}
+					<a className='action action-like'>
+						<span className='glyphicon glyphicon-heart'></span>
+						{likes > 0 ? <strong>{likes}</strong> : null}
+					</a>
+					<a className='action action-star pull-right'>
+						<span className='glyphicon glyphicon-star'></span>
+					</a>
+				</span>
 			</div>
-			<Markdown source={data.body}/>
+			<div className='body'>
+				<Markdown source={data.body}/>
+			</div>
 		</div>
 	);
 };
@@ -74,7 +97,7 @@ const Message = (props) => {
 Message.propTypes = {
 	className: React.PropTypes.string,
 	data: React.PropTypes.object,
-	avatarSize: React.PropTypes.string,
+	avatarSize: Avatar.propTypes.size,
 };
 
 Message.defaultProps = {
