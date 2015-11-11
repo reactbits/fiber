@@ -1,8 +1,39 @@
-@import "../base";
+@import "../_base";
+@import "../_mixins";
 
 .avatar {
 	float: left;
 	margin: 3px 0 0 -45px;
 	overflow: hidden;
 	border-radius: 50%;
+}
+
+.avatar.circled {
+	border: 2px solid #eee;
+	padding: 2px;
+}
+
+@mixin shadow ($size: 2px) {
+	border: $size solid #fff;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.shadow {
+	@include shadow()
+}
+.shadow_1 {
+  @include shadow(1px)
+}
+.shadow_2 {
+	@include shadow(2px)
+}
+.shadow_3 {
+	@include shadow(3px)
+}
+
+.hover_rotate {
+	@include transform-transition(.2s ease-in-out);
+}
+.hover_rotate:hover {
+	@include transform(rotate(-45deg));
 }

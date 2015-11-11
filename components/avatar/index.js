@@ -66,7 +66,8 @@ const makeWrapper = (title) => {
 const Avatar = (props) => {
 	// TODO circled
 	// TODO shadow
-	const className = `avatar ${style.avatar} ${props.className}`;
+	// TODO animated (rotate on hover)
+	const className = `avatar ${style.hover_rotate} ${style.avatar} ${props.className}`;
 	const src = avatarURL(props.source);
 	const size = mapSize(props.size);
 	const avatarStyle = {

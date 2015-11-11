@@ -1,0 +1,60 @@
+@mixin border-radius ($radius: 4px) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin transition ($args...) {
+	-webkit-transition: $args;
+	-moz-transition: $args;
+	-o-transition: $args;
+	-ms-transition: $args;
+	transition: $args;
+}
+
+@mixin transform-transition ($args...) {
+	-webkit-transition: -webkit-transform $args;
+	-moz-transition: -moz-transform $args;
+	-o-transition: -o-transform $args;
+	-ms-transition: -ms-transform $args;
+	transition: transform $args;
+}
+
+@mixin transform ($args...) {
+	-webkit-transform: $args;
+	-moz-transform: $args;
+	-o-transform: $args;
+	-ms-transform: $args;
+	transform: $args;
+}
+
+@mixin arrow-left ($position: 50%, $width: 7px, $length: 10px, $background-color: #fcfcfc, $border-color: #ddd) {
+	&:before {
+	    content: '';
+	    position: absolute;
+	    border-style: solid;
+	    border-width: $width $length $width 0;
+	    border-color: transparent $border-color;
+	    display: block;
+	    width: 0;
+	    z-index: 0;
+	    margin-top: -$width;
+	    left: (-$length - 1);
+	    top: $position;
+  	}
+	&:after {
+		content: '';
+		position: absolute;
+		border-style: solid;
+		border-width: $width $length $width 0;
+		border-color: transparent $background-color;
+		display: block;
+		width: 0;
+		z-index: 1;
+		margin-top: -$width;
+		left: -$length;
+		top: $position;
+	}
+}
