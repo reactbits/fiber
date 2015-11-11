@@ -33,8 +33,7 @@ const formatTime = (value) => {
 	return moment(value).format('HH:mm');
 };
 
-const Age = (props) => {
-	const time = props.time;
+const Age = ({time}) => {
 	const text = formatTime(time);
 
 	let className = `time ${style.time}`;
@@ -47,6 +46,7 @@ const Age = (props) => {
 	};
 
 	if (moment.isDate(time)) {
+		attrs['data-toggle'] = 'tooltip';
 		attrs.title = moment(time).format('ddd MMM D YYYY HH:mm:ss');
 	}
 
@@ -58,11 +58,6 @@ const Age = (props) => {
 const Message = (props) => {
 	const data = props.data || props;
 	const time = getTime(data);
-
-	const ts = formatTime(time);
-	let timeClass = `time ${style.time}`;
-	if (isToday(time)) timeClass += ` ${style.today}`;
-
 	return (
 		<div className={'message ' + style.message}>
 			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize} name={data.name}/> : null}

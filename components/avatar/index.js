@@ -5,6 +5,7 @@ import style from './style';
 import _ from 'lodash';
 import is from './is';
 import gravatarURL from './gravatar';
+import '../tooltip';
 
 const avatarSize = {
 	small: 24,
@@ -51,27 +52,37 @@ const RandomAvatar = (props) => {
 	);
 };
 
+const makeWrapper = (title) => {
+	return (props, content) => {
+		const attrs = {...props};
+		if (title) {
+			attrs['data-toggle'] = 'tooltip';
+			attrs.title = title;
+		}
+		return <div {...attrs}>{content}</div>;
+	};
+};
+
 const Avatar = (props) => {
 	// TODO circled
 	// TODO shadow
 	const src = avatarURL(props.source);
 	const size = mapSize(props.size);
-	const avatarStyle = Object.assign({}, props.style || {}, {
+	const avatarStyle = {
+		...props.style,
 		marginLeft: -(size + 8),
-	});
+	};
 
 	const imgProps = {
 		width: size,
 		height: size,
 	};
 
-	if (props.name) {
-		imgProps.title = props.name;
-	}
+	const wrapper = makeWrapper(props.name);
 
 	return (
 		<ImageLoader className={`avatar ${style.avatar}`} style={avatarStyle}
-			src={src} wrapper={React.DOM.div} preloader={preloader} imgProps={imgProps}>
+			src={src} wrapper={wrapper} preloader={preloader} imgProps={imgProps}>
 			<RandomAvatar src={src} size={size}/>
   	</ImageLoader>
 	);
