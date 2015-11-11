@@ -90,10 +90,10 @@ const Avatar = (props) => {
 };
 
 Avatar.propTypes = {
-  className: React.PropTypes.string,
-  source: React.PropTypes.string,
-  size: React.PropTypes.string,
-  style: React.PropTypes.object,
+	className: React.PropTypes.string,
+	source: React.PropTypes.string,
+	size: React.PropTypes.string,
+	style: React.PropTypes.object,
 };
 
 Avatar.defaultProps = {
