@@ -84,7 +84,7 @@ const Avatar = (props) => {
 		<ImageLoader className={`avatar ${style.avatar}`} style={avatarStyle}
 			src={src} wrapper={wrapper} preloader={preloader} imgProps={imgProps}>
 			<RandomAvatar src={src} size={size}/>
-  	</ImageLoader>
+		</ImageLoader>
 	);
 };
 
