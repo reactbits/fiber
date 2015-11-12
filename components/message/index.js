@@ -60,19 +60,27 @@ const UserName = (props) => {
 	return <span className={className}>{props.name}</span>;
 };
 
+const actionIcon = {
+	like: 'fa fa-heart',
+	replies: 'fa fa-comment',
+	star: 'fa fa-star',
+};
+
 const Message = (props) => {
-	const className = `message ${style.message} ${props.className}`;
+	let className = `message ${style.message} ${props.className}`;
+	if (!!props.isReply) className += ` ${style.reply}`;
 	const data = props.data || props;
 	const time = getTime(data);
 	const likes = data.likes || 0;
+
 	// TODO support data.replies as promise
 	const replies = data.replies || [];
 	// TODO render admin badge
-	// TODO customize action glyph icons
+	// TODO customize action glyph icons (fa, etc)
 	// TODO spam icon
 	// TODO render replies on reply count click or message click
 	const replyElements = replies.map(d => {
-		return <Message data={d}/>;
+		return <Message data={d} isReply/>;
 	});
 	return (
 		<div className={className} data-id={data.id}>
@@ -81,13 +89,20 @@ const Message = (props) => {
 				{data.name ? <UserName name={data.name}/> : null}
 				{time ? <Age time={time}/> : null}
 				<span className='actions'>
-					{replies.length > 0 ? <span className='glyphicon glyphicon-comment'>{replies.length}</span> : null}
+					{
+						replies.length > 0 ?
+							<span className='reply-count'>
+								<i className={actionIcon.replies}/>
+								<span>{replies.length}</span>
+							</span>
+						: null
+					}
 					<a className='action action-like'>
-						<span className='glyphicon glyphicon-heart'></span>
-						{likes > 0 ? <strong>{likes}</strong> : null}
+						<i className={actionIcon.like}/>
+						{likes > 0 ? <span>{likes}</span> : null}
 					</a>
 					<a className='action action-star pull-right'>
-						<span className='glyphicon glyphicon-star'></span>
+						<i className={actionIcon.star}/>
 					</a>
 				</span>
 			</div>
@@ -103,13 +118,15 @@ Message.propTypes = {
 	className: React.PropTypes.string,
 	data: React.PropTypes.object,
 	avatarSize: Avatar.propTypes.size,
+	isReply: React.PropTypes.bool,
 };
 
 Message.defaultProps = {
 	className: '',
 	data: {},
 	avatarSize: '',
+	isReply: false,
 };
 
 export default Message;
-export {Message, getTime};
+export {Message, getTime, actionIcon};
