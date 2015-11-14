@@ -1,5 +1,6 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
 
   "env": {
     "browser": true,
@@ -10,10 +11,6 @@
 
   "globals": {
   	"$": true
-  },
-
-  "ecmaFeatures": {
-  	"experimentalObjectRestSpread": true
   },
 
   rules: {
