@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Message, {getTime} from '../message';
 import style from './style';
 import moment from 'moment';
@@ -70,9 +70,9 @@ const Thread = (props) => {
 };
 
 Thread.propTypes = {
-	className: React.PropTypes.string,
-	topic: React.PropTypes.string,
-	messages: React.PropTypes.array,
+	className: PropTypes.string,
+	topic: PropTypes.string,
+	messages: PropTypes.array.required,
 };
 
 Thread.defaultProps = {

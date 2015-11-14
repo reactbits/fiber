@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ImageLoader from 'react-imageloader';
 import Spinner from 'halogen/ClipLoader';
 import style from './style';
@@ -91,10 +91,10 @@ const Avatar = (props) => {
 };
 
 Avatar.propTypes = {
-	className: React.PropTypes.string,
-	source: React.PropTypes.string,
-	size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-	style: React.PropTypes.object,
+	className: PropTypes.string,
+	source: PropTypes.string,
+	size: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+	style: PropTypes.object,
 };
 
 Avatar.defaultProps = {
