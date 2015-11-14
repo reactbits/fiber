@@ -12,6 +12,10 @@
   	"$": true
   },
 
+  "ecmaFeatures": {
+  	"experimentalObjectRestSpread": true
+  },
+
   rules: {
   	"id-length": 0,
   	"indent": [2, "tab"],
