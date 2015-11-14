@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Avatar from '../avatar';
 import Markdown from '../markdown';
 import moment from 'moment';
@@ -88,25 +88,25 @@ const Message = (props) => {
 			<div className={`meta ${style.meta}`}>
 				{data.name ? <UserName name={data.name}/> : null}
 				{time ? <Age time={time}/> : null}
-				<span className='actions'>
+				<span className="actions">
 					{
 						replies.length > 0 ?
-							<span className='reply-count'>
+							<span className="reply-count">
 								<i className={actionIcon.replies}/>
 								<span>{replies.length}</span>
 							</span>
 						: null
 					}
-					<a className='action action-like'>
+					<a className="action action-like">
 						<i className={actionIcon.like}/>
 						{likes > 0 ? <span>{likes}</span> : null}
 					</a>
-					<a className='action action-star pull-right'>
+					<a className="action action-star pull-right">
 						<i className={actionIcon.star}/>
 					</a>
 				</span>
 			</div>
-			<div className='body'>
+			<div className="body">
 				<Markdown source={data.body}/>
 			</div>
 			{replyElements}
@@ -115,10 +115,10 @@ const Message = (props) => {
 };
 
 Message.propTypes = {
-	className: React.PropTypes.string,
-	data: React.PropTypes.object,
+	className: PropTypes.string,
+	data: PropTypes.object,
 	avatarSize: Avatar.propTypes.size,
-	isReply: React.PropTypes.bool,
+	isReply: PropTypes.bool,
 };
 
 Message.defaultProps = {

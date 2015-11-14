@@ -17,6 +17,7 @@
   	"indent": [2, "tab"],
   	"no-console": 0,
   	"func-names": 0,
+  	"no-use-before-define": 0,
   	"react/no-multi-comp": 0,
   	"react/prop-types": 0
   }
