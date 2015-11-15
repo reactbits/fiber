@@ -1,43 +1,50 @@
 const initialState = {
 	currentUser: null,
-	threads: []
-	selectedThread: {
-		user: {
-			avatar: '',
-			name: '',
-		},
-		title: '',
-		messages: [],
-	},
+	threads: [],
+	messages: [],
 };
 
-const ADD_TOPIC = 'ADD_TOPIC';
-const REMOVE_TOPIC = 'REMOVE_TOPIC';
-const SELECT_TOPIC = 'SELECT_TOPIC';
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
+// TODO extract into separate module
 
-export function selectTopic(id) {
+class Builder {
+	mutators: {},
+
+	add(type, update) {
+		this.mutators[type] = update;
+		return (data) => {
+			return {
+				type: type,
+				data: data,
+			};
+		};
+	},
+
+	build() {
+		const mutators = this.mutators;
+		return (state, action) => {
+			const fn = mutators[action.type];
+			if (!fn) {
+				return fn;
+			}
+			return fn(state, action.data);
+		};
+	},
+}
+
+const builder = new Builder();
+
+export const addMessage = builder.add('ADD_MESSAGE', (state, msg) => {
 	return {
-		type: SELECT_TOPIC,
-		id: id,
+		...state,
+		[...state.messages, msg],
 	};
-}
+});
 
-export function addMessage(msg) {
+export const removeMessage = builder.add('REMOVE_MESSAGE', (state, msg) => {
 	return {
-		type: ADD_MESSAGE,
-		message: msg,
+		...state,
+		state.messages.filter(m => m.id != msg.id),
 	};
-}
+});
 
-export function removeMessage(msg) {
-	return {
-		type: REMOVE_MESSAGE,
-		message: msg,
-	};
-}
-
-export function reducer(state = initialState, action) {
-	return state;
-}
+export const reducer = builder.build();
