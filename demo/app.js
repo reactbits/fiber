@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import Thread from '../components/thread';
 import {Row, Col, Panel} from 'react-bootstrap';
-import EventEmitter from 'eventemitter3';
+import {connect, Provider} from 'react-redux';
+import store from './store';
+import * as actions from './state';
 import qwest from 'qwest';
 import moment from 'moment';
 import _ from 'lodash';
 
-const eventSource = new EventEmitter();
-const messages = [];
 const users = [
 	{
 		name: 'sergeyt',
@@ -46,8 +46,7 @@ const timeline = [
 	moment().subtract(1, 'days').subtract(42, 'minutes').toDate(),
 ];
 
-function nextDate() {
-	const i = messages.length;
+function nextDate(i) {
 	if (i < timeline.length) {
 		return timeline[i];
 	}
@@ -68,15 +67,14 @@ function makeMessage() {
 			body: data.joke,
 			name: user.name,
 			avatar: user.avatar,
-			time: nextDate(),
+			time: nextDate(nextId - 1),
 			likes: rnd(0, 10),
 		};
 	});
 }
 
 function pushMessage(msg) {
-	messages.push(msg);
-	eventSource.emit('message', msg);
+	store.dispatch(actions.addMessage(msg));
 	if (messages.length < 25) {
 		setTimeout(fetchQuote, 1000);
 	}
@@ -115,44 +113,36 @@ for (let i = 0; i < maxUsers; i++) {
 	fetchUser();
 }
 
-export default class App extends Component {
-	constructor(props) {
-		super(props);
+const Body = (props) => {
+	// TODO render threads pane (e.g. for different quote sources)
+	return (
+		<div className="app container">
+			<Row>
+				<Col md={4}>
+					<Panel header="Topics">
+						<span>TODO list topics</span>
+					</Panel>
+				</Col>
+				<Col md={8}>
+					<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
+						<Thread messages={props.messages} avatarSize={64}/>
+					</Panel>
+				</Col>
+			</Row>
+		</div>
+	);
+};
 
-		this.state = {
-			messages: messages,
-		};
-	}
+const App = connect((state) => {
+	return {
+		messages: state.messages
+	};
+})(Body);
 
-	componentDidMount() {
-		eventSource.on('message', this.handleMessage.bind(this));
-	}
-
-	componentWillUnmount() {
-		eventSource.off('message', this.handleMessage.bind(this));
-	}
-
-	handleMessage() {
-		this.setState({messages: messages});
-	}
-
-	render() {
-		// TODO render threads pane (e.g. for different quote sources)
-		return (
-			<div className="app container">
-				<Row>
-					<Col md={4}>
-						<Panel header="Topics">
-							<span>TODO list topics</span>
-						</Panel>
-					</Col>
-					<Col md={8}>
-						<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
-							<Thread messages={this.state.messages} avatarSize={64}/>
-						</Panel>
-					</Col>
-				</Row>
-			</div>
-		);
-	}
-}
+export default (props) => {
+	return (
+		<Provider store={store}>
+			<App/>
+		</Provider>
+	);
+};

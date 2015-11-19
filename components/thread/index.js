@@ -72,7 +72,7 @@ const Thread = (props) => {
 Thread.propTypes = {
 	className: PropTypes.string,
 	topic: PropTypes.string,
-	messages: PropTypes.array.required,
+	messages: PropTypes.array,
 };
 
 Thread.defaultProps = {
