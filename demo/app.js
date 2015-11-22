@@ -62,14 +62,19 @@ function makeMessage() {
 		const data = response.value;
 		const i = randomIndex(users);
 		const user = users[i];
-		return {
+		const msg = {
 			id: nextId++,
 			body: data.joke,
-			name: user.name,
-			avatar: user.avatar,
+			fetchUser: new Promise((resolve) => {
+				return setTimeout(() => resolve(user), 100);
+			}),
 			time: nextDate(nextId - 1),
 			likes: rnd(0, 10),
 		};
+		if ((nextId & 1) === 0) {
+			msg.user = user;
+		}
+		return msg;
 	});
 }
 

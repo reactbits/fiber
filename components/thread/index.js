@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Message, {getTime} from '../message';
+import Avatar from '../avatar';
 import style from './style';
 import moment from 'moment';
 
@@ -59,7 +60,7 @@ const Thread = (props) => {
 		if (moment.isDate(time) && (i === 0 || getDay(msg) !== getDay(messages[i - 1]))) {
 			items.push(<Day key={+time} message={msg}/>);
 		}
-		items.push(<Message key={msg.id} data={msg} avatarSize={props.avatarSize}/>);
+		items.push(<Message key={msg.id} data={msg} avatarSize={props.avatarSize} fetchUser={props.fetchUser}/>);
 	}
 	return (
 		<div className={className}>
@@ -73,6 +74,8 @@ Thread.propTypes = {
 	className: PropTypes.string,
 	topic: PropTypes.string,
 	messages: PropTypes.array,
+	avatarSize: Avatar.propTypes.size,
+	fetchUser: PropTypes.func,
 };
 
 Thread.defaultProps = {

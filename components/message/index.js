@@ -1,63 +1,21 @@
 import React, {PropTypes} from 'react';
 import Avatar from '../avatar';
 import Markdown from '../markdown';
-import moment from 'moment';
+import UserName from './username';
+import Age from './age';
 import style from './style';
 import _ from 'lodash';
+import {isPromise, promiseOnce, toPromise} from '../util';
 
 // TODO unread style
 // TODO custom background
 // TODO button with menu (reply, delete, star, like, etc)
 
 const getTime = (msg) => {
-	return msg.updated_at || msg.created_at || msg.time;
-};
-
-const isToday = (value) => {
-	if (!moment.isDate(value)) return false;
-	const now = moment();
-	const m = moment(value);
-	return m.year() === now.year() && m.dayOfYear() === now.dayOfYear();
-};
-
-const formatTime = (value) => {
-	if (!value) {
-		return '';
-	}
-	if (_.isString(value)) {
-		return value;
-	}
-	if (isToday(value)) {
-		return moment(value).fromNow();
-	}
-	return moment(value).format('HH:mm');
-};
-
-const Age = ({time}) => {
-	const text = formatTime(time);
-
-	let className = `time ${style.time}`;
-	if (isToday(time)) {
-		className += ` ${style.today}`;
-	}
-
-	const attrs = {
-		className: className,
-	};
-
-	if (moment.isDate(time)) {
-		attrs['data-toggle'] = 'tooltip';
-		attrs.title = moment(time).format('ddd MMM D YYYY HH:mm:ss');
-	}
-
-	return (
-		<span {...attrs}>{text}</span>
-	);
-};
-
-const UserName = (props) => {
-	const className = `name ${style.name}`;
-	return <span className={className}>{props.name}</span>;
+	const t = msg.updated_at || msg.created_at || msg.time;
+	if (!t) return null;
+	const d = new Date(t);
+	return isNaN(d.getTime()) ? null : d;
 };
 
 const actionIcon = {
@@ -66,15 +24,36 @@ const actionIcon = {
 	star: 'fa fa-star',
 };
 
+const getOrFetch = (obj, key, fetch) => {
+	if (obj && obj[key]) {
+		return obj[key];
+	}
+	const promise = toPromise(fetch);
+	if (promise) {
+		return promise.then(t => {
+			return t[key];
+		});
+	}
+	return null;
+};
+
 const Message = (props) => {
 	let className = `message ${style.message} ${props.className}`;
 	if (!!props.isReply) className += ` ${style.reply}`;
 	const data = props.data || props;
+	const user = data.user;
 	const time = getTime(data);
 	const likes = data.likes || 0;
 
+	let fetchUser = data.fetchUser || props.fetchUser;
+	fetchUser = isPromise(fetchUser) || _.isFunction(fetchUser) ? promiseOnce(fetchUser) : null;
+
+	const avatar = getOrFetch(user, 'avatar', fetchUser);
+	const userName = getOrFetch(user, 'name', fetchUser);
+
 	// TODO support data.replies as promise
 	const replies = data.replies || [];
+
 	// TODO render admin badge
 	// TODO customize action glyph icons (fa, etc)
 	// TODO spam icon
@@ -82,11 +61,12 @@ const Message = (props) => {
 	const replyElements = replies.map(d => {
 		return <Message key={d.id} data={d} avatarSize={props.avatarSize} isReply/>;
 	});
+
 	return (
 		<div className={className} data-id={data.id}>
-			{data.avatar ? <Avatar source={data.avatar} size={props.avatarSize} name={data.name}/> : null}
+			{avatar ? <Avatar source={avatar} size={props.avatarSize} name={userName}/> : null}
 			<div className={`meta ${style.meta}`}>
-				{data.name ? <UserName name={data.name}/> : null}
+				{userName ? <UserName name={userName}/> : null}
 				{time ? <Age time={time}/> : null}
 				<span className="actions">
 					{
