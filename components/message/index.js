@@ -80,7 +80,7 @@ const Message = (props) => {
 	// TODO spam icon
 	// TODO render replies on reply count click or message click
 	const replyElements = replies.map(d => {
-		return <Message data={d} isReply/>;
+		return <Message key={d.id} data={d} avatarSize={props.avatarSize} isReply/>;
 	});
 	return (
 		<div className={className} data-id={data.id}>

@@ -1,7 +1,11 @@
-@import "../base";
+@import "../_base";
 
 .message {
 	padding: 6px 30px 3px 70px;
+}
+
+.reply {
+	padding: 6px 0px 3px 30px;
 }
 
 .name {
@@ -10,11 +14,14 @@
 
 .time {
 	color: #bbb;
-	font-size: 11px;
 	font-weight: 400;
 	margin: 0 0 0 6px;
 }
 
 .today {
 	color: #36a5d9;
+}
+
+.meta span, .meta a, .meta i {
+	margin-right: 0.3em;
 }

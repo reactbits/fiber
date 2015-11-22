@@ -18,6 +18,6 @@ export const addMessage = reducer.add('ADD_MESSAGE', (state, msg) => {
 export const removeMessage = reducer.add('REMOVE_MESSAGE', (state, msg) => {
 	return {
 		...state,
-		messages: state.messages.filter(m => m.id != msg.id),
+		messages: state.messages.filter(m => m.id !== msg.id),
 	};
 });

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Thread from '../components/thread';
 import {Row, Col, Panel} from 'react-bootstrap';
 import {connect, Provider} from 'react-redux';
@@ -75,7 +75,7 @@ function makeMessage() {
 
 function pushMessage(msg) {
 	store.dispatch(actions.addMessage(msg));
-	if (messages.length < 25) {
+	if (nextId < 25) {
 		setTimeout(fetchQuote, 1000);
 	}
 }
@@ -135,14 +135,14 @@ const Body = (props) => {
 
 const App = connect((state) => {
 	return {
-		messages: state.messages
+		messages: state.messages,
 	};
 })(Body);
 
 export default (props) => {
 	return (
 		<Provider store={store}>
-			<App/>
+			<App {...props}/>
 		</Provider>
 	);
 };

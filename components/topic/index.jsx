@@ -1,3 +1,4 @@
+import React from 'react';
 import Avatar from '../avatar';
 import style from './style';
 
@@ -16,7 +17,7 @@ const TopicList = (props) => {
 		return <Topic {...t}/>;
 	});
 	return (
-		<div className={`topic_list ${style.topic_list}`}
+		<div className={`topic_list ${style.topic_list}`}>
 			{items}
 		</div>
 	);
