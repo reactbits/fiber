@@ -5,7 +5,7 @@ import UserName from './username';
 import Age from './age';
 import style from './style';
 import _ from 'lodash';
-import {isPromise, promiseOnce, toPromise} from '../util';
+import {isPromise, promiseOnce, getOrFetch} from '../util';
 
 // TODO unread style
 // TODO custom background
@@ -24,19 +24,6 @@ const actionIcon = {
 	star: 'fa fa-star',
 };
 
-const getOrFetch = (obj, key, fetch) => {
-	if (obj && obj[key]) {
-		return obj[key];
-	}
-	const promise = toPromise(fetch);
-	if (promise) {
-		return promise.then(t => {
-			return t[key];
-		});
-	}
-	return null;
-};
-
 const Message = (props) => {
 	let className = `message ${style.message} ${props.className}`;
 	if (!!props.isReply) className += ` ${style.reply}`;
@@ -48,8 +35,8 @@ const Message = (props) => {
 	let fetchUser = data.fetchUser || props.fetchUser;
 	fetchUser = isPromise(fetchUser) || _.isFunction(fetchUser) ? promiseOnce(fetchUser) : null;
 
-	const avatar = getOrFetch(user, 'avatar', fetchUser);
-	const userName = getOrFetch(user, 'name', fetchUser);
+	const avatar = getOrFetch(fetchUser, user, 'avatar', 'avatar_url');
+	const userName = getOrFetch(fetchUser, user, 'name', 'login');
 
 	// TODO support data.replies as promise
 	const replies = data.replies || [];
