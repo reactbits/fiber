@@ -1,14 +1,16 @@
 process.env.UV_THREADPOOL_SIZE = 100;
 
 const express = require('express');
+const morgan = require('morgan');
 const got = require('got');
 const webpack = require('webpack');
-const config = require('./webpack.config');
 
+const config = require('./webpack.config');
 const port = 8000;
 const app = express();
 const compiler = webpack(config);
 
+app.use(morgan('dev'));
 app.use(express.static(process.cwd()));
 
 app.use(require('webpack-dev-middleware')(compiler, {

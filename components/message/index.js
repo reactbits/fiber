@@ -4,8 +4,7 @@ import Markdown from '../markdown';
 import UserName from './username';
 import Age from './age';
 import style from './style';
-import _ from 'lodash';
-import {isPromise, promiseOnce, getOrFetch} from '../util';
+import {promiseOnce, getOrFetch} from '../util';
 
 // TODO unread style
 // TODO custom background
@@ -32,9 +31,7 @@ const Message = (props) => {
 	const time = getTime(data);
 	const likes = data.likes || 0;
 
-	let fetchUser = data.fetchUser || props.fetchUser;
-	fetchUser = isPromise(fetchUser) || _.isFunction(fetchUser) ? promiseOnce(fetchUser) : null;
-
+	const fetchUser = promiseOnce(data.fetchUser || props.fetchUser, data);
 	const avatar = getOrFetch(fetchUser, user, 'avatar', 'avatar_url');
 	const userName = getOrFetch(fetchUser, user, 'name', 'login');
 

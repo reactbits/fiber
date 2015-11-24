@@ -4,10 +4,17 @@ export function isPromise(value) {
 	return value && _.isFunction(value.then);
 }
 
-export function promiseOnce(fn) {
+export function promiseOnce(fn, data) {
+	if (!fn) return fn;
 	let resolved;
 	return function() {
-		return resolved || (resolved = isPromise(fn) ? fn : new Promise(fn));
+		if (resolved) return resolved;
+		if (isPromise(fn)) {
+			return (resolved = fn);
+		}
+		const t = fn(data);
+		resolved = isPromise(t) ? t : Promise.resolve(t);
+		return resolved;
 	};
 }
 

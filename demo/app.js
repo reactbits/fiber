@@ -65,9 +65,7 @@ function makeMessage() {
 		const msg = {
 			id: nextId++,
 			body: data.joke,
-			fetchUser: new Promise((resolve) => {
-				return setTimeout(() => resolve(user), 100);
-			}),
+			user_id: i,
 			time: nextDate(nextId - 1),
 			likes: rnd(0, 10),
 		};
@@ -75,6 +73,13 @@ function makeMessage() {
 			msg.user = user;
 		}
 		return msg;
+	});
+}
+
+function fetchMessageUser(msg) {
+	const user = users[msg.user_id];
+	return new Promise((resolve) => {
+		return setTimeout(() => resolve(user), 100);
 	});
 }
 
@@ -130,7 +135,7 @@ const Body = (props) => {
 				</Col>
 				<Col md={8}>
 					<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
-						<Thread messages={props.messages} avatarSize={64}/>
+						<Thread messages={props.messages} avatarSize={64} fetchUser={fetchMessageUser}/>
 					</Panel>
 				</Col>
 			</Row>
