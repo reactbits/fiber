@@ -57,7 +57,7 @@
     "got": "^5.1.0",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.3",
-    "make-reducer": "^0.2.0",
+    "make-reducer": "^0.4.0",
     "node-sass": "^3.4.2",
     "normalize.css": "^3.0.3",
     "postcss-loader": "^0.8.0",
