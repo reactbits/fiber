@@ -1,6 +1,6 @@
 import Avatar from './avatar';
-import Message from './message';
-import Thread from './thread';
+import {Message} from './message';
+import {Thread} from './thread';
 import Markdown from './thread';
 import {Topic, TopicList} from './topic';
 

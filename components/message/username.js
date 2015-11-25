@@ -28,6 +28,6 @@ export default class UserName extends Component {
 			value = '';
 		}
 		const className = `name ${style.name}`;
-		return <span className={className}>{value}</span>;
+		return <a className={className}>{value}</a>;
 	}
 }

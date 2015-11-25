@@ -123,6 +123,10 @@ for (let i = 0; i < maxUsers; i++) {
 	fetchUser();
 }
 
+const onAction = (type, id) => {
+	swal(`action ${type} on message ${id}`);
+};
+
 const Body = (props) => {
 	// TODO render threads pane (e.g. for different quote sources)
 	return (
@@ -135,7 +139,7 @@ const Body = (props) => {
 				</Col>
 				<Col md={8}>
 					<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
-						<Thread messages={props.messages} avatarSize={64} fetchUser={fetchMessageUser}/>
+						<Thread messages={props.messages} avatarSize={64} fetchUser={fetchMessageUser} onAction={onAction}/>
 					</Panel>
 				</Col>
 			</Row>

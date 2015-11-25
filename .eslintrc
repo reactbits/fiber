@@ -10,7 +10,8 @@
   },
 
   "globals": {
-  	"$": true
+  	"$": true,
+  	"swal": true,
   },
 
   rules: {
