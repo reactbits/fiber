@@ -131,30 +131,40 @@ const onAction = (type, id) => {
 const Body = (props) => {
 	// TODO render threads pane (e.g. for different quote sources)
 
-	const topics = [
+	const threads = [
 		{
-			title: 'Chuck Norris Database',
-			message: 'test message',
-			user: users[0],
-			updated_at: nextDate(0),
+			id: 1,
+			topic: 'Chuck Norris Database',
+			last_message: {
+				user: users[0],
+				body: 'test message',
+				updated_at: nextDate(0),
+			},
 			unread: 4,
 			selected: true,
 		},
 		{
-			title: 'Chuck Norris Database',
-			message: 'test message',
-			user: users[0],
-			updated_at: nextDate(0),
+			id: 2,
+			topic: 'Offtopic',
+			last_message: {
+				user: users[0],
+				body: 'test message',
+				updated_at: nextDate(0),
+			},
 			unread: 11,
 		},
 	];
+
+	const selectThread = (thread) => {
+		swal(`selected ${thread.topic}`);
+	};
 
 	return (
 		<div className="app container">
 			<Row>
 				<Col md={4}>
 					<Panel header="Threads">
-						<TopicList items={topics}/>
+						<TopicList threads={threads} onSelect={selectThread}/>
 					</Panel>
 				</Col>
 				<Col md={8}>
