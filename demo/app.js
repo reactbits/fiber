@@ -1,5 +1,6 @@
 import React from 'react';
-import Thread from '../components/thread';
+import {Thread} from '../components/thread';
+import {TopicList} from '../components/topic';
 import {Row, Col, Panel} from 'react-bootstrap';
 import {connect, Provider} from 'react-redux';
 import store from './store';
@@ -129,12 +130,31 @@ const onAction = (type, id) => {
 
 const Body = (props) => {
 	// TODO render threads pane (e.g. for different quote sources)
+
+	const topics = [
+		{
+			title: 'Chuck Norris Database',
+			message: 'test message',
+			user: users[0],
+			updated_at: nextDate(0),
+			unread: 4,
+			selected: true,
+		},
+		{
+			title: 'Chuck Norris Database',
+			message: 'test message',
+			user: users[0],
+			updated_at: nextDate(0),
+			unread: 11,
+		},
+	];
+
 	return (
 		<div className="app container">
 			<Row>
 				<Col md={4}>
-					<Panel header="Topics">
-						<span>TODO list topics</span>
+					<Panel header="Threads">
+						<TopicList items={topics}/>
 					</Panel>
 				</Col>
 				<Col md={8}>

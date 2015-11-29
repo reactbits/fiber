@@ -5,4 +5,3 @@ import Markdown from './thread';
 import {Topic, TopicList} from './topic';
 
 export default {Avatar, Message, Thread, Markdown, Topic, TopicList};
-export {Avatar, Message, Thread, Markdown, Topic, TopicList};
