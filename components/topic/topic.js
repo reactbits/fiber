@@ -2,6 +2,7 @@ import React from 'react';
 import Avatar from '../avatar';
 import style from './style';
 import moment from 'moment';
+import _ from 'lodash';
 
 const formatTime = (value) => {
 	if (!value) {
@@ -43,8 +44,7 @@ const Topic = (props) => {
 	);
 };
 
-// TODO rename to ThreadList
-const TopicList = (props) => {
+const ThreadList = (props) => {
 	const items = props.threads.map(t => {
 		return <Topic key={t.id} thread={t} {...t} onSelect={props.onSelect}/>;
 	});
@@ -55,5 +55,5 @@ const TopicList = (props) => {
 	);
 };
 
-export default TopicList;
-export {Topic, TopicList};
+export default ThreadList;
+export {ThreadList};

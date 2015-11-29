@@ -1,6 +1,6 @@
 import React from 'react';
 import {Thread} from '../components/thread';
-import {TopicList} from '../components/topic';
+import {ThreadList} from '../components/topic';
 import {Row, Col, Panel} from 'react-bootstrap';
 import {connect, Provider} from 'react-redux';
 import store from './store';
@@ -164,7 +164,7 @@ const Body = (props) => {
 			<Row>
 				<Col md={4}>
 					<Panel header="Threads">
-						<TopicList threads={threads} onSelect={selectThread}/>
+						<ThreadList threads={threads} onSelect={selectThread}/>
 					</Panel>
 				</Col>
 				<Col md={8}>
