@@ -36,7 +36,7 @@
     "query-string": "^3.0.0",
     "react": "^0.14.3",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.4.0"
+    "react-markdown2": "^0.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.2",
