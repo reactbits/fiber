@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import {Message, getTime} from '../message';
+import React, { PropTypes } from 'react';
+import { Message, getTime } from '../message';
 import Avatar from '../avatar';
 import style from './style';
 import moment from 'moment';
@@ -91,4 +91,4 @@ Thread.defaultProps = {
 };
 
 export default Thread;
-export {Thread};
+export { Thread };

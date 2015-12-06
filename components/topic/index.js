@@ -1,4 +1,4 @@
-import {ThreadList} from './topic';
+import { ThreadList } from './topic';
 
-export {ThreadList};
+export { ThreadList };
 export default ThreadList;

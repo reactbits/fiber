@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import Avatar from '../avatar';
 import Markdown from '../markdown';
 import UserName from './username';
 import Age from './age';
-import {renderActions} from './action';
+import { renderActions } from './action';
 import style from './style';
-import {promiseOnce, getOrFetch} from '../util';
+import { promiseOnce, getOrFetch } from '../util';
 
 // TODO unread style
 // TODO custom background
@@ -48,10 +48,10 @@ const Message = (props) => {
 	});
 
 	const actions = {
-		reply: {count: replies.length},
-		like: {count: likes},
-		remove: {right: true},
-		star: {right: true},
+		reply: { count: replies.length },
+		like: { count: likes },
+		remove: { right: true },
+		star: { right: true },
 	};
 
 	return (
@@ -87,4 +87,4 @@ Message.defaultProps = {
 };
 
 export default Message;
-export {Message, getTime};
+export { Message, getTime };

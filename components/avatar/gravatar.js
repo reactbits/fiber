@@ -19,7 +19,7 @@ export default function gravatarURL(email, size = 32, options = defaultOptions) 
 		url += md5(email.toLowerCase());
 	}
 
-	const qs = queryString.stringify(Object.assign({s: size}, options));
+	const qs = queryString.stringify({ s: size, ...options });
 	if (qs) {
 		url += '?' + qs;
 	}

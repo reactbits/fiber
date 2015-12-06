@@ -56,4 +56,4 @@ const ThreadList = (props) => {
 };
 
 export default ThreadList;
-export {ThreadList};
+export { ThreadList };

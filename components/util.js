@@ -7,7 +7,7 @@ export function isPromise(value) {
 export function promiseOnce(fn, data) {
 	if (!fn) return fn;
 	let resolved;
-	return function() {
+	return function () {
 		if (resolved) return resolved;
 		if (isPromise(fn)) {
 			return (resolved = fn);

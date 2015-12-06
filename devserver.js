@@ -21,7 +21,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 
 function proxy(path, url) {
-	app.get(path, function(req, res) {
+	app.get(path, function (req, res) {
 		res.header('Content-Type', 'application/json');
 		got.stream(url).pipe(res);
 	});

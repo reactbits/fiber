@@ -23,7 +23,7 @@ const formatTime = (value) => {
 	return moment(value).format('HH:mm');
 };
 
-export const Age = ({time}) => {
+export const Age = ({ time }) => {
 	const text = formatTime(time);
 
 	let className = `time ${style.time}`;

@@ -1,4 +1,4 @@
 import Thread from './thread';
 
-export {Thread};
+export { Thread };
 export default Thread;

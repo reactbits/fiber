@@ -19,8 +19,15 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{test: /\.json$/, loader: 'json'},
-			{test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/},
+			{
+				test: /\.json$/,
+				loader: 'json',
+			},
+			{
+				test: /\.jsx?$/,
+				loader: 'babel',
+				exclude: /node_modules/,
+			},
 			{
 				test: /(\.scss|\.css)$/,
 				loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap'),

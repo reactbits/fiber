@@ -1,8 +1,8 @@
 import React from 'react';
-import {Thread} from '../components/thread';
-import {ThreadList} from '../components/topic';
-import {Row, Col, Panel} from 'react-bootstrap';
-import {connect, Provider} from 'react-redux';
+import { Thread } from '../components/thread';
+import { ThreadList } from '../components/topic';
+import { Row, Col, Panel } from 'react-bootstrap';
+import { connect, Provider } from 'react-redux';
 import store from './store';
 import * as actions from './state';
 import qwest from 'qwest';

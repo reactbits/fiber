@@ -1,4 +1,4 @@
-import {Message, getTime} from './message';
+import { Message, getTime } from './message';
 
-export {Message, getTime};
+export { Message, getTime };
 export default Message;

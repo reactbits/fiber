@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImageLoader from 'react-imageloader';
 import Spinner from 'halogen/ClipLoader';
 import style from './style';
@@ -6,7 +6,7 @@ import _ from 'lodash';
 import is from './is';
 import gravatarURL from './gravatar';
 import '../tooltip';
-import {toPromise} from '../util';
+import { toPromise } from '../util';
 
 const avatarSize = {
 	small: 24,
@@ -55,7 +55,7 @@ const RandomAvatar = (props) => {
 
 const makeWrapper = (title) => {
 	return (props, content) => {
-		const attrs = {...props};
+		const attrs = { ...props };
 		if (title) {
 			attrs['data-toggle'] = 'tooltip';
 			attrs.title = title;
@@ -79,12 +79,12 @@ class Avatar extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {source: props.source};
+		this.state = { source: props.source };
 		this.setSource = this.setSource.bind(this);
 	}
 
 	setSource(value) {
-		return this.setState({source: value});
+		return this.setState({ source: value });
 	}
 
 	render() {
@@ -130,4 +130,4 @@ class Avatar extends Component {
 }
 
 export default Avatar;
-export {Avatar};
+export { Avatar };

@@ -34,7 +34,7 @@ const regexps = {
 };
 
 function regexpCheck(key) {
-	is[key] = function(value) {
+	is[key] = function (value) {
 		return regexps[key].test(value);
 	};
 }

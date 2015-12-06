@@ -1,6 +1,6 @@
-import {compose, createStore} from 'redux';
-import {devTools, persistState} from 'redux-devtools';
-import {reducer} from './state';
+import { compose, createStore } from 'redux';
+import { devTools, persistState } from 'redux-devtools';
+import { reducer } from './state';
 
 const makeStore = compose(
   devTools(),
