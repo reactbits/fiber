@@ -4,7 +4,7 @@ import Thread from './thread';
 import Markdown from './thread';
 import ThreadList from './topic';
 
-export default {
+export {
 	Avatar,
 	Message,
 	Thread,

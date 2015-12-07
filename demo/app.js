@@ -1,6 +1,5 @@
 import React from 'react';
-import { Thread } from '../components/thread';
-import { ThreadList } from '../components/topic';
+import { Thread, ThreadList } from '../components';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { connect, Provider } from 'react-redux';
 import store from './store';
@@ -12,15 +11,15 @@ import _ from 'lodash';
 const users = [
 	{
 		name: 'sergeyt',
-		avatar: 'stodyshev@gmail.com',
+		avatar_url: 'stodyshev@gmail.com',
 	},
 	{
 		name: 'sergeyt',
-		avatar: 'https://robohash.org/sergeyt',
+		avatar_url: 'https://robohash.org/sergeyt',
 	},
 	{
 		name: 'noavatar',
-		avatar: 'noavatar.png',
+		avatar_url: 'noavatar.png',
 	},
 ];
 
@@ -109,10 +108,13 @@ function fetchQuote() {
 const maxUsers = 10;
 
 function fetchUser() {
-	qwest.get('/uiface/random').then((xhr, response) => {
+	qwest.get('/randomuser').then((xhr, response) => {
+		const user = response.results[0].user;
+		const name = user.name.first + ' ' + user.name.last;
 		users.push({
-			name: response.username,
-			avatar: 'https://robohash.org/' + response.username, // response.image_urls.epic,
+			name: name,
+			avatar_url: 'https://robohash.org/' + name,
+			// avatar_url: user.picture.large,
 		});
 		if (users.length >= maxUsers) {
 			fetchQuote();

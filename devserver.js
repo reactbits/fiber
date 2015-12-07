@@ -23,11 +23,16 @@ app.use(require('webpack-hot-middleware')(compiler));
 function proxy(path, url) {
 	app.get(path, function (req, res) {
 		res.header('Content-Type', 'application/json');
-		got.stream(url).pipe(res);
+		got.stream(url)
+			.on('error', err => {
+				console.log(err);
+			})
+			.pipe(res);
 	});
 }
 
-proxy('/uiface/random', 'http://uifaces.com/api/v1/random');
+proxy('/randomface', 'http://uifaces.com/api/v1/random');
+proxy('/randomuser', 'https://randomuser.me/api/');
 proxy('/jokes/random', 'http://api.icndb.com/jokes/random');
 
 app.listen(port, '0.0.0.0', (err) => {
