@@ -1,4 +1,5 @@
 import Thread from './thread';
+import ThreadList from './list';
 
-export { Thread };
+export { Thread, ThreadList };
 export default Thread;
