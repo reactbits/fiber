@@ -20,6 +20,7 @@ const Topic = (props) => {
 	const msg = props.last_message || props.message || {};
 	const user = msg.user;
 	const unread = props.unread ? `${props.unread > 10 ? '10+' : props.unread} new` : '';
+	const avatarURL = user ? user.avatar_url || user.avatar : null;
 
 	const onClick = (e) => {
 		e.preventDefault();
@@ -30,7 +31,7 @@ const Topic = (props) => {
 
 	return (
 		<div className={className} onClick={onClick}>
-			{user && user.avatar ? <Avatar source={user.avatar} size={props.avatarSize} name={user.name}/> : null}
+			{avatarURL ? <Avatar source={avatarURL} size={props.avatarSize} name={user.name}/> : null}
 			<div className={`header ${style.header}`}>
 				<span>{props.topic}</span>
 				{unread ? <span className={`unread ${style.unread}`}>{unread}</span> : null}
