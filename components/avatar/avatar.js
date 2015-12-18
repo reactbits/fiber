@@ -121,8 +121,7 @@ class Avatar extends Component {
 		}
 
 		return (
-			<ImageLoader className={className} style={avatarStyle}
-				src={src} wrapper={wrapper} preloader={preloader} imgProps={imgProps}>
+			<ImageLoader className={className} style={avatarStyle} src={src} wrapper={wrapper} preloader={preloader} imgProps={imgProps}>
 				<RandomAvatar src={src} size={size}/>
 			</ImageLoader>
 		);

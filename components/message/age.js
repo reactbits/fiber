@@ -32,7 +32,7 @@ export const Age = ({ time }) => {
 	}
 
 	const attrs = {
-		className: className,
+		className,
 	};
 
 	if (moment.isDate(time)) {

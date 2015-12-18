@@ -40,10 +40,7 @@ const Message = (props) => {
 
 	const replyElements = replies.map(d => {
 		return (
-			<Message key={d.id} data={d} isReply
-				avatarSize={props.avatarSize}
-				onAction={props.onAction}
-			/>
+			<Message key={d.id} data={d} isReply avatarSize={props.avatarSize} onAction={props.onAction}/>
 		);
 	});
 

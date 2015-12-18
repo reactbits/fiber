@@ -61,11 +61,8 @@ const Thread = (props) => {
 			items.push(<Day key={+time} message={msg}/>);
 		}
 		const elem = (
-			<Message key={msg.id} data={msg}
-				avatarSize={props.avatarSize}
-				fetchUser={props.fetchUser}
-				onAction={props.onAction}
-			/>);
+			<Message key={msg.id} data={msg} avatarSize={props.avatarSize} fetchUser={props.fetchUser} onAction={props.onAction}/>
+		);
 		items.push(elem);
 	}
 	return (

@@ -112,7 +112,7 @@ function fetchUser() {
 		const user = response.results[0].user;
 		const name = user.name.first + ' ' + user.name.last;
 		users.push({
-			name: name,
+			name,
 			avatar_url: 'https://robohash.org/' + name,
 			// avatar_url: user.picture.large,
 		});

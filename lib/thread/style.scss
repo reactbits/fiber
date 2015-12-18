@@ -4,11 +4,48 @@
 	padding: 4px;
 }
 
-.topic {
-	font-weight: bold;
-}
-
 .day {
 	padding: 0px 0px 10px 25px;
 	color: #bbb;
+}
+
+.topic {
+	font-weight: bold;
+	cursor: default;
+	padding: 6px 30px 3px 70px;
+}
+
+.topic_selected {
+	color: #db6b9a;
+}
+
+.header {
+	font-weight: bold;
+}
+
+.unread {
+	color: #36a5d9;
+	margin-left: 6px;
+  border: 1px solid #9acde4;
+  border-radius: 4px;
+  padding: 1px 4px 0;
+  display: inline-block;
+  line-height: 15px;
+  font-weight: 400;
+  font-size: 11px;
+}
+
+.user_name {
+	color: #bbb;
+	font-weight: 400;
+	font-size: 11px;
+}
+
+.time {
+	color: #bbb;
+	font-weight: 400;
+	font-size: 11px;
+}
+
+.body {
 }
