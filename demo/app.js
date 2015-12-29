@@ -2,6 +2,7 @@ import React from 'react';
 import { Thread, ThreadList } from '../components';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { connect, Provider } from 'react-redux';
+import DevTools from './devtools';
 import store from './store';
 import * as actions from './state';
 import qwest from 'qwest';
@@ -188,7 +189,10 @@ const App = connect((state) => {
 export default (props) => {
 	return (
 		<Provider store={store}>
-			<App {...props}/>
+			<div>
+				<App {...props}/>
+				<DevTools/>
+			</div>
 		</Provider>
 	);
 };
