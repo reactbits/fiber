@@ -34,12 +34,12 @@
     "md5": "^2.0.0",
     "moment": "^2.10.6",
     "query-string": "^3.0.0",
-    "react": "^0.14.3",
+    "react": "^0.14.5",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.4.1"
+    "react-markdown2": "^0.4.2"
   },
   "devDependencies": {
-    "autoprefixer": "^6.2.2",
+    "autoprefixer": "^6.2.3",
     "babel": "^6.3.26",
     "babel-core": "^6.3.26",
     "babel-eslint": "^5.0.0-beta6",
@@ -63,10 +63,10 @@
     "node-sass": "^3.4.2",
     "normalize.css": "^3.0.3",
     "postcss-loader": "^0.8.0",
-    "prismjs-package": "^0.3.0",
+    "prismjs-package": "^0.4.0",
     "qwest": "^2.2.6",
     "react-bootstrap": "^0.28.1",
-    "react-dom": "^0.14.3",
+    "react-dom": "^0.14.5",
     "react-redux": "^4.0.6",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
