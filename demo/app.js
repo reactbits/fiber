@@ -131,6 +131,10 @@ const onAction = (type, id) => {
 	swal(`action ${type} on message ${id}`);
 };
 
+function sendMessage(msg) {
+	swal(`thread: ${msg.threadId}, body: ${msg.body}`);
+}
+
 const Body = (props) => {
 	// TODO render threads pane (e.g. for different quote sources)
 
@@ -172,7 +176,7 @@ const Body = (props) => {
 				</Col>
 				<Col md={8}>
 					<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
-						<Thread messages={props.messages} avatarSize={64} fetchUser={fetchMessageUser} onAction={onAction}/>
+						<Thread id={1} messages={props.messages} avatarSize={64} fetchUser={fetchMessageUser} onAction={onAction} sendMessage={sendMessage}/>
 					</Panel>
 				</Col>
 			</Row>

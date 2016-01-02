@@ -6,7 +6,7 @@ const got = require('got');
 const webpack = require('webpack');
 
 const config = require('./webpack.config');
-const port = 8000;
+const port = 7000;
 const app = express();
 const compiler = webpack(config);
 

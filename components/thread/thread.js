@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Message, getTime } from '../message';
+import MessageInput from './messageinput';
 import Avatar from '../avatar';
 import style from './style';
 import moment from 'moment';
+import _ from 'lodash';
 
 const Text = (props) => {
 	return (
@@ -50,7 +52,8 @@ const Day = (props) => {
 	return <Text className={'day ' + style.day} text={text}/>;
 };
 
-const Thread = (props) => {
+// TODO allow to use custom MessageInput component
+export const Thread = (props) => {
 	const className = `thread ${style.thread} ${props.className}`;
 	const messages = props.messages || [];
 	const items = [];
@@ -65,10 +68,16 @@ const Thread = (props) => {
 		);
 		items.push(elem);
 	}
+	const sendMessage = (body) => {
+		if (_.isFunction(props.sendMessage)) {
+			props.sendMessage({ threadId: props.id, body });
+		}
+	};
 	return (
 		<div className={className}>
 			{props.topic ? <Topic text={props.topic}/> : null}
 			{items}
+			<MessageInput submit={sendMessage}/>
 		</div>
 	);
 };
