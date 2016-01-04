@@ -1,21 +1,14 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Message, getTime } from '../message';
 import MessageInput from './messageinput';
 import Avatar from '../avatar';
+import Day from './day';
 import style from './style';
 import moment from 'moment';
 import _ from 'lodash';
 
-const Text = (props) => {
-	return (
-		<div className={props.className}>
-			{props.text || ''}
-		</div>
-	);
-};
-
 const Topic = (props) => {
-	return <Text className={'topic ' + style.topic} text={props.text}/>;
+	return <a className={'topic ' + style.topic} onClick={props.onClick}>{props.text}</a>;
 };
 
 const getDay = (msg) => {
@@ -23,78 +16,69 @@ const getDay = (msg) => {
 	return moment.isDate(time) ? moment(time).dayOfYear() : -1;
 };
 
-const formatDay = (time) => {
-	const now = moment();
-	const day = now.dayOfYear();
-	const m = moment(time);
-	// this year
-	if (m.year() === now.year()) {
-		if (m.dayOfYear() === day) {
-			// TODO localization
-			return 'Today';
-		}
-		if (m.dayOfYear() === day - 1) {
-			// TODO localization
-			return 'Yesterday';
-		}
-		// this week
-		if (m.week() === now.week()) {
-			return m.format('dddd');
-		}
-		return m.format('MMMM D, dddd');
-	}
-	return m.format('MMMM D YYYY, dddd');
-};
-
-const Day = (props) => {
-	const time = getTime(props.message || {});
-	const text = formatDay(time);
-	return <Text className={'day ' + style.day} text={text}/>;
-};
-
 // TODO allow to use custom MessageInput component
-export const Thread = (props) => {
-	const className = `thread ${style.thread} ${props.className}`;
-	const messages = props.messages || [];
-	const items = [];
-	for (let i = 0; i < messages.length; i++) {
-		const msg = messages[i];
-		const time = getTime(msg);
-		if (moment.isDate(time) && (i === 0 || getDay(msg) !== getDay(messages[i - 1]))) {
-			items.push(<Day key={+time} message={msg}/>);
-		}
-		const elem = (
-			<Message key={msg.id} data={msg} avatarSize={props.avatarSize} fetchUser={props.fetchUser} onAction={props.onAction}/>
-		);
-		items.push(elem);
+export class Thread extends Component {
+	static propTypes = {
+		className: PropTypes.string,
+		topic: PropTypes.string,
+		messages: PropTypes.array,
+		avatarSize: Avatar.propTypes.size,
+		fetchUser: PropTypes.func,
 	}
-	const sendMessage = (body) => {
-		if (_.isFunction(props.sendMessage)) {
-			props.sendMessage({ threadId: props.id, body });
+
+	static defaultProps = {
+		className: '',
+		topic: '',
+		messages: [],
+	}
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			collapsed: false,
+		};
+	}
+
+	render() {
+		const props = this.props;
+		const className = `thread ${style.thread} ${props.className}`;
+		const messages = props.messages || [];
+		const items = [];
+
+		if (!this.state.collapsed) {
+			for (let i = 0; i < messages.length; i++) {
+				const msg = messages[i];
+				const time = getTime(msg);
+				if (moment.isDate(time) && (i === 0 || getDay(msg) !== getDay(messages[i - 1]))) {
+					items.push(<Day key={+time} time={time}/>);
+				}
+				const elem = (
+					<Message key={msg.id} data={msg} avatarSize={props.avatarSize} fetchUser={props.fetchUser} onAction={props.onAction}/>
+				);
+				items.push(elem);
+			}
+
+			const sendMessage = (body) => {
+				if (_.isFunction(props.sendMessage)) {
+					props.sendMessage({ threadId: props.id, body });
+				}
+			};
+
+			items.push(<MessageInput key={`message-input-${props.id}`} submit={sendMessage}/>);
 		}
-	};
-	return (
-		<div className={className}>
-			{props.topic ? <Topic text={props.topic}/> : null}
-			{items}
-			<MessageInput submit={sendMessage}/>
-		</div>
-	);
-};
 
-Thread.propTypes = {
-	className: PropTypes.string,
-	topic: PropTypes.string,
-	messages: PropTypes.array,
-	avatarSize: Avatar.propTypes.size,
-	fetchUser: PropTypes.func,
-};
+		const collapse = () => {
+			this.setState({ collapsed: !this.state.collapsed });
+		};
 
-Thread.defaultProps = {
-	className: '',
-	topic: '',
-	messages: [],
-};
+		return (
+			<div className={className}>
+				{props.topic ? <Topic text={props.topic} onClick={collapse}/> : null}
+				{items}
+			</div>
+		);
+	}
+}
 
 export default Thread;
 export { Thread };

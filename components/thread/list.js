@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from '../avatar';
+import Thread from './thread';
 import style from './style';
 import moment from 'moment';
 import _ from 'lodash';
@@ -13,7 +14,7 @@ const formatTime = (value) => {
 
 // TODO reuse rendering of user name from message component
 
-const Topic = (props) => {
+export const Topic = (props) => {
 	let className = `topic ${style.topic}`;
 	if (props.selected) className += ` ${style.topic_selected}`;
 
@@ -45,9 +46,24 @@ const Topic = (props) => {
 	);
 };
 
-const ThreadList = (props) => {
+function selectProps(props, ...names) {
+	return names.map(k => props.hasOwnProperty(k) ? props[k] : undefined).filter(t => t !== undefined);
+}
+
+// TODO render only topic in collapsed mode
+
+export const ThreadList = (props) => {
+	// TODO use propTypes of Thread component
+	const options = selectProps(props,
+		'avatarSize',
+		'fetchUser',
+		'sendMessage',
+		'onSelect',
+		'onAction'
+	);
 	const items = props.threads.map(t => {
-		return <Topic key={t.id} thread={t} {...t} onSelect={props.onSelect}/>;
+		return <Thread key={t.id} {...t} {...options}/>;
+		// return <Topic key={t.id} thread={t} {...t} onSelect={props.onSelect}/>;
 	});
 	return (
 		<div className={`topic_list ${style.topic_list}`}>
@@ -57,4 +73,3 @@ const ThreadList = (props) => {
 };
 
 export default ThreadList;
-export { ThreadList };

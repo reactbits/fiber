@@ -1,28 +1,13 @@
 import React from 'react';
-import { Thread, ThreadList } from '../components';
+import { ThreadList } from '../components';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { connect, Provider } from 'react-redux';
 import DevTools from './devtools';
 import store from './store';
+import { users, nextDate } from './state';
 import * as actions from './state';
 import qwest from 'qwest';
-import moment from 'moment';
 import _ from 'lodash';
-
-const users = [
-	{
-		name: 'sergeyt',
-		avatar_url: 'stodyshev@gmail.com',
-	},
-	{
-		name: 'sergeyt',
-		avatar_url: 'https://robohash.org/sergeyt',
-	},
-	{
-		name: 'noavatar',
-		avatar_url: 'noavatar.png',
-	},
-];
 
 function randomIndex(arr) {
 	return Math.floor(Math.random() * arr.length);
@@ -30,28 +15,6 @@ function randomIndex(arr) {
 
 function rnd(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const timeline = [
-	// previous year
-	moment().subtract(1, 'years').subtract(45, 'minutes').toDate(),
-	moment().subtract(1, 'years').subtract(53, 'minutes').toDate(),
-	// previous week
-	moment().subtract(7, 'days').subtract(45, 'minutes').toDate(),
-	moment().subtract(7, 'days').subtract(53, 'minutes').toDate(),
-	// yesterday
-	moment().subtract(2, 'days').subtract(45, 'minutes').toDate(),
-	moment().subtract(2, 'days').subtract(53, 'minutes').toDate(),
-	// today
-	moment().subtract(1, 'days').subtract(32, 'minutes').toDate(),
-	moment().subtract(1, 'days').subtract(42, 'minutes').toDate(),
-];
-
-function nextDate(i) {
-	if (i < timeline.length) {
-		return timeline[i];
-	}
-	return new Date();
 }
 
 // TODO support multiple sources
@@ -131,52 +94,21 @@ const onAction = (type, id) => {
 	swal(`action ${type} on message ${id}`);
 };
 
+const selectThread = (thread) => {
+	swal(`selected ${thread.topic}`);
+};
+
 function sendMessage(msg) {
 	swal(`thread: ${msg.threadId}, body: ${msg.body}`);
 }
 
 const Body = (props) => {
-	// TODO render threads pane (e.g. for different quote sources)
-
-	const threads = [
-		{
-			id: 1,
-			topic: 'Chuck Norris Database',
-			last_message: {
-				user: users[0],
-				body: 'test message',
-				updated_at: nextDate(0),
-			},
-			unread: 4,
-			selected: true,
-		},
-		{
-			id: 2,
-			topic: 'Offtopic',
-			last_message: {
-				user: users[0],
-				body: 'test message',
-				updated_at: nextDate(0),
-			},
-			unread: 11,
-		},
-	];
-
-	const selectThread = (thread) => {
-		swal(`selected ${thread.topic}`);
-	};
-
 	return (
 		<div className="app container">
 			<Row>
-				<Col md={4}>
-					<Panel header="Threads">
-						<ThreadList threads={threads} onSelect={selectThread}/>
-					</Panel>
-				</Col>
 				<Col md={8}>
-					<Panel header="THE INTERNET CHUCK NORRIS DATABASE">
-						<Thread id={1} messages={props.messages} avatarSize={64} fetchUser={fetchMessageUser} onAction={onAction} sendMessage={sendMessage}/>
+					<Panel header="Threads">
+						<ThreadList threads={props.threads} onSelect={selectThread} avatarSize={64} fetchUser={fetchMessageUser} onAction={onAction} sendMessage={sendMessage}/>
 					</Panel>
 				</Col>
 			</Row>
@@ -184,11 +116,7 @@ const Body = (props) => {
 	);
 };
 
-const App = connect((state) => {
-	return {
-		messages: state.messages,
-	};
-})(Body);
+const App = connect(_.identity)(Body);
 
 export default (props) => {
 	return (
