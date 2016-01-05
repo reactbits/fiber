@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThreadList } from '../components';
+import { ThreadList, ChannelList } from '../components';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { connect, Provider } from 'react-redux';
 import DevTools from './devtools';
@@ -102,7 +102,14 @@ function sendMessage(msg) {
 }
 
 const Body = (props) => {
-	const listProps = {
+	const { dispatch } = props;
+	const channelListProps = {
+		channels: props.channels,
+		selectedChannel: props.selectedChannel,
+		selectChannel: (cn) => dispatch(actions.selectChannel(cn)),
+		createChannel: (cn) => dispatch(actions.addChannel(cn)),
+	};
+	const threadListProps = {
 		threads: props.threads,
 		onSelect: selectThread,
 		avatarSize: 64,
@@ -113,9 +120,14 @@ const Body = (props) => {
 	return (
 		<div className="app container">
 			<Row>
+				<Col md={4}>
+					<Panel header="Channels">
+						<ChannelList {...channelListProps}/>
+					</Panel>
+				</Col>
 				<Col md={8}>
 					<Panel header="Threads">
-						<ThreadList {...listProps}/>
+						<ThreadList {...threadListProps}/>
 					</Panel>
 				</Col>
 			</Row>

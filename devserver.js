@@ -1,5 +1,3 @@
-process.env.UV_THREADPOOL_SIZE = 100;
-
 const express = require('express');
 const morgan = require('morgan');
 const got = require('got');
@@ -14,8 +12,10 @@ app.use(morgan('dev'));
 app.use(express.static(process.cwd()));
 
 app.use(require('webpack-dev-middleware')(compiler, {
-	noInfo: true,
 	publicPath: config.output.publicPath,
+	stats: {
+		colors: true,
+	},
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
@@ -40,6 +40,5 @@ app.listen(port, '0.0.0.0', (err) => {
 		console.log(err);
 		return;
 	}
-
 	console.log('Listening at http://0.0.0.0:%s', port);
 });

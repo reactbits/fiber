@@ -39,7 +39,24 @@ export const users = [
 	},
 ];
 
+const channels = [
+	{
+		id: 1,
+		name: 'Issues',
+	},
+	{
+		id: 2,
+		name: 'Testing',
+	},
+	{
+		id: 3,
+		name: 'Chats',
+	},
+];
+
 const initialState = {
+	channels,
+	selectedChannel: channels[0],
 	threads: [
 		{
 			id: 1,
@@ -99,4 +116,13 @@ export const removeMessage = reducer.on('REMOVE_MESSAGE', (state, msg) => {
 		};
 	});
 	return { ...state, threads };
+});
+
+export const selectChannel = reducer.on('SELECT_CHANNEL', (state, cn) => {
+	return { ...state, selectedChannel: cn };
+});
+
+export const addChannel = reducer.on('ADD_CHANNEL', (state, cn) => {
+	const t = { ...cn, id: state.channels.length + 1 };
+	return { ...state, channels: [...state.channels, t] };
 });
