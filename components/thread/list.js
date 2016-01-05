@@ -47,7 +47,8 @@ export const Topic = (props) => {
 };
 
 function selectProps(props, ...names) {
-	return names.map(k => props.hasOwnProperty(k) ? props[k] : undefined).filter(t => t !== undefined);
+	const pairs = names.map(k => props.hasOwnProperty(k) ? { [k]: props[k] } : undefined);
+	return pairs.filter(t => t !== undefined).reduce((a, b) => Object.assign(a, b), { });
 }
 
 // TODO render only topic in collapsed mode
@@ -56,6 +57,7 @@ export const ThreadList = (props) => {
 	// TODO use propTypes of Thread component
 	const options = selectProps(props,
 		'avatarSize',
+		'iconSet',
 		'fetchUser',
 		'sendMessage',
 		'onSelect',

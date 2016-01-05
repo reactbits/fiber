@@ -1,25 +1,45 @@
 import React from 'react';
+import classNames from 'classnames';
+import style from './style';
 import _ from 'lodash';
 
 // TODO configurable icons
-export const actionIcon = {
+export const ionIconSet = {
+	like: 'ion-ios-heart',
+	reply: 'ion-ios-chatbubble',
+	star: 'ion-star',
+	remove: 'ion-trash-a',
+};
+
+export const faIconSet = {
 	like: 'fa fa-heart',
 	reply: 'fa fa-comment',
 	star: 'fa fa-star',
 	remove: 'fa fa-trash',
 };
 
-export const actionTip = {
+export const tips = {
 	like: 'Like',
 	reply: 'Reply',
 	star: 'Star',
 	remove: 'Delete',
 };
 
-export const Action = (props) => {
-	let className = `action ${props.type}`;
-	if (props.right) className += ' pull-right';
+function getIconSet(name) {
+	switch (name) {
+	case 'fa':
+	case 'awesome':
+		return faIconSet;
+	case 'ion':
+	case 'ionic':
+	default:
+		return ionIconSet;
+	}
+}
 
+export const Action = (props) => {
+	const className = classNames('action', props.type, style.action, { 'pull-right': props.right });
+	const iconSet = getIconSet(props.iconSet);
 	const count = props.count || 0;
 
 	const onClick = (e) => {
@@ -30,8 +50,8 @@ export const Action = (props) => {
 	};
 
 	return (
-		<a className={className} onClick={onClick} data-toggle="tooltip" title={actionTip[props.type]}>
-			<i className={actionIcon[props.type]}/>
+		<a className={className} onClick={onClick} data-toggle="tooltip" title={tips[props.type]}>
+			<i className={iconSet[props.type]}/>
 			{count > 0 ? <span className="count">{count}</span> : null}
 		</a>
 	);
@@ -39,13 +59,14 @@ export const Action = (props) => {
 
 export default Action;
 
-export function renderActions(actions, msg, handler) {
+export function renderActions(actions, msg, options) {
 	return Object.keys(actions).map(key => {
 		const props = {
 			msgid: msg.id,
 			type: key,
 			...actions[key],
-			onAction: handler,
+			onAction: options.onAction,
+			iconSet: options.iconSet,
 		};
 		props.type = key;
 		return <Action key={`${msg.id}/${key}`} {...props}/>;

@@ -36,7 +36,22 @@ const formatDay = (time) => {
 
 export const Day = (props) => {
 	const text = formatDay(props.time);
-	return <TextBlock className={'day ' + style.day} text={text}/>;
+	const msgCount = n => {
+		return (
+			<span style={{ margin: '0 4px 0 4px' }}>
+				<i className="ion-ios-chatbubble" style={{ marginRight: '4px' }}/>
+				<span>{n}</span>
+			</span>
+		);
+	};
+	return (
+		<div className={'day ' + style.day}>
+			<a onClick={props.onClick}>
+				<span>{text}</span>
+				{props.count > 0 ? msgCount(props.count) : null}
+			</a>
+		</div>
+	);
 };
 
 export default Day;

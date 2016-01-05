@@ -44,11 +44,17 @@ const Message = (props) => {
 		);
 	});
 
+	// TODO allow to hide unused actions
 	const actions = {
 		reply: { count: replies.length },
 		like: { count: likes },
 		remove: { right: true },
 		star: { right: true },
+	};
+
+	const actionProps = {
+		onAction: props.onAction,
+		iconSet: props.iconSet,
 	};
 
 	return (
@@ -58,7 +64,7 @@ const Message = (props) => {
 				{userName ? <UserName name={userName}/> : null}
 				{time ? <Age time={time}/> : null}
 				<span className="actions">
-					{renderActions(actions, data, props.onAction)}
+					{renderActions(actions, data, actionProps)}
 				</span>
 			</div>
 			<div className="body">
