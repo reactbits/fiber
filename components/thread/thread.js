@@ -64,7 +64,12 @@ export class Thread extends Component {
 			};
 
 			const makeDay = (time, msgcount) => {
-				return <Day key={`day-${props.id}-${+time}`} time={time} count={msgcount} onClick={() => collapseDay(time)}/>;
+				const dayProps = {
+					time,
+					count: msgcount,
+					onClick: () => collapseDay(time),
+				};
+				return <Day key={`day-${props.id}-${+time}`} {...dayProps}/>;
 			};
 
 			const renderMessage = (msg) => {

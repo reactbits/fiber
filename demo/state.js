@@ -73,15 +73,16 @@ function rnd(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export const addMessage = reducer.on('ADD_MESSAGE', (state, msg) => {
-	const threads = state.threads.slice();
-	let i;
-	if (!msg.thread_id) {
-		i = rnd(0, state.threads.length - 1);
-		msg.thread_id = threads[i].id;
-	} else {
-		i = _.findIndex(threads, t => t.id === msg.thread_id);
-	}
+function setThread(state, msg) {
+	if (msg.thread_id) return msg;
+	const i = rnd(0, state.threads.length - 1);
+	return { ...msg, thread_id: state.threads[i].id };
+}
+
+export const addMessage = reducer.on('ADD_MESSAGE', (state, m) => {
+	const msg = setThread(state, m);
+	const threads = [...state.threads];
+	const i = _.findIndex(threads, t => t.id === msg.thread_id);
 	const thread = threads[i];
 	threads[i] = {
 		...thread,

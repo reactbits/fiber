@@ -30,7 +30,7 @@ module.exports = {
 			},
 			{
 				test: /(\.scss|\.css)$/,
-				loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap'),
+				loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap'), // eslint-disable-line max-len
 			},
 		],
 	},
@@ -40,7 +40,7 @@ module.exports = {
 		new webpack.NoErrorsPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
-				'NODE_ENV': JSON.stringify('development'),
+				NODE_ENV: JSON.stringify('development'),
 			},
 		}),
 	],

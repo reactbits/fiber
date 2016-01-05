@@ -60,8 +60,7 @@ function fetchQuote() {
 		if (n > 0) {
 			// TODO async loading of replies
 			return Promise.all(_.range(n).map(makeMessage)).then((replies) => {
-				msg.replies = replies;
-				pushMessage(msg);
+				pushMessage({ ...msg, replies });
 			});
 		}
 		pushMessage(msg);
@@ -103,12 +102,20 @@ function sendMessage(msg) {
 }
 
 const Body = (props) => {
+	const listProps = {
+		threads: props.threads,
+		onSelect: selectThread,
+		avatarSize: 64,
+		fetchUser: fetchMessageUser,
+		onAction,
+		sendMessage,
+	};
 	return (
 		<div className="app container">
 			<Row>
 				<Col md={8}>
 					<Panel header="Threads">
-						<ThreadList threads={props.threads} onSelect={selectThread} avatarSize={64} fetchUser={fetchMessageUser} onAction={onAction} sendMessage={sendMessage}/>
+						<ThreadList {...listProps}/>
 					</Panel>
 				</Col>
 			</Row>

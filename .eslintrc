@@ -14,7 +14,7 @@
   	"swal": true,
   },
 
-  rules: {
+  "rules": {
   	"id-length": 0,
   	"indent": [2, "tab"],
   	"no-console": 0,

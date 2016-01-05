@@ -120,8 +120,15 @@ class Avatar extends Component {
 			throw new Error('invalid source property');
 		}
 
+		const loaderProps = {
+			src,
+			wrapper,
+			preloader,
+			imgProps,
+		};
+
 		return (
-			<ImageLoader className={className} style={avatarStyle} src={src} wrapper={wrapper} preloader={preloader} imgProps={imgProps}>
+			<ImageLoader className={className} style={avatarStyle} {...loaderProps}>
 				<RandomAvatar src={src} size={size}/>
 			</ImageLoader>
 		);
