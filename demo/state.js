@@ -60,7 +60,7 @@ const initialState = {
 	threads: [
 		{
 			id: 1,
-			topic: 'Chuck Norris Database',
+			subject: 'Chuck Norris Database',
 			last_message: {
 				user: users[0],
 				body: 'test message',
@@ -72,7 +72,7 @@ const initialState = {
 		},
 		{
 			id: 2,
-			topic: 'Offtopic',
+			subject: 'Offtopic',
 			last_message: {
 				user: users[0],
 				body: 'test message',

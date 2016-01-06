@@ -49,6 +49,7 @@ export class Thread extends Component {
 	render() {
 		const props = this.props;
 		const className = `thread ${style.thread} ${props.className}`;
+		const subject = props.subject || props.topic;
 		const messages = props.messages || [];
 		const items = [];
 
@@ -122,7 +123,7 @@ export class Thread extends Component {
 
 		return (
 			<div className={className}>
-				{props.topic ? <Topic text={props.topic} onClick={collapse}/> : null}
+				{subject ? <Topic text={subject} onClick={collapse}/> : null}
 				{items}
 			</div>
 		);
