@@ -23,7 +23,26 @@ const getDay = time => {
 
 const getMsgDay = msg => getDay(getTime(msg));
 
-const msgCount = m => 1 + (Array.isArray(m.replies) ? m.replies.map(msgCount) : 0);
+function countDayMessages(messages, start) {
+	const countIt = m => {
+		let n = 1;
+		if (Array.isArray(m.replies)) {
+			n += m.replies.reduce((a, b) => a + countIt(b), 0);
+		}
+		return n;
+	};
+	const msg = messages[start];
+	let result = countIt(msg);
+	const day = getMsgDay(msg);
+	for (let i = start + 1; i < messages.length; i++) {
+		if (day !== getMsgDay(messages[i])) {
+			i--;
+			break;
+		}
+		result += countIt(messages[i]);
+	}
+	return result;
+}
 
 // TODO allow to use custom MessageInput component
 export class Thread extends Component {
@@ -93,17 +112,7 @@ export class Thread extends Component {
 				const day = getDay(time);
 				if (moment.isDate(time) && (i === 0 || day !== getMsgDay(messages[i - 1]))) {
 					collaseMessages = isCollapsedDay(time);
-					let msgcount = 0;
-					if (collaseMessages) {
-						msgcount = msgCount(msg);
-						for (i++; i < messages.length; i++) {
-							if (day !== getMsgDay(messages[i])) {
-								i--;
-								break;
-							}
-							msgcount += msgCount(messages[i]);
-						}
-					}
+					const msgcount = countDayMessages(messages, i);
 					items.push(makeDay(time, msgcount));
 				}
 				if (collaseMessages) continue;

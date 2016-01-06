@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import style from './style';
 import _ from 'lodash';
+import MessageCount from './messagecount';
 
 // TODO configurable icons
 export const ionIconSet = {
@@ -38,6 +39,24 @@ function getIconSet(name) {
 }
 
 export const Action = (props) => {
+	const count = props.count || 0;
+	const onClick = (e) => {
+		e.preventDefault();
+		if (_.isFunction(props.onAction)) {
+			props.onAction(props.type, props.msgid);
+		}
+	};
+
+	if (props.type === 'reply') {
+		const attrs = {
+			count,
+			onClick,
+			title: tips[props.type],
+			element: React.DOM.a,
+		};
+		return <MessageCount {...attrs}/>;
+	}
+
 	const className = classNames({
 		action: true,
 		[props.type]: true,
@@ -45,14 +64,6 @@ export const Action = (props) => {
 		'pull-right': props.right,
 	});
 	const iconSet = getIconSet(props.iconSet);
-	const count = props.count || 0;
-
-	const onClick = (e) => {
-		e.preventDefault();
-		if (_.isFunction(props.onAction)) {
-			props.onAction(props.type, props.msgid);
-		}
-	};
 
 	return (
 		<a className={className} onClick={onClick} data-toggle="tooltip" title={tips[props.type]}>

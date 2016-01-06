@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import style from './style';
 import moment from 'moment';
+import { MessageCount } from '../message';
 
 // TODO move to common components
 export const TextBlock = (props) => {
@@ -38,19 +39,11 @@ const formatDay = (time) => {
 export const Day = (props) => {
 	const className = classNames('day', style.day);
 	const text = formatDay(props.time);
-	const msgCount = n => {
-		return (
-			<span style={{ margin: '0 4px 0 4px' }}>
-				<i className="ion-ios-chatbubble" style={{ marginRight: '4px' }}/>
-				<span>{n}</span>
-			</span>
-		);
-	};
 	return (
 		<div className={className}>
 			<a onClick={props.onClick}>
 				<span>{text}</span>
-				{props.count > 0 ? msgCount(props.count) : null}
+				<MessageCount count={props.count}/>
 			</a>
 		</div>
 	);
