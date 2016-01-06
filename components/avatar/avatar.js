@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 import ImageLoader from 'react-imageloader';
 import Spinner from 'halogen/ClipLoader';
 import style from './style';
@@ -90,8 +91,19 @@ class Avatar extends Component {
 	render() {
 		// TODO circled
 		// TODO shadow
-		// TODO animated (rotate on hover)
-		const className = `avatar ${style.hover_rotate} ${style.avatar} ${this.props.className}`;
+		const props = this.props;
+		const classList = {
+			avatar: true,
+			[style.avatar]: true,
+		};
+		// TODO animation
+		if (props.animated) {
+			classList[style.hover_rotate] = true;
+		}
+		if (props.className) {
+			classList[props.className] = true;
+		}
+		const className = classNames(classList);
 		const src = avatarURL(this.state.source);
 		const size = mapSize(this.props.size);
 		const avatarStyle = {

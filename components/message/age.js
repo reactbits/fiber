@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import moment from 'moment';
 import style from './style';
 import _ from 'lodash';
@@ -25,12 +26,11 @@ const formatTime = (value) => {
 
 export const Age = ({ time }) => {
 	const text = formatTime(time);
-
-	let className = `time ${style.time}`;
-	if (isToday(time)) {
-		className += ` ${style.today}`;
-	}
-
+	const className = classNames({
+		time: true,
+		[style.time]: true,
+		[style.today]: isToday(time),
+	});
 	const attrs = {
 		className,
 	};

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import style from './style';
 import _ from 'lodash';
 import { toPromise } from '../util';
@@ -27,7 +28,7 @@ export default class UserName extends Component {
 			// TODO render small spinner
 			value = '';
 		}
-		const className = `name ${style.name}`;
+		const className = classNames('name', style.name);
 		return <a className={className}>{value}</a>;
 	}
 }

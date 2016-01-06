@@ -1,8 +1,14 @@
 import React from 'react';
+import classNames from 'classnames';
 import Channel from './channel';
 import AddChannel from './addchannel';
+import style from './style';
 
 export const ChannelList = (props) => {
+	const className = classNames({
+		'channel-list': true,
+		[style.channel_list]: true,
+	});
 	const selectedId = (props.selectedChannel || {}).id;
 	const channels = props.channels.map(cn => {
 		return (
@@ -10,11 +16,11 @@ export const ChannelList = (props) => {
 		);
 	});
 	return (
-		<div className="channel-list">
+		<div className={className}>
 			<div className="header">
 				<span>Channels</span>
 			</div>
-			<div className="channels">
+			<div className="body">
 				{channels}
 			</div>
 			<AddChannel createChannel={props.createChannel}/>

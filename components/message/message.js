@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import Avatar from '../avatar';
 import Markdown from '../markdown';
 import UserName from './username';
@@ -19,13 +20,13 @@ const getTime = (msg) => {
 };
 
 const Message = (props) => {
-	let className = `message ${style.message} ${props.className}`;
-	if (!!props.isReply) className += ` ${style.reply}`;
+	const className = classNames('message', style.message, props.className, {
+		[style.reply]: !!props.isReply,
+	});
 	const data = props.data || props;
 	const user = data.user;
 	const time = getTime(data);
 	const likes = data.likes || 0;
-
 	const fetchUser = promiseOnce(data.fetchUser || props.fetchUser, data);
 	const avatar = getOrFetch(fetchUser, user, 'avatar', 'avatar_url');
 	const userName = getOrFetch(fetchUser, user, 'name', 'login');
@@ -60,14 +61,14 @@ const Message = (props) => {
 	return (
 		<div className={className} data-id={data.id}>
 			{avatar ? <Avatar source={avatar} size={props.avatarSize} name={userName}/> : null}
-			<div className={`meta ${style.meta}`}>
+			<div className={classNames('meta', style.meta)}>
 				{userName ? <UserName name={userName}/> : null}
 				{time ? <Age time={time}/> : null}
-				<span className="actions">
+				<span className={classNames('actions', style.actions)}>
 					{renderActions(actions, data, actionProps)}
 				</span>
 			</div>
-			<div className="body">
+			<div className={classNames('message-body', style.message_body)}>
 				<Markdown source={data.body}/>
 			</div>
 			{replyElements}

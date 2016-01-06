@@ -38,7 +38,12 @@ function getIconSet(name) {
 }
 
 export const Action = (props) => {
-	const className = classNames('action', props.type, style.action, { 'pull-right': props.right });
+	const className = classNames({
+		action: true,
+		[props.type]: true,
+		[style.action]: true,
+		'pull-right': props.right,
+	});
 	const iconSet = getIconSet(props.iconSet);
 	const count = props.count || 0;
 

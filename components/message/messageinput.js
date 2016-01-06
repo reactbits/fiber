@@ -1,11 +1,12 @@
 import React from 'react';
+import classNames from 'classnames';
 import style from './style';
 
 // TODO render user avatar
 // TODO configure submit shortcut, alt-enter is default
 
 export const MessageInput = (props) => {
-	const className = `message-input ${style.message_input}`;
+	const className = classNames('message-input', style.message_input);
 	const onKeyUp = (e) => {
 		const input = $(e.target);
 		if (e.altKey && e.which === 13) {

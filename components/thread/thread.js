@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 import { Message, MessageInput, getTime } from '../message';
 import Avatar from '../avatar';
 import Day from './day';
@@ -6,9 +7,10 @@ import style from './style';
 import moment from 'moment';
 import _ from 'lodash';
 
-const Topic = props => {
+const Header = props => {
+	const className = classNames('thread-header', style.thread_header);
 	return (
-		<a className={'topic ' + style.topic} onClick={props.onClick}>
+		<a className={className} onClick={props.onClick}>
 			<span>{props.text}</span>
 		</a>
 	);
@@ -48,7 +50,7 @@ export class Thread extends Component {
 
 	render() {
 		const props = this.props;
-		const className = `thread ${style.thread} ${props.className}`;
+		const className = classNames('thread', style.thread, props.className);
 		const subject = props.subject || props.topic;
 		const messages = props.messages || [];
 		const items = [];
@@ -123,7 +125,7 @@ export class Thread extends Component {
 
 		return (
 			<div className={className}>
-				{subject ? <Topic text={subject} onClick={collapse}/> : null}
+				{subject ? <Header text={subject} onClick={collapse}/> : null}
 				{items}
 			</div>
 		);

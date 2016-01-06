@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import style from './style';
 import moment from 'moment';
 
@@ -35,6 +36,7 @@ const formatDay = (time) => {
 };
 
 export const Day = (props) => {
+	const className = classNames('day', style.day);
 	const text = formatDay(props.time);
 	const msgCount = n => {
 		return (
@@ -45,7 +47,7 @@ export const Day = (props) => {
 		);
 	};
 	return (
-		<div className={'day ' + style.day}>
+		<div className={className}>
 			<a onClick={props.onClick}>
 				<span>{text}</span>
 				{props.count > 0 ? msgCount(props.count) : null}

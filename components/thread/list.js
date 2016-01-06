@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Avatar from '../avatar';
 import Thread from './thread';
 import style from './style';
@@ -54,6 +55,7 @@ function selectProps(props, ...names) {
 // TODO render only topic in collapsed mode
 
 export const ThreadList = (props) => {
+	const className = classNames('thread-list', style.thread_list);
 	// TODO use propTypes of Thread component
 	const options = selectProps(props,
 		'avatarSize',
@@ -68,7 +70,7 @@ export const ThreadList = (props) => {
 		// return <Topic key={t.id} thread={t} {...t} onSelect={props.onSelect}/>;
 	});
 	return (
-		<div className={`topic_list ${style.topic_list}`}>
+		<div className={className}>
 			{items}
 		</div>
 	);
