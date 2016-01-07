@@ -3,6 +3,7 @@
 
 .message {
 	padding: 6px 30px 3px 70px;
+	min-height: 70px;
 }
 
 .reply {
@@ -56,4 +57,25 @@ $mc-border-color: #9197a3;
 a.message_count, a.message_count:hover {
 	cursor: pointer;
 	text-decoration: none;
+}
+
+.message_input {
+	width: 100%;
+	height: 100%;
+	min-height: 2em;
+	padding: .6em;
+	border: 1px solid rgba(0,0,0,0.1);
+  border-radius: .2em;
+	overflow: hidden;
+	outline: none;
+	font-size: .9em;
+	line-height: 1.5;
+	cursor: pointer;
+}
+
+$focus-color: #1fadc5;
+
+.message_input:focus {
+	box-shadow: 0 0 .2em $focus-color inset;
+  border-color: $focus-color;
 }

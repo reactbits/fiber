@@ -80,9 +80,9 @@ export function renderActions(actions, msg, options) {
 		const props = {
 			msgid: msg.id,
 			type: key,
-			...actions[key],
 			onAction: options.onAction,
 			iconSet: options.iconSet,
+			...actions[key],
 		};
 		props.type = key;
 		return <Action key={`${msg.id}/${key}`} {...props}/>;

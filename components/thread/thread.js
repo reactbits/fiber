@@ -101,6 +101,7 @@ export class Thread extends Component {
 					iconSet: props.iconSet,
 					fetchUser: props.fetchUser,
 					onAction: props.onAction,
+					sendMessage: props.sendMessage,
 				};
 				return <Message key={msg.id} {...msgProps}/>;
 			};
@@ -121,7 +122,7 @@ export class Thread extends Component {
 
 			const sendMessage = (body) => {
 				if (_.isFunction(props.sendMessage)) {
-					props.sendMessage({ threadId: props.id, body });
+					props.sendMessage({ thread_id: props.id, body });
 				}
 			};
 
