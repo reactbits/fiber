@@ -52,13 +52,13 @@ export class Thread extends Component {
 		messages: PropTypes.array,
 		avatarSize: Avatar.propTypes.size,
 		fetchUser: PropTypes.func,
-	}
+	};
 
 	static defaultProps = {
 		className: '',
 		topic: '',
 		messages: [],
-	}
+	};
 
 	constructor(props) {
 		super(props);

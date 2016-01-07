@@ -70,13 +70,13 @@ class Avatar extends Component {
 		className: PropTypes.string,
 		size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		style: PropTypes.object,
-	}
+	};
 
 	static defaultProps = {
 		className: '',
 		size: 'normal',
 		style: {},
-	}
+	};
 
 	constructor(props) {
 		super(props);
