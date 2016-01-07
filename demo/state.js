@@ -1,7 +1,7 @@
 import makeReducer from 'make-reducer';
 import moment from 'moment';
 import _ from 'lodash';
-import { updateArray } from './update';
+import { updateArray } from 'update-it';
 
 const timeline = [
 	// previous year
