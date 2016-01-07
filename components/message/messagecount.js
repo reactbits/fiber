@@ -13,9 +13,7 @@ export const MessageCount = (props) => {
 			title: props.title,
 		};
 	}
-	return (
-		<elem {...attrs}>{props.count}</elem>
-	);
+	return elem(attrs, props.count);
 };
 
 export default MessageCount;

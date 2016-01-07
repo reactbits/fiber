@@ -27,22 +27,33 @@
 	margin-right: 0.3em;
 }
 
-.action, .action span {
+.action, .action:hover {
 	font-size: 14px;
 	text-decoration: none;
 	cursor: pointer;
 }
 
+$mc-border-color: #9197a3;
+
 .message_count {
-	margin: 0 4px;
+	margin: 0 8px;
   display: inline-block;
   position: relative;
-  padding: 0px 3px;
-  background: #fff;
-  color: #999;
-  border: #999 solid 1px;
-  border-radius: 3px;
-  @include arrow-left($width: 4px, $length: 4px, $background-color: #fff, $border-color: #999);
-  font-size: 8pt;
+  padding: 0px 4px;
+  background: white;
+  color: #4e5665;
+  border: $mc-border-color solid 1px;
+  border-radius: 2px;
+	font-size: 11px;
   font-weight: normal;
+	text-align: center;
+	white-space: nowrap;
+	min-width: 15px;
+	text-decoration: none;
+  @include arrow-left($width: 4px, $length: 4px, $background-color: white, $border-color: $mc-border-color);
+}
+
+a.message_count, a.message_count:hover {
+	cursor: pointer;
+	text-decoration: none;
 }
