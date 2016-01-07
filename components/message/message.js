@@ -106,7 +106,7 @@ export class Message extends Component {
 			const sendReply = (text) => {
 				hideReplyInput();
 				if (_.isFunction(props.sendMessage)) {
-					props.sendMessage({ thread_id: data.thread_id, inReplyTo: data.id, body: text });
+					props.sendMessage({ thread_id: data.thread_id, in_reply_to: data.id, body: text });
 				}
 			};
 			replyInput = <MessageInput submit={sendReply} cancel={hideReplyInput} focused/>;

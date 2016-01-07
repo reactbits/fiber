@@ -125,13 +125,13 @@ export const addMessage = reducer.on('ADD_MESSAGE', (state, message) => {
 	const msg = setThread(state, message);
 	const threads = state.threads.map(t => {
 		if (t.id !== msg.thread_id) return t;
-		if (msg.inReplyTo) {
+		if (msg.in_reply_to) {
 			const messages = updateArray(t.messages, m => {
 				return {
 					...m,
 					replies: [...(m.replies || []), msg],
 				};
-			}, m => m.hasOwnProperty('body') && m.id === msg.inReplyTo);
+			}, m => m.hasOwnProperty('body') && m.id === msg.in_reply_to);
 			return { ...t, messages };
 		}
 		return { ...t, messages: [...t.messages, msg] };
