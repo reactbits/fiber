@@ -51,14 +51,16 @@ export class MessageInput extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			value: props.value,
 			helpVisible: false,
 		};
 		this.onFocus = this.onFocus.bind(this);
 		this.onBlur = this.onBlur.bind(this);
+		this.onChange = this.onChange.bind(this);
 	}
 
 	componentDidMount() {
-		const input = $(ReactDOM.findDOMNode(this)).find('.message-input');
+		const input = $(this.refs.input);
 		if (!!this.props.focused) {
 			input.focus();
 		}
@@ -66,7 +68,7 @@ export class MessageInput extends Component {
 	}
 
 	componentWillUnmount() {
-		const input = $(ReactDOM.findDOMNode(this)).find('.message-input');
+		const input = $(this.refs.input);
 		input.off('focus').off('blur');
 	}
 
@@ -76,6 +78,10 @@ export class MessageInput extends Component {
 
 	onBlur() {
 		$(ReactDOM.findDOMNode(this)).removeClass(style.focused);
+	}
+
+	onChange(event) {
+		this.setState({ value: event.target.value });
 	}
 
 	render() {
@@ -95,6 +101,13 @@ export class MessageInput extends Component {
 				input.val('');
 				props.submit(text);
 			}
+		};
+		const textareaProps = {
+			className,
+			placeholder: 'Reply...',
+			value: this.state.value,
+			onKeyUp,
+			onChange: this.onChange,
 		};
 
 		const showHelp = (e) => {
@@ -121,8 +134,7 @@ export class MessageInput extends Component {
 			<div className={style.reply_form}>
 				{showHelpButton}
 				{help}
-				<textarea className={className} placeholder="Reply..." onKeyUp={onKeyUp}>
-				</textarea>
+				<textarea ref="input" {...textareaProps}/>
 				<div className={style.reply_controls}>
 					<a className={style.upload_button} data-toggle="tooltip" title="Upload images">
 						<i className="ion-camera"/>

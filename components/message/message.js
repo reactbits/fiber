@@ -40,6 +40,7 @@ export class Message extends Component {
 		super(props);
 		this.state = {
 			showReplyInput: false,
+			showEdit: false,
 		};
 	}
 
@@ -75,15 +76,20 @@ export class Message extends Component {
 		});
 
 		const showReply = () => {
-			this.setState({ showReplyInput: true });
+			this.setState({ showReplyInput: true, showEdit: false });
+		};
+
+		const showEdit = () => {
+			this.setState({ showEdit: true, showReplyInput: false });
 		};
 
 		// TODO allow to hide unused actions
 		const actions = {
 			reply: { count: replies.length, onAction: showReply },
 			like: { count: likes },
-			remove: { right: true },
 			star: { right: true },
+			remove: { right: true },
+			edit: { right: true, onAction: showEdit },
 		};
 
 		const actionProps = {
@@ -98,11 +104,27 @@ export class Message extends Component {
 				this.setState({ showReplyInput: false });
 			};
 			const sendReply = (text) => {
+				hideReplyInput();
 				if (_.isFunction(props.sendMessage)) {
 					props.sendMessage({ thread_id: data.thread_id, inReplyTo: data.id, body: text });
 				}
 			};
 			replyInput = <MessageInput submit={sendReply} cancel={hideReplyInput} focused/>;
+		}
+
+		let editor = null;
+
+		if (this.state.showEdit) {
+			const hideEdit = () => {
+				this.setState({ showEdit: false });
+			};
+			const updateMessage = (text) => {
+				hideEdit();
+				if (_.isFunction(props.updateMessage)) {
+					props.updateMessage({ thread_id: data.thread_id, id: data.id, body: text });
+				}
+			};
+			editor = <MessageInput submit={updateMessage} cancel={hideEdit} focused value={data.body}/>;
 		}
 
 		return (
@@ -119,6 +141,7 @@ export class Message extends Component {
 					<Markdown source={data.body}/>
 				</div>
 				{replyInput}
+				{editor}
 				{replyElements}
 			</div>
 		);

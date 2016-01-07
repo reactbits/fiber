@@ -10,6 +10,7 @@ export const ionIconSet = {
 	reply: 'ion-ios-chatbubble',
 	star: 'ion-star',
 	remove: 'ion-trash-a',
+	edit: 'ion-edit',
 };
 
 export const faIconSet = {
@@ -17,6 +18,7 @@ export const faIconSet = {
 	reply: 'fa fa-comment',
 	star: 'fa fa-star',
 	remove: 'fa fa-trash',
+	edit: 'fa fa-pencil',
 };
 
 export const tips = {
@@ -24,6 +26,7 @@ export const tips = {
 	reply: 'Reply',
 	star: 'Star',
 	remove: 'Delete',
+	edit: 'Edit',
 };
 
 function getIconSet(name) {

@@ -102,6 +102,7 @@ export class Thread extends Component {
 					fetchUser: props.fetchUser,
 					onAction: props.onAction,
 					sendMessage: props.sendMessage,
+					updateMessage: props.updateMessage,
 				};
 				return <Message key={msg.id} {...msgProps}/>;
 			};

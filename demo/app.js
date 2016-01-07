@@ -47,9 +47,11 @@ function fetchMessageUser(msg) {
 	});
 }
 
+const maxMessages = 10;
+
 function pushMessage(msg) {
 	store.dispatch(actions.addMessage(msg));
-	if (nextId < 25) {
+	if (nextId < maxMessages) {
 		setTimeout(fetchQuote, 1000);
 	}
 }
@@ -90,15 +92,33 @@ for (let i = 0; i < maxUsers; i++) {
 }
 
 const onAction = (type, id) => {
-	swal(`action ${type} on message ${id}`);
+	switch (type) {
+	case 'delete':
+	case 'remove':
+		store.dispatch(actions.removeMessage(id));
+		break;
+	default:
+		swal(`action ${type} on message ${id}`);
+		break;
+	}
 };
 
 const selectThread = (thread) => {
 	swal(`selected ${thread.topic}`);
 };
 
-function sendMessage(msg) {
-	swal(`thread: ${msg.threadId}, body: ${msg.body}`);
+function sendMessage(m) {
+	const state = store.getState();
+	const msg = {
+		...m,
+		id: nextId++,
+		user: state.currentUser,
+	};
+	store.dispatch(actions.addMessage(msg));
+}
+
+function updateMessage(msg) {
+	store.dispatch(actions.updateMessage(msg));
 }
 
 const Body = (props) => {
@@ -116,6 +136,7 @@ const Body = (props) => {
 		fetchUser: fetchMessageUser,
 		onAction,
 		sendMessage,
+		updateMessage,
 	};
 	return (
 		<div className="app container">

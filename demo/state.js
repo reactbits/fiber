@@ -1,6 +1,7 @@
 import makeReducer from 'make-reducer';
 import moment from 'moment';
 import _ from 'lodash';
+import { updateArray } from './update';
 
 const timeline = [
 	// previous year
@@ -55,6 +56,7 @@ const channels = [
 ];
 
 const initialState = {
+	currentUser: users[0],
 	channels,
 	selectedChannel: channels[0],
 	threads: [
@@ -84,7 +86,30 @@ const initialState = {
 	],
 };
 
+function removeById(list, id) {
+	return list.filter(t => t.id !== id);
+}
+
+function replaceById(list, obj) {
+	const i = _.findIndex(list, t => t.id === obj.id);
+	if (i >= 0) {
+		const result = [...list];
+		result[i] = { ...result[i], ...obj };
+		return result;
+	}
+	return list;
+}
+
 export const reducer = makeReducer(initialState);
+
+export const selectChannel = reducer.on('SELECT_CHANNEL', (state, cn) => {
+	return { ...state, selectedChannel: cn };
+});
+
+export const addChannel = reducer.on('ADD_CHANNEL', (state, cn) => {
+	const t = { ...cn, id: state.channels.length + 1 };
+	return { ...state, channels: [...state.channels, t] };
+});
 
 function rnd(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -96,33 +121,38 @@ function setThread(state, msg) {
 	return { ...msg, thread_id: state.threads[i].id };
 }
 
-export const addMessage = reducer.on('ADD_MESSAGE', (state, m) => {
-	const msg = setThread(state, m);
-	const threads = [...state.threads];
-	const i = _.findIndex(threads, t => t.id === msg.thread_id);
-	const thread = threads[i];
-	threads[i] = {
-		...thread,
-		messages: [...thread.messages, msg],
-	};
+export const addMessage = reducer.on('ADD_MESSAGE', (state, message) => {
+	const msg = setThread(state, message);
+	const threads = state.threads.map(t => {
+		if (t.id !== msg.thread_id) return t;
+		if (msg.inReplyTo) {
+			const messages = updateArray(t.messages, m => {
+				return {
+					...m,
+					replies: [...(m.replies || []), msg],
+				};
+			}, m => m.hasOwnProperty('body') && m.id === msg.inReplyTo);
+			return { ...t, messages };
+		}
+		return { ...t, messages: [...t.messages, msg] };
+	});
 	return { ...state, threads };
 });
 
-export const removeMessage = reducer.on('REMOVE_MESSAGE', (state, msg) => {
+export const removeMessage = reducer.on('REMOVE_MESSAGE', (state, id) => {
 	const threads = state.threads.map(t => {
 		return {
 			...t,
-			messages: t.messages.filter(m => m.id !== msg.id),
+			messages: removeById(t.messages, id),
 		};
 	});
 	return { ...state, threads };
 });
 
-export const selectChannel = reducer.on('SELECT_CHANNEL', (state, cn) => {
-	return { ...state, selectedChannel: cn };
-});
-
-export const addChannel = reducer.on('ADD_CHANNEL', (state, cn) => {
-	const t = { ...cn, id: state.channels.length + 1 };
-	return { ...state, channels: [...state.channels, t] };
+export const updateMessage = reducer.on('UPDATE_MESSAGE', (state, msg) => {
+	const threads = state.threads.map(t => {
+		if (t.id !== msg.thread_id) return t;
+		return { ...t, messages: replaceById(t.messages, msg) };
+	});
+	return { ...state, threads };
 });

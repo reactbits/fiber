@@ -62,6 +62,7 @@ export const ThreadList = (props) => {
 		'iconSet',
 		'fetchUser',
 		'sendMessage',
+		'updateMessage',
 		'onSelect',
 		'onAction'
 	);
