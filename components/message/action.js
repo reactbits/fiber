@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import style from './style';
 import _ from 'lodash';
-import MessageCount from './messagecount';
+import Counter from './counter';
 
 // TODO configurable icons
 export const ionIconSet = {
@@ -29,6 +29,11 @@ export const tips = {
 	edit: 'Edit',
 };
 
+const actionClassNames = {
+	like: style.like_count,
+	reply: style.message_count,
+};
+
 function getIconSet(name) {
 	switch (name) {
 	case 'fa':
@@ -52,12 +57,13 @@ export const Action = (props) => {
 
 	if (props.type === 'reply') {
 		const attrs = {
+			className: actionClassNames[props.type],
 			count,
 			onClick,
 			title: tips[props.type],
 			element: React.DOM.a,
 		};
-		return <MessageCount {...attrs}/>;
+		return <Counter {...attrs}/>;
 	}
 
 	const className = classNames({

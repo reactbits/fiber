@@ -1,5 +1,6 @@
 @import "../_base";
 @import "../_mixins";
+@import "../_shapes";
 
 .message {
 	padding: 6px 30px 3px 70px;
@@ -50,12 +51,25 @@ $mc-border-color: #9197a3;
 	text-align: center;
 	white-space: nowrap;
 	min-width: 15px;
+	cursor: pointer;
 	text-decoration: none;
   @include arrow-left($width: 4px, $length: 4px, $background-color: white, $border-color: $mc-border-color);
 }
 
-a.message_count, a.message_count:hover {
+.message_count:hover {
+	text-decoration: none;
+}
+
+.like_count {
+	display: inline-block;
 	cursor: pointer;
+	white-space: nowrap;
+	text-align: center;
+	text-decoration: none;
+	@include heart($size: 20px);
+}
+
+.like_count:hover {
 	text-decoration: none;
 }
 

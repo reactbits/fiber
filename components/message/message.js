@@ -70,7 +70,10 @@ export class Message extends Component {
 				data: d,
 				isReply: true,
 				avatarSize: props.avatarSize,
+				fetchUser,
 				onAction: props.onAction,
+				sendMessage: props.sendMessage,
+				updateMessage: props.updateMessage,
 			};
 			return <Message key={d.id} {...replyProps}/>;
 		});

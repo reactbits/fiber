@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import style from './style';
 import moment from 'moment';
-import { MessageCount } from '../message';
+import { Counter } from '../message';
 
 // TODO move to common components
 export const TextBlock = (props) => {
@@ -43,7 +43,7 @@ export const Day = (props) => {
 		<div className={className}>
 			<a onClick={props.onClick}>
 				<span>{text}</span>
-				<MessageCount count={props.count}/>
+				<Counter count={props.count}/>
 			</a>
 		</div>
 	);

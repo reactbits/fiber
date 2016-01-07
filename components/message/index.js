@@ -1,11 +1,11 @@
 import { Message, getTime } from './message';
 import MessageInput from './messageinput';
-import MessageCount from './messagecount';
+import Counter from './counter';
 
 export {
 	Message,
 	MessageInput,
-	MessageCount,
+	Counter,
 	getTime,
 };
 
