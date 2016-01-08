@@ -39,7 +39,7 @@
     "react-dom": "^0.14.6",
     "react-imageloader": "^2.1.0",
     "react-markdown2": "^0.4.4",
-    "react-popover": "^0.4.3"
+    "react-popover": "^0.4.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.2.3",
@@ -54,11 +54,11 @@
     "cpx": "^1.2.1",
     "css-loader": "^0.23.1",
     "eslint": "^1.10.3",
-    "eslint-config-airbnb": "^3.0.2",
+    "eslint-config-airbnb": "^3.1.0",
     "eslint-plugin-react": "^3.14.0",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
-    "got": "^5.3.0",
+    "got": "^6.0.0",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.4",
     "make-reducer": "^0.4.0",
@@ -68,7 +68,7 @@
     "postcss-loader": "^0.8.0",
     "prismjs-package": "^0.5.0",
     "qwest": "^2.2.9",
-    "react-bootstrap": "^0.28.1",
+    "react-bootstrap": "^0.28.2",
     "react-redux": "^4.0.6",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
