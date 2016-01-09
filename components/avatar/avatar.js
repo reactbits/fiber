@@ -107,8 +107,8 @@ class Avatar extends Component {
 		const src = avatarURL(this.state.source);
 		const size = mapSize(this.props.size);
 		const avatarStyle = {
-			...this.props.style,
 			marginLeft: -(size + 8),
+			...this.props.style,
 		};
 
 		const imgProps = {
