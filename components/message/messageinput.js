@@ -98,7 +98,7 @@ export class MessageInput extends Component {
 			if (e.ctrlKey && e.which === 13) {
 				const text = input.val();
 				if (!text) return;
-				input.val('');
+				this.setState({ value: '' });
 				props.submit(text);
 			}
 		};
