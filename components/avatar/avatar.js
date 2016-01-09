@@ -4,7 +4,7 @@ import ImageLoader from 'react-imageloader';
 import Spinner from 'halogen/ClipLoader';
 import style from './style';
 import _ from 'lodash';
-import is from './is';
+import is from 'is_js';
 import gravatarURL from './gravatar';
 import '../tooltip';
 import { toPromise } from '../util';
