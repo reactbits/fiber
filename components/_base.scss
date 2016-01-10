@@ -1,0 +1,12 @@
+$input-focus-color: #1fadc5;
+
+.input {
+	border: 1px solid rgba(0,0,0,0.1);
+  border-radius: .2em;
+	outline: none;
+}
+
+.input:focus {
+	box-shadow: 0 0 .2em $input-focus-color inset;
+  border-color: $input-focus-color;
+}

@@ -1,0 +1,59 @@
+@import "../_base";
+
+.focused .show_help {
+	display: inline-block;
+}
+
+.show_help {
+	cursor: pointer;
+	display: none;
+	position: absolute;
+	right: .2em;
+	padding: .3em;
+	transition: color .2s;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+	color: $input-focus-color;
+}
+
+.show_help:hover {
+	text-decoration: none;
+}
+
+.monospaced {
+	font-family: 'Bitstream Vera Sans Mono',Menlo,Monaco,Courier,monospace;
+}
+
+.help_format {
+	padding: .6em 0;
+}
+
+.help_code {
+	border: 1px solid #ddd;
+	border-width: 1px 0;
+	padding: .6em 0;
+	margin-bottom: 1.2em;
+}
+
+.help_post em {
+	background: #eee;
+	border-radius: .3em;
+	padding: .1em .4em 0;
+	color: #333;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.help .Popover-body {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 2rem 4rem;
+  background: white;
+  border-radius: 0.3rem;
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+.help .Popover-tipShape {
+  fill: white;
+}

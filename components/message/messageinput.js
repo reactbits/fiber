@@ -1,38 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import PopoverClass from 'react-popover';
+import { Button } from 'react-bootstrap';
+import Help from '../markdown/help';
 import style from './style';
 import _ from 'lodash';
-
-const popover = React.createFactory(PopoverClass);
-
-function helpContent() {
-	const quote = '> ';
-	const monospaced = '`';
-	return (
-		<div>
-			<div className={style.help_format}>
-				<span><b>*bold*</b></span><br/>
-				<span><i>_italic_</i></span><br/>
-				<span>{quote}{'quoted'}</span><br/>
-				<span className={style.monospaced}>{monospaced}{'monospaced'}{monospaced}</span><br/>
-				<span>[title](link)</span><br/>
-			</div>
-			<div className={style.help_code}>
-				<span>{'```js'}</span><br/>
-				<span>javascript code</span><br/>
-				<span>{'```'}</span><br/>
-			</div>
-			<div className={style.help_post}>
-				<em>ctrl</em>
-				{' + '}
-				<em>enter</em>
-				<span>&nbsp;post</span>
-			</div>
-		</div>
-	);
-}
 
 // TODO render user avatar
 // TODO configure submit shortcut, ctrl-enter is default
@@ -51,7 +23,7 @@ export class MessageInput extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: props.value,
+			value: props.value || '',
 			helpVisible: false,
 		};
 		this.onFocus = this.onFocus.bind(this);
@@ -61,10 +33,10 @@ export class MessageInput extends Component {
 
 	componentDidMount() {
 		const input = $(this.refs.input);
+		input.focus(this.onFocus).blur(this.onBlur);
 		if (!!this.props.focused) {
 			input.focus();
 		}
-		input.focus(this.onFocus).blur(this.onBlur);
 	}
 
 	componentWillUnmount() {
@@ -81,12 +53,26 @@ export class MessageInput extends Component {
 	}
 
 	onChange(event) {
-		this.setState({ value: event.target.value });
+		const value = event.target.value || '';
+		if (_.isFunction(this.props.onChange)) {
+			this.props.onChange(value);
+		}
+		this.setState({ value });
 	}
 
 	render() {
 		const props = this.props;
-		const className = classNames('message-input', style.message_input);
+		const className = classNames('message-input', style.input, style.message_input);
+		const canSubmit = _.isFunction(props.canSubmit) ?
+												props.canSubmit
+												: () => this.state.value.length > 0;
+		const submit = () => {
+			const input = $(this.refs.input);
+			const text = input.val();
+			if (!text) return;
+			this.setState({ value: '' });
+			props.submit(text);
+		};
 		const onKeyUp = (e) => {
 			if (e.which === 27) {
 				if (_.isFunction(props.cancel)) {
@@ -94,51 +80,33 @@ export class MessageInput extends Component {
 					return;
 				}
 			}
-			const input = $(e.target);
 			if (e.ctrlKey && e.which === 13) {
-				const text = input.val();
-				if (!text) return;
-				this.setState({ value: '' });
-				props.submit(text);
+				submit();
 			}
 		};
 		const textareaProps = {
 			className,
-			placeholder: 'Reply...',
+			placeholder: props.placeholder || 'Reply...',
 			value: this.state.value,
 			onKeyUp,
 			onChange: this.onChange,
 		};
-
-		const showHelp = (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			this.setState({ helpVisible: true });
-			return false;
+		const submitProps = {
+			className: 'pull-right',
+			bsStyle: 'primary',
+			bsSize: 'small',
+			onClick: submit,
+			disabled: !canSubmit(),
 		};
-
-		const showHelpButton = <a className={style.show_help} onMouseDown={showHelp}>?</a>;
-
-		const helpProps = {
-			className: style.help,
-			isOpen: this.state.helpVisible,
-			preferPlace: 'below',
-			place: 'below',
-			onOuterAction: () => this.setState({ helpVisible: false }),
-			body: helpContent(),
-		};
-
-		const help = popover(helpProps, showHelpButton);
-
 		return (
 			<div className={style.reply_form}>
-				{showHelpButton}
-				{help}
+				<Help/>
 				<textarea ref="input" {...textareaProps}/>
 				<div className={style.reply_controls}>
 					<a className={style.upload_button} data-toggle="tooltip" title="Upload images">
 						<i className="ion-camera"/>
 					</a>
+					<Button {...submitProps}>Post</Button>
 				</div>
 			</div>
 		);

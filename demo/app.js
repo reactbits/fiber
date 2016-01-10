@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThreadList, ChannelList } from '../components';
+import { ThreadList, ChannelList, ThreadForm } from '../components';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { connect, Provider } from 'react-redux';
 import DevTools from './devtools';
@@ -163,6 +163,7 @@ const Body = (props) => {
 				</Col>
 				<Col md={8}>
 					<Panel header="Threads">
+						<ThreadForm/>
 						<ThreadList {...threadListProps}/>
 					</Panel>
 				</Col>

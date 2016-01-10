@@ -37,6 +37,7 @@
     "moment": "^2.11.1",
     "query-string": "^3.0.0",
     "react": "^0.14.6",
+    "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6",
     "react-imageloader": "^2.1.0",
     "react-markdown2": "^0.4.4",
