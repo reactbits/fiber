@@ -163,7 +163,7 @@ const Body = (props) => {
 	const threadListProps = {
 		threads: props.threads,
 		onSelect: selectThread,
-		avatarSize: 64,
+		avatarSize: 40,
 		fetchUser: fetchMessageUser,
 		onAction,
 		canExecute,

@@ -9,7 +9,7 @@ import gravatarURL from './gravatar';
 import '../tooltip';
 import { toPromise } from '../util';
 
-const avatarSize = {
+const avatarSizes = {
 	small: 24,
 	sm: 24,
 	s: 24,
@@ -23,16 +23,16 @@ const avatarSize = {
 
 const defaultSize = 32;
 
-const mapSize = (value) => {
-	return (_.isString(value) ? avatarSize[value.toLowerCase()] : value) || defaultSize;
-};
+export function avatarSize(value) {
+	return (_.isString(value) ? avatarSizes[value.toLowerCase()] : value) || defaultSize;
+}
 
-const avatarURL = (url) => {
+function avatarURL(url) {
 	if (is.email(url)) {
 		return gravatarURL(url);
 	}
 	return url;
-};
+}
 
 function preloader() {
 	const css = {
@@ -46,26 +46,31 @@ function preloader() {
   );
 }
 
-const RandomAvatar = (props) => {
+function RandomAvatar(props) {
 	// TODO render random avatar
 	const size = props.size;
 	return (
 		<img src={gravatarURL(props.src)} width={size} height={size}/>
 	);
-};
+}
 
-const makeWrapper = (title) => {
-	return (props, content) => {
-		const attrs = { ...props };
-		if (title) {
-			attrs['data-toggle'] = 'tooltip';
-			attrs.title = title;
+function makeWrapper(props) {
+	return (sourceProps, content) => {
+		const attrs = { ...sourceProps };
+		if (props.className) {
+			attrs.className += ' ' + props.className;
 		}
-		return <div {...attrs}>{content}</div>;
+		if (props.title) {
+			attrs['data-toggle'] = 'tooltip';
+			attrs.title = props.title;
+		}
+		return (
+			<div {...attrs}>{content}</div>
+		);
 	};
-};
+}
 
-class Avatar extends Component {
+export class Avatar extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -89,24 +94,23 @@ class Avatar extends Component {
 	}
 
 	render() {
-		// TODO circled
 		// TODO shadow
 		const props = this.props;
-		const classList = {
-			avatar: true,
-			[style.avatar]: true,
-		};
-		// TODO animation
-		if (props.animated) {
-			classList[style.hover_rotate] = true;
-		}
-		if (props.className) {
-			classList[props.className] = true;
-		}
-		const className = classNames(classList);
+		const className = classNames(
+			props.className,
+			'avatar',
+			style.avatar,
+			style.circled,
+			{
+				// TODO animation
+				[style.hover_rotate]: props.animated,
+			}
+		);
 		const src = avatarURL(this.state.source);
-		const size = mapSize(this.props.size);
+		const size = avatarSize(this.props.size);
 		const avatarStyle = {
+			width: size + 8,
+			height: size + 8,
 			marginLeft: -(size + 8),
 			...this.props.style,
 		};
@@ -116,7 +120,10 @@ class Avatar extends Component {
 			height: size,
 		};
 
-		const wrapper = makeWrapper(this.props.name);
+		const wrapper = makeWrapper({
+			className: style.online,
+			title: props.name,
+		});
 
 		const promise = toPromise(src);
 		if (promise) {
@@ -148,4 +155,3 @@ class Avatar extends Component {
 }
 
 export default Avatar;
-export { Avatar };

@@ -2,15 +2,33 @@
 @import "../_mixins";
 
 .avatar {
+	cursor: pointer;
+	position: relative;
 	float: left;
-	margin: 3px 0 0 -45px;
-	overflow: hidden;
+	margin: 4px 4px 4px -45px;
+	overflow: visible;
+}
+
+.avatar img {
 	border-radius: 50%;
 }
 
 .avatar.circled {
-	border: 2px solid #eee;
+	border: 2px solid lighten(orange, 25%);
+	border-radius: 50%;
 	padding: 2px;
+}
+
+.online:after {
+	content: "\f400";
+  color: #4cbe00;
+  position: absolute;
+  top: -.4em;
+  right: -.4em;
+  text-shadow: 0 0 .1em #fff;
+  font-size: .8em;
+	font-family: "Ionicons";
+	z-index: 99;
 }
 
 @mixin shadow ($size: 2px) {

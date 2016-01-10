@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import Avatar from '../avatar';
+import { Avatar, avatarSize } from '../avatar';
 import Markdown from '../markdown';
 import UserName from './username';
 import Age from './age';
@@ -56,6 +56,13 @@ export class Message extends Component {
 		const fetchUser = promiseOnce(data.fetchUser || props.fetchUser, data);
 		const avatar = getOrFetch(fetchUser, user, 'avatar', 'avatar_url');
 		const userName = getOrFetch(fetchUser, user, 'name', 'login');
+
+		const bodyProps = {
+			className: classNames('message-body', style.message_body),
+			style: {
+				minHeight: avatarSize(props.avatarSize) - 16,
+			},
+		};
 
 		// TODO support data.replies as promise
 		const replies = data.replies || [];
@@ -142,7 +149,7 @@ export class Message extends Component {
 						{renderActions(actions, data, actionProps)}
 					</span>
 				</div>
-				<div className={classNames('message-body', style.message_body)}>
+				<div {...bodyProps}>
 					<Markdown source={data.body}/>
 				</div>
 				{replyInput}
