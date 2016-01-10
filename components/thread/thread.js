@@ -101,6 +101,7 @@ export class Thread extends Component {
 					iconSet: props.iconSet,
 					fetchUser: props.fetchUser,
 					onAction: props.onAction,
+					canExecute: props.canExecute,
 					sendMessage: props.sendMessage,
 					updateMessage: props.updateMessage,
 				};

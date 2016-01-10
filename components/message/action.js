@@ -85,15 +85,20 @@ export const Action = (props) => {
 export default Action;
 
 export function renderActions(actions, msg, options) {
-	return Object.keys(actions).map(key => {
-		const props = {
-			msgid: msg.id,
-			type: key,
-			onAction: options.onAction,
-			iconSet: options.iconSet,
-			...actions[key],
-		};
-		props.type = key;
-		return <Action key={`${msg.id}/${key}`} {...props}/>;
-	});
+	return Object.keys(actions)
+		.filter(key => {
+			if (!_.isFunction(options.canExecute)) return true;
+			return options.canExecute(key, msg);
+		})
+		.map(key => {
+			const props = {
+				msgid: msg.id,
+				type: key,
+				onAction: options.onAction,
+				iconSet: options.iconSet,
+				...actions[key],
+			};
+			props.type = key;
+			return <Action key={`${msg.id}/${key}`} {...props}/>;
+		});
 }

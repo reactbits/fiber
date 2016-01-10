@@ -25,11 +25,11 @@ function makeMessage() {
 	return qwest.get(source).then((xhr, response) => {
 		const data = response.value;
 		const i = randomIndex(users);
-		const user = users[i];
+		const user = nextId === 1 ? users[0] : users[i];
 		const msg = {
 			id: nextId++,
 			body: data.joke,
-			user_id: i,
+			user_id: user.id,
 			time: nextDate(nextId - 1),
 			likes: rnd(0, 10),
 		};
@@ -41,7 +41,7 @@ function makeMessage() {
 }
 
 function fetchMessageUser(msg) {
-	const user = users[msg.user_id];
+	const user = _.find(users, u => u.id === msg.user_id);
 	return new Promise((resolve) => {
 		return setTimeout(() => resolve(user), 100);
 	});
@@ -77,6 +77,7 @@ function fetchUser() {
 		const user = response.results[0].user;
 		const name = user.name.first + ' ' + user.name.last;
 		users.push({
+			id: users.length + 1,
 			name,
 			avatar_url: 'https://robohash.org/' + name,
 			// avatar_url: user.picture.large,
@@ -91,7 +92,20 @@ for (let i = 0; i < maxUsers; i++) {
 	fetchUser();
 }
 
-const onAction = (type, id) => {
+function canExecute(type, msg) {
+	const { currentUser } = store.getState();
+	if (!currentUser) return false;
+	switch (type) {
+	case 'delete':
+	case 'remove':
+	case 'edit':
+		return msg.user_id === currentUser.id;
+	default:
+		return true;
+	}
+}
+
+function onAction(type, id) {
 	switch (type) {
 	case 'delete':
 	case 'remove':
@@ -101,11 +115,11 @@ const onAction = (type, id) => {
 		swal(`action ${type} on message ${id}`);
 		break;
 	}
-};
+}
 
-const selectThread = (thread) => {
+function selectThread(thread) {
 	swal(`selected ${thread.topic}`);
-};
+}
 
 function sendMessage(m) {
 	const state = store.getState();
@@ -135,6 +149,7 @@ const Body = (props) => {
 		avatarSize: 64,
 		fetchUser: fetchMessageUser,
 		onAction,
+		canExecute,
 		sendMessage,
 		updateMessage,
 	};

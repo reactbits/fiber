@@ -64,7 +64,8 @@ export const ThreadList = (props) => {
 		'sendMessage',
 		'updateMessage',
 		'onSelect',
-		'onAction'
+		'onAction',
+		'canExecute',
 	);
 	const items = props.threads.map(t => {
 		return <Thread key={t.id} {...t} {...options}/>;

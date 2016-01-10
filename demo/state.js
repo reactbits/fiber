@@ -27,14 +27,17 @@ export function nextDate(i) {
 
 export const users = [
 	{
+		id: 1,
 		name: 'sergeyt',
 		avatar_url: 'stodyshev@gmail.com',
 	},
 	{
+		id: 2,
 		name: 'sergeyt',
 		avatar_url: 'https://robohash.org/sergeyt',
 	},
 	{
+		id: 3,
 		name: 'noavatar',
 		avatar_url: 'noavatar.png',
 	},

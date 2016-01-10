@@ -72,6 +72,7 @@ export class Message extends Component {
 				avatarSize: props.avatarSize,
 				fetchUser,
 				onAction: props.onAction,
+				canExecute: props.canExecute,
 				sendMessage: props.sendMessage,
 				updateMessage: props.updateMessage,
 			};
@@ -97,6 +98,7 @@ export class Message extends Component {
 
 		const actionProps = {
 			onAction: props.onAction,
+			canExecute: props.canExecute,
 			iconSet: props.iconSet,
 		};
 
