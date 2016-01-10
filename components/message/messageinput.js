@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { Button } from 'react-bootstrap';
+import { Input } from '../common';
 import Help from '../markdown/help';
 import style from './style';
 import _ from 'lodash';
@@ -22,34 +22,36 @@ export class MessageInput extends Component {
 
 	constructor(props) {
 		super(props);
+
 		this.state = {
+			focused: false,
 			value: props.value || '',
 			helpVisible: false,
 		};
-		this.onFocus = this.onFocus.bind(this);
-		this.onBlur = this.onBlur.bind(this);
+
 		this.onChange = this.onChange.bind(this);
+
+		const self = this;
+		function makeFocusTransition(focused) {
+			return () => {
+				if (focused && _.isFunction(props.onFocus)) {
+					props.onFocus();
+				}
+				if (!focused && _.isFunction(props.onBlur)) {
+					props.onBlur();
+				}
+				self.setState({ focused });
+			};
+		}
+		this.onFocus = makeFocusTransition(true);
+		this.onBlur = makeFocusTransition(false);
 	}
 
 	componentDidMount() {
 		const input = $(this.refs.input);
-		input.focus(this.onFocus).blur(this.onBlur);
 		if (!!this.props.focused) {
 			input.focus();
 		}
-	}
-
-	componentWillUnmount() {
-		const input = $(this.refs.input);
-		input.off('focus').off('blur');
-	}
-
-	onFocus() {
-		$(ReactDOM.findDOMNode(this)).addClass(style.focused);
-	}
-
-	onBlur() {
-		$(ReactDOM.findDOMNode(this)).removeClass(style.focused);
 	}
 
 	onChange(event) {
@@ -62,46 +64,40 @@ export class MessageInput extends Component {
 
 	render() {
 		const props = this.props;
-		const className = classNames('message-input', style.input, style.message_input);
 		const canSubmit = _.isFunction(props.canSubmit) ?
 												props.canSubmit
 												: () => this.state.value.length > 0;
 		const submit = () => {
-			const input = $(this.refs.input);
-			const text = input.val();
-			if (!text) return;
+			const { value } = this.state;
+			if (!value) return;
 			this.setState({ value: '' });
-			props.submit(text);
+			props.submit(value);
 		};
-		const onKeyUp = (e) => {
-			if (e.which === 27) {
-				if (_.isFunction(props.cancel)) {
-					props.cancel();
-					return;
-				}
-			}
-			if (e.ctrlKey && e.which === 13) {
-				submit();
-			}
-		};
-		const textareaProps = {
-			className,
+		const inputProps = {
+			className: classNames('message-input', style.input, style.message_input),
 			placeholder: props.placeholder || 'Reply...',
 			value: this.state.value,
-			onKeyUp,
 			onChange: this.onChange,
+			onFocus: this.onFocus,
+			onBlur: this.onBlur,
+			cancel: props.cancel,
+			submit,
 		};
 		const submitProps = {
 			className: 'pull-right',
 			bsStyle: 'primary',
 			bsSize: 'small',
-			onClick: submit,
+			onMouseDown: submit,
 			disabled: !canSubmit(),
 		};
+		const formProps = {
+			className: classNames(style.reply_form, { [style.focused]: this.state.focused }),
+			style: (props.formStyle || {}),
+		};
 		return (
-			<div className={style.reply_form}>
+			<div {...formProps}>
 				<Help/>
-				<textarea ref="input" {...textareaProps}/>
+				<Input {...inputProps}/>
 				<div className={style.reply_controls}>
 					<a className={style.upload_button} data-toggle="tooltip" title="Upload images">
 						<i className="ion-camera"/>

@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { Input } from '../common';
 import MessageInput from '../message/messageinput';
 import style from './style';
 
 export class ThreadForm extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			subject: '',
 			body: '',
+			subjectFocused: false,
+			bodyFocused: false,
 		};
+
 		this.onSubjectChange = this.onSubjectChange.bind(this);
 		this.onBodyChange = this.onBodyChange.bind(this);
+
+		const self = this;
+		function makeTransition(state) {
+			return ()	=> {
+				self.setState(state);
+			};
+		}
+		this.onSubjectFocus = makeTransition({ subjectFocused: true });
+		this.onSubjectBlur = makeTransition({ subjectFocused: false });
+		this.onBodyFocus = makeTransition({ bodyFocused: true });
+		this.onBodyBlur = makeTransition({ bodyFocused: false });
 	}
 
 	onSubjectChange(event) {
@@ -39,15 +55,13 @@ export class ThreadForm extends Component {
 			props.submit({ subject, body });
 		};
 		const subjectProps = {
-			className: classNames(props.className, style.input),
-			type: 'text',
+			className: classNames(style.input, style.subject_input),
 			rows: 1,
 			placeholder: 'Subject',
 			value: this.state.subject,
 			onChange: this.onSubjectChange,
-			style: {
-				width: '100%',
-			},
+			onFocus: this.onSubjectFocus,
+			onBlur: this.onSubjectBlur,
 		};
 		const bodyProps = {
 			placeholder: 'Write your message here...',
@@ -55,11 +69,34 @@ export class ThreadForm extends Component {
 			submit,
 			value: this.state.body,
 			onChange: this.onBodyChange,
+			onFocus: this.onBodyFocus,
+			onBlur: this.onBodyBlur,
+			formStyle: {
+				margin: '0px',
+				padding: '0px',
+			},
+		};
+		const formProps = {
+			className: style.thread_form,
+			style: { marginBottom: '24px' },
+		};
+		if (this.state.subjectFocused || this.state.bodyFocused) {
+			return (
+				<div {...formProps}>
+					<Input {...subjectProps}/>
+					<MessageInput {...bodyProps}/>
+				</div>
+			);
+		}
+		const placeholderProps = {
+			className: classNames(style.input, style.subject_input),
+			rows: 1,
+			placeholder: 'Start a new topic...',
+			onFocus: this.onSubjectFocus,
 		};
 		return (
-			<div className="thread-form" style={{ marginBottom: '24px' }}>
-				<textarea {...subjectProps}/>
-				<MessageInput {...bodyProps}/>
+			<div {...formProps}>
+				<Input {...placeholderProps}/>
 			</div>
 		);
 	}

@@ -135,6 +135,23 @@ function updateMessage(msg) {
 	store.dispatch(actions.updateMessage(msg));
 }
 
+function createThread({ subject, body }) {
+	const { threads, currentUser } = store.getState();
+	store.dispatch(actions.addThread({
+		id: threads.length + 1,
+		subject,
+		messages: [
+			{
+				id: 1,
+				body,
+				user_id: currentUser.id,
+				user: currentUser,
+				replies: [],
+			},
+		],
+	}));
+}
+
 const Body = (props) => {
 	const { dispatch } = props;
 	const channelListProps = {
@@ -163,7 +180,7 @@ const Body = (props) => {
 				</Col>
 				<Col md={8}>
 					<Panel header="Threads">
-						<ThreadForm/>
+						<ThreadForm submit={createThread}/>
 						<ThreadList {...threadListProps}/>
 					</Panel>
 				</Col>

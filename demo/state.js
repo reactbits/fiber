@@ -114,6 +114,10 @@ export const addChannel = reducer.on('ADD_CHANNEL', (state, cn) => {
 	return { ...state, channels: [...state.channels, t] };
 });
 
+export const addThread = reducer.on('ADD_THREAD', (state, thread) => {
+	return { ...state, threads: [...state.threads, thread] };
+});
+
 function rnd(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
