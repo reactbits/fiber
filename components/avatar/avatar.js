@@ -116,11 +116,13 @@ export class Avatar extends Component {
 	render() {
 		// TODO shadow
 		const props = this.props;
+		const shape = props.shape || 'circle';
 		const className = classNames(
 			props.className,
 			'avatar',
 			style.avatar,
 			{
+				[shape]: true,
 				[style.online]: this.online(),
 				[style.circled]: props.circled,
 				// TODO animation

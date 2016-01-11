@@ -12,8 +12,17 @@
 	overflow: visible;
 }
 
-.avatar img {
+.avatar.circle img {
 	border-radius: 50%;
+}
+
+.avatar.round_rect img {
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.avatar.round_rect img:hover {
+	border: 1px solid transparentize(#1fadc5, 0.5);
 }
 
 .avatar.circled {

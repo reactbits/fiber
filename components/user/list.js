@@ -8,6 +8,9 @@ export function UserList(props) {
 	const items = users.map(user => {
 		const avatarProps = {
 			user,
+			className: style.user_item,
+			shape: 'round_rect',
+			size: 32,
 			style: {
 				margin: 0,
 			},
@@ -19,7 +22,7 @@ export function UserList(props) {
 			<div className={style.user_list_header}>
 				<i className="ion-ios-people"/>
 				<span>Online</span>
-				<span className={style.online_count}>{online}</span>
+				<em className={style.online_count}>{online}</em>
 			</div>
 			<div className={style.user_list_body}>
 				{items}

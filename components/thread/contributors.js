@@ -38,6 +38,7 @@ export class ContributorList extends Component {
 		const items = this.state.users.map(user => {
 			const avatarProps = {
 				user,
+				shape: 'round_rect',
 				online: false,
 				size: 24,
 				style: {

@@ -1,1 +1,33 @@
 @import "../_base";
+
+.user_item {
+	display: inline-block;
+}
+
+.user_list_body {
+	max-width: 5 * 40px;
+}
+
+.user_list_header i {
+	font-size: 24px;
+	margin: 4px;
+}
+
+.user_list_header span {
+	font-size: 20px;
+}
+
+.online_count {
+	display: inline-block;
+	margin: -.3em 0 0 .3em;
+	width: 1.6em;
+	height: 1.6em;
+	border-radius: 50%;
+	background-color: #4cbe00;
+	text-align: center;
+	vertical-align: middle;
+	color: white;
+	line-height: 1.7;
+	font-style: normal;
+	font-weight: bold;
+}
