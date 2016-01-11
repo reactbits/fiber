@@ -10,14 +10,20 @@
 }
 
 .day a {
+	cursor: pointer;
 	color: #bbb;
-	cursor: default;
 }
 
 .thread_header {
+	cursor: pointer;
+	display: block;
 	font-weight: bold;
-	cursor: default;
 	padding: 4px 0px;
+}
+
+.thread_header a {
+	cursor: pointer;
+	outline: none;
 }
 
 .topic_selected {

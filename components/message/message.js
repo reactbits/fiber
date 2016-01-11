@@ -44,6 +44,68 @@ export class Message extends Component {
 		};
 	}
 
+	renderReplyInput() {
+		if (!this.state.showReplyInput) return null;
+		const props = this.props;
+		const data = props.data || props;
+		const hideReplyInput = () => {
+			this.setState({ showReplyInput: false });
+		};
+		const sendReply = (text) => {
+			hideReplyInput();
+			if (_.isFunction(props.sendMessage)) {
+				props.sendMessage({ thread_id: data.thread_id, in_reply_to: data.id, body: text });
+			}
+		};
+		return <MessageInput submit={sendReply} cancel={hideReplyInput} focused/>;
+	}
+
+	renderEditor() {
+		if (!this.state.showEdit) return null;
+		const props = this.props;
+		const data = props.data || props;
+		const hideEdit = () => {
+			this.setState({ showEdit: false });
+		};
+		const updateMessage = (text) => {
+			hideEdit();
+			if (_.isFunction(props.updateMessage)) {
+				props.updateMessage({ thread_id: data.thread_id, id: data.id, body: text });
+			}
+		};
+		return <MessageInput submit={updateMessage} cancel={hideEdit} focused value={data.body}/>;
+	}
+
+	renderActions() {
+		const props = this.props;
+		const data = props.data || props;
+		const replies = data.replies || [];
+
+		const showReply = () => {
+			this.setState({ showReplyInput: true, showEdit: false });
+		};
+
+		const showEdit = () => {
+			this.setState({ showEdit: true, showReplyInput: false });
+		};
+
+		const actions = {
+			reply: { count: replies.length, onAction: showReply },
+			like: { count: data.likes || 0 },
+			edit: { onAction: showEdit },
+			remove: { },
+			star: { },
+		};
+
+		const actionProps = {
+			onAction: props.onAction,
+			canExecute: props.canExecute,
+			iconSet: props.iconSet,
+		};
+
+		return renderActions(actions, 'message', data, actionProps);
+	}
+
 	render() {
 		const props = this.props;
 		const className = classNames('message', style.message, props.className, {
@@ -52,7 +114,6 @@ export class Message extends Component {
 		const data = props.data || props;
 		const user = data.user;
 		const time = getTime(data);
-		const likes = data.likes || 0;
 		const fetchUser = promiseOnce(data.fetchUser || props.fetchUser, data);
 		const userName = getOrFetch(fetchUser, user, 'name', 'login');
 
@@ -76,7 +137,6 @@ export class Message extends Component {
 		const replies = data.replies || [];
 
 		// TODO render admin badge
-		// TODO customize action glyph icons (fa, etc)
 		// TODO spam icon
 		// TODO render replies on reply count click or message click
 
@@ -94,59 +154,6 @@ export class Message extends Component {
 			return <Message key={d.id} {...replyProps}/>;
 		});
 
-		const showReply = () => {
-			this.setState({ showReplyInput: true, showEdit: false });
-		};
-
-		const showEdit = () => {
-			this.setState({ showEdit: true, showReplyInput: false });
-		};
-
-		// TODO allow to hide unused actions
-		const actions = {
-			reply: { count: replies.length, onAction: showReply },
-			like: { count: likes },
-			star: { right: true },
-			remove: { right: true },
-			edit: { right: true, onAction: showEdit },
-		};
-
-		const actionProps = {
-			onAction: props.onAction,
-			canExecute: props.canExecute,
-			iconSet: props.iconSet,
-		};
-
-		let replyInput = null;
-
-		if (this.state.showReplyInput) {
-			const hideReplyInput = () => {
-				this.setState({ showReplyInput: false });
-			};
-			const sendReply = (text) => {
-				hideReplyInput();
-				if (_.isFunction(props.sendMessage)) {
-					props.sendMessage({ thread_id: data.thread_id, in_reply_to: data.id, body: text });
-				}
-			};
-			replyInput = <MessageInput submit={sendReply} cancel={hideReplyInput} focused/>;
-		}
-
-		let editor = null;
-
-		if (this.state.showEdit) {
-			const hideEdit = () => {
-				this.setState({ showEdit: false });
-			};
-			const updateMessage = (text) => {
-				hideEdit();
-				if (_.isFunction(props.updateMessage)) {
-					props.updateMessage({ thread_id: data.thread_id, id: data.id, body: text });
-				}
-			};
-			editor = <MessageInput submit={updateMessage} cancel={hideEdit} focused value={data.body}/>;
-		}
-
 		return (
 			<div className={className} data-id={data.id}>
 				<Avatar {...avatarProps}/>
@@ -154,14 +161,14 @@ export class Message extends Component {
 					{userName ? <UserName name={userName}/> : null}
 					{time ? <Age time={time}/> : null}
 					<span className={classNames('actions', style.actions)}>
-						{renderActions(actions, data, actionProps)}
+						{this.renderActions()}
 					</span>
 				</div>
 				<div {...bodyProps}>
 					<Markdown source={data.body}/>
 				</div>
-				{replyInput}
-				{editor}
+				{this.renderReplyInput()}
+				{this.renderEditor()}
 				{replyElements}
 			</div>
 		);

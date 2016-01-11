@@ -24,7 +24,7 @@ export class MessageInput extends Component {
 		super(props);
 
 		this.state = {
-			focused: false,
+			focused: this.props.focused,
 			value: props.value || '',
 			helpVisible: false,
 		};
@@ -45,13 +45,6 @@ export class MessageInput extends Component {
 		}
 		this.onFocus = makeFocusTransition(true);
 		this.onBlur = makeFocusTransition(false);
-	}
-
-	componentDidMount() {
-		const input = $(this.refs.input);
-		if (!!this.props.focused) {
-			input.focus();
-		}
 	}
 
 	onChange(event) {
@@ -82,6 +75,7 @@ export class MessageInput extends Component {
 			onBlur: this.onBlur,
 			cancel: props.cancel,
 			submit,
+			focused: this.state.focused,
 		};
 		const submitProps = {
 			className: 'pull-right',

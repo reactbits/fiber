@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { Message, MessageInput, getTime, Counter } from '../message';
+import { renderActions } from '../message/action';
 import ContributorList from './contributors';
 import Avatar from '../avatar';
 import Day from './day';
@@ -8,70 +9,13 @@ import style from './style';
 import moment from 'moment';
 import observable from 'observable';
 import _ from 'lodash';
-import { toPromise, promiseOnce } from '../util';
-
-const Header = props => {
-	const className = classNames('thread-header', style.thread_header);
-	return (
-		<a className={className} onClick={props.onClick}>
-			<span>{props.text}</span>
-			<Counter count={props.count || 0}/>
-		</a>
-	);
-};
-
-const getDay = time => {
-	const m = moment(time);
-	return m.isValid ? m.year() + m.dayOfYear() : -1;
-};
-
-const getMsgDay = msg => getDay(getTime(msg));
-
-function getDayMessages(messages, start) {
-	const msg = messages[start];
-	const result = [msg];
-	const day = getMsgDay(msg);
-	for (let i = start + 1; i < messages.length; i++) {
-		if (day !== getMsgDay(messages[i])) {
-			i--;
-			break;
-		}
-		result.push(messages[i]);
-	}
-	return result;
-}
-
-function countMessages(messages) {
-	const countIt = m => {
-		let n = 1;
-		if (Array.isArray(m.replies)) {
-			n += m.replies.reduce((a, b) => a + countIt(b), 0);
-		}
-		return n;
-	};
-	return messages.reduce((a, m) => a + countIt(m), 0);
-}
-
-function collectContributors(users, messages, fetchUser) {
-	function push(user) {
-		const arr = users();
-		if (_.find(arr, u => u.id === user.id)) return;
-		users([...arr, user]);
-	}
-	messages.forEach(m => {
-		if (_.isObject(m.user)) {
-			push(m.user);
-		} else if (m.fetchUser || fetchUser) {
-			const promise = toPromise(promiseOnce(m.fetchUser || fetchUser, m));
-			if (promise) {
-				promise.then(push);
-			}
-		}
-		if (_.isArray(m.replies)) {
-			collectContributors(users, m.replies, fetchUser);
-		}
-	});
-}
+import {
+	getDay,
+	getMsgDay,
+	getDayMessages,
+	countMessages,
+	collectContributors,
+} from './util';
 
 // TODO allow to use custom MessageInput component
 export class Thread extends Component {
@@ -96,10 +40,46 @@ export class Thread extends Component {
 		};
 	}
 
+	renderActions() {
+		const props = this.props;
+
+		const actions = {
+			like: { count: props.likes || 0 },
+			remove: { },
+			star: { },
+		};
+
+		const actionProps = {
+			onAction: props.onAction,
+			canExecute: props.canExecute,
+			iconSet: props.iconSet,
+		};
+
+		return renderActions(actions, 'thread', props, actionProps);
+	}
+
+	renderHeader() {
+		const props = this.props;
+		const subject = props.subject || props.topic;
+		const className = classNames('thread-header', style.thread_header);
+		const count = countMessages(props.messages || []);
+		const collapse = () => {
+			this.setState({ collapsed: !this.state.collapsed });
+		};
+		return (
+			<div className={className}>
+				<a onClick={collapse}>{subject}</a>
+				<Counter count={count || 0}/>
+				<span className={classNames('actions', style.actions)}>
+					{this.renderActions()}
+				</span>
+			</div>
+		);
+	}
+
 	render() {
 		const props = this.props;
 		const className = classNames('thread', style.thread, props.className);
-		const subject = props.subject || props.topic;
 		const messages = props.messages || [];
 		const items = [];
 
@@ -167,18 +147,9 @@ export class Thread extends Component {
 			items.push(<MessageInput key={`message-input-${props.id}`} submit={sendMessage}/>);
 		}
 
-		const collapse = () => {
-			this.setState({ collapsed: !this.state.collapsed });
-		};
-		const headerProps = {
-			text: subject,
-			onClick: collapse,
-			count: countMessages(messages),
-		};
-
 		return (
 			<div className={className}>
-				{subject ? <Header {...headerProps}/> : null}
+				{this.renderHeader()}
 				{items}
 			</div>
 		);

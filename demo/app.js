@@ -92,10 +92,10 @@ for (let i = 0; i < maxUsers; i++) {
 	fetchUser();
 }
 
-function canExecute(type, msg) {
+function canExecute(type, action, msg) {
 	const { currentUser } = store.getState();
 	if (!currentUser) return false;
-	switch (type) {
+	switch (action) {
 	case 'delete':
 	case 'remove':
 	case 'edit':
@@ -105,16 +105,18 @@ function canExecute(type, msg) {
 	}
 }
 
-function onAction(type, id) {
-	switch (type) {
-	case 'delete':
-	case 'remove':
-		store.dispatch(actions.removeMessage(id));
-		break;
-	default:
-		swal(`action ${type} on message ${id}`);
-		break;
+function onAction(type, action, data) {
+	if (type === 'message') {
+		switch (action) {
+		case 'delete':
+		case 'remove':
+			store.dispatch(actions.removeMessage(data.id));
+			return;
+		default:
+			break;
+		}
 	}
+	swal(`action ${action} on ${type} ${data.id}`);
 }
 
 function selectThread(thread) {
@@ -127,6 +129,7 @@ function sendMessage(m) {
 		...m,
 		id: nextId++,
 		user: state.currentUser,
+		user_id: state.currentUser.id,
 	};
 	store.dispatch(actions.addMessage(msg));
 }

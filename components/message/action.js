@@ -46,21 +46,22 @@ function getIconSet(name) {
 	}
 }
 
-export const Action = (props) => {
+export function Action(props) {
+	const { action } = props;
 	const count = props.count || 0;
 	const onClick = (e) => {
 		e.preventDefault();
 		if (_.isFunction(props.onAction)) {
-			props.onAction(props.type, props.msgid);
+			props.onAction(props.type, action, props.data);
 		}
 	};
 
-	if (props.type === 'reply') {
+	if (action === 'reply') {
 		const attrs = {
-			className: actionClassNames[props.type],
+			className: actionClassNames[action],
 			count,
 			onClick,
-			title: tips[props.type],
+			title: tips[action],
 			element: React.DOM.a,
 		};
 		return <Counter {...attrs}/>;
@@ -68,37 +69,37 @@ export const Action = (props) => {
 
 	const className = classNames({
 		action: true,
-		[props.type]: true,
+		[action]: true,
 		[style.action]: true,
 		'pull-right': props.right,
 	});
 	const iconSet = getIconSet(props.iconSet);
 
 	return (
-		<a className={className} onClick={onClick} data-toggle="tooltip" title={tips[props.type]}>
-			<i className={iconSet[props.type]}/>
+		<a className={className} onClick={onClick} data-toggle="tooltip" title={tips[action]}>
+			<i className={iconSet[action]}/>
 			{count > 0 ? <span className="count">{count}</span> : null}
 		</a>
 	);
-};
+}
 
 export default Action;
 
-export function renderActions(actions, msg, options) {
+export function renderActions(actions, type, data, options) {
 	return Object.keys(actions)
 		.filter(key => {
 			if (!_.isFunction(options.canExecute)) return true;
-			return options.canExecute(key, msg);
+			return options.canExecute(type, key, data);
 		})
 		.map(key => {
 			const props = {
-				msgid: msg.id,
-				type: key,
+				data,
+				type,
+				action: key,
 				onAction: options.onAction,
 				iconSet: options.iconSet,
 				...actions[key],
 			};
-			props.type = key;
-			return <Action key={`${msg.id}/${key}`} {...props}/>;
+			return <Action key={`${data.id}/${key}`} {...props}/>;
 		});
 }
