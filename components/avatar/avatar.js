@@ -34,16 +34,18 @@ function avatarURL(url) {
 	return url;
 }
 
-function preloader() {
-	const css = {
-		marginLeft: 16,
-		marginTop: 16,
+function makePreloader(size) {
+	return () => {
+		const css = {
+			width: size,
+			height: size,
+		};
+		return (
+			<div className={style.preloader} style={css}>
+				<Spinner color="#4DAF7C" size={size + ''}/>
+			</div>
+		);
 	};
-	return (
-		<div style={css}>
-			<Spinner color="#4DAF7C" size="32px"/>
-		</div>
-  );
 }
 
 function RandomAvatar(props) {
@@ -142,6 +144,8 @@ export class Avatar extends Component {
 		const wrapper = makeWrapper({
 			title: this.title(),
 		});
+
+		const preloader = makePreloader(size);
 
 		function empty() {
 			return (

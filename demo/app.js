@@ -174,12 +174,12 @@ const Body = (props) => {
 		<div className="app container">
 			<Row>
 				<Col md={4}>
-					<Panel header="Channels">
+					<Panel>
 						<ChannelList {...channelListProps}/>
 					</Panel>
 				</Col>
 				<Col md={8}>
-					<Panel header="Threads">
+					<Panel>
 						<ThreadForm submit={createThread}/>
 						<ThreadList {...threadListProps}/>
 					</Panel>

@@ -1,6 +1,10 @@
 @import "../_base";
 @import "../_mixins";
 
+.preloader {
+	justify-content: center;
+}
+
 .avatar {
 	cursor: pointer;
 	position: relative;
