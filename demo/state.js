@@ -61,6 +61,7 @@ const channels = [
 
 const initialState = {
 	currentUser: users[0],
+	users,
 	channels,
 	selectedChannel: channels[0],
 	threads: [
@@ -109,6 +110,10 @@ function replaceById(list, obj) {
 }
 
 export const reducer = makeReducer(initialState);
+
+export const addUser = reducer.on('ADD_USER', (state, user) => {
+	return { ...state, users: [...state.users, user] };
+});
 
 export const selectChannel = reducer.on('SELECT_CHANNEL', (state, cn) => {
 	return { ...state, selectedChannel: cn };

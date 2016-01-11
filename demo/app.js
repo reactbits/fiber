@@ -1,10 +1,15 @@
 import React from 'react';
-import { ThreadList, ChannelList, ThreadForm } from '../components';
+import {
+	ThreadList,
+	ThreadForm,
+	ChannelList,
+	UserList,
+} from '../components';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { connect, Provider } from 'react-redux';
 import DevTools from './devtools';
 import store from './store';
-import { users, nextDate } from './state';
+import { nextDate } from './state';
 import * as actions from './state';
 import qwest from 'qwest';
 import _ from 'lodash';
@@ -24,6 +29,7 @@ let nextId = 1;
 function makeMessage() {
 	return qwest.get(source).then((xhr, response) => {
 		const data = response.value;
+		const { users } = store.getState();
 		const i = randomIndex(users);
 		const user = nextId === 1 ? users[0] : users[i];
 		const msg = {
@@ -41,6 +47,7 @@ function makeMessage() {
 }
 
 function fetchMessageUser(msg) {
+	const { users } = store.getState();
 	const user = _.find(users, u => u.id === msg.user_id);
 	return new Promise((resolve) => {
 		return setTimeout(() => resolve(user), 100);
@@ -74,15 +81,17 @@ const maxUsers = 10;
 
 function fetchUser() {
 	qwest.get('/randomuser').then((xhr, response) => {
-		const user = response.results[0].user;
-		const name = user.name.first + ' ' + user.name.last;
-		users.push({
+		const data = response.results[0].user;
+		const name = data.name.first + ' ' + data.name.last;
+		const { users } = store.getState();
+		const user = {
 			id: users.length + 1,
 			name,
 			avatar_url: 'https://robohash.org/' + name,
 			// avatar_url: user.picture.large,
-		});
-		if (users.length >= maxUsers) {
+		};
+		store.dispatch(actions.addUser(user));
+		if (users.length + 1 >= maxUsers) {
 			fetchQuote();
 		}
 	});
@@ -179,6 +188,7 @@ const Body = (props) => {
 				<Col md={4}>
 					<Panel>
 						<ChannelList {...channelListProps}/>
+						<UserList users={props.users}/>
 					</Panel>
 				</Col>
 				<Col md={8}>
