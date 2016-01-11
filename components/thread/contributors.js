@@ -37,6 +37,7 @@ export class ContributorList extends Component {
 		}
 		const items = this.state.users.map(user => {
 			const avatarProps = {
+				hover: 'grow',
 				user,
 				shape: 'round_rect',
 				online: false,

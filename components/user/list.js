@@ -9,6 +9,7 @@ export function UserList(props) {
 		const avatarProps = {
 			user,
 			className: style.user_item,
+			hover: 'grow',
 			shape: 'round_rect',
 			size: 32,
 			style: {

@@ -31,6 +31,7 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "halogen": "^0.1.10",
+    "hover.css": "^2.0.2",
     "is_js": "^0.7.6",
     "lodash": "^3.10.1",
     "md5": "^2.0.0",

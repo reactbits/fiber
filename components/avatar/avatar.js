@@ -8,6 +8,7 @@ import is from 'is_js';
 import gravatarURL from './gravatar';
 import '../tooltip';
 import { toPromise } from '../util';
+import hover from '../hover';
 
 const avatarSizes = {
 	small: 24,
@@ -117,6 +118,7 @@ export class Avatar extends Component {
 		// TODO shadow
 		const props = this.props;
 		const shape = props.shape || 'circle';
+		const hoverEffect = hover(props.hover);
 		const className = classNames(
 			props.className,
 			'avatar',
@@ -125,10 +127,10 @@ export class Avatar extends Component {
 				[shape]: true,
 				[style.online]: this.online(),
 				[style.circled]: props.circled,
-				// TODO animation
-				[style.hover_rotate]: props.animated,
+				[hoverEffect]: true,
 			}
 		);
+
 		const src = avatarURL(this.state.source);
 		const size = avatarSize(this.props.size);
 		const avatarStyle = {

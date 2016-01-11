@@ -60,10 +60,3 @@
 .shadow_3 {
 	@include shadow(3px)
 }
-
-.hover_rotate {
-	@include transform-transition(.2s ease-in-out);
-}
-.hover_rotate:hover {
-	@include transform(rotate(-45deg));
-}
