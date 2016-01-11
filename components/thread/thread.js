@@ -63,7 +63,7 @@ export class Thread extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			collapsed: false,
+			collapsed: true,
 		};
 	}
 

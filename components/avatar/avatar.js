@@ -56,13 +56,9 @@ function RandomAvatar(props) {
 
 function makeWrapper(props) {
 	return (sourceProps, content) => {
-		const attrs = { ...sourceProps };
-		if (props.className) {
-			attrs.className += ' ' + props.className;
-		}
+		const attrs = { ...sourceProps, ...props };
 		if (props.title) {
 			attrs['data-toggle'] = 'tooltip';
-			attrs.title = props.title;
 		}
 		return (
 			<div {...attrs}>{content}</div>
@@ -85,12 +81,32 @@ export class Avatar extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { source: props.source };
-		this.setSource = this.setSource.bind(this);
+
+		let source = props.source;
+		if (!source) {
+			const user = props.user;
+			if (user && _.isObject(user)) {
+				source = user.avatar_url || user.avatar;
+			}
+		}
+
+		this.state = { source, user: props.user };
 	}
 
-	setSource(value) {
-		return this.setState({ source: value });
+	online() {
+		if (this.props.online) return true;
+		const user = this.state.user;
+		return user && _.isObject(user) && user.online;
+	}
+
+	title() {
+		const value = this.props.title || this.props.name;
+		if (value) return value;
+		const user = this.state.user;
+		if (user && _.isObject(user)) {
+			return user.name || user.login;
+		}
+		return '';
 	}
 
 	render() {
@@ -100,8 +116,9 @@ export class Avatar extends Component {
 			props.className,
 			'avatar',
 			style.avatar,
-			style.circled,
 			{
+				[style.online]: this.online(),
+				[style.circled]: props.circled,
 				// TODO animation
 				[style.hover_rotate]: props.animated,
 			}
@@ -121,22 +138,41 @@ export class Avatar extends Component {
 		};
 
 		const wrapper = makeWrapper({
-			className: style.online,
-			title: props.name,
+			title: this.title(),
 		});
 
-		const promise = toPromise(src);
-		if (promise) {
-			promise.then(this.setSource);
+		function empty() {
 			return (
 				<div className={className} style={avatarStyle}>
-					{preloader}
+					{preloader()}
 				</div>
 			);
 		}
 
+		const sourcePromise = toPromise(src);
+		if (sourcePromise) {
+			sourcePromise.then(value => {
+				this.setState({ source: value });
+			});
+			return empty();
+		}
+
+		if (!src && this.props.user) {
+			const userPromise = toPromise(this.props.user);
+			if (userPromise) {
+				userPromise.then(user => {
+					this.setState({
+						user,
+						source: user.avatar_url || user.avatar,
+					});
+				});
+				return empty();
+			}
+		}
+
 		if (!_.isString(src)) {
-			throw new Error('invalid source property');
+			// TODO render error
+			return empty();
 		}
 
 		const loaderProps = {

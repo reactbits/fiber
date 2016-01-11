@@ -54,8 +54,16 @@ export class Message extends Component {
 		const time = getTime(data);
 		const likes = data.likes || 0;
 		const fetchUser = promiseOnce(data.fetchUser || props.fetchUser, data);
-		const avatar = getOrFetch(fetchUser, user, 'avatar', 'avatar_url');
 		const userName = getOrFetch(fetchUser, user, 'name', 'login');
+
+		const avatarProps = {
+			user: user || fetchUser,
+			size: props.avatarSize,
+			circled: true,
+			style: {
+				float: 'left',
+			},
+		};
 
 		const bodyProps = {
 			className: classNames('message-body', style.message_body),
@@ -141,7 +149,7 @@ export class Message extends Component {
 
 		return (
 			<div className={className} data-id={data.id}>
-				{avatar ? <Avatar source={avatar} size={props.avatarSize} name={userName}/> : null}
+				<Avatar {...avatarProps}/>
 				<div className={classNames('meta', style.meta)}>
 					{userName ? <UserName name={userName}/> : null}
 					{time ? <Age time={time}/> : null}

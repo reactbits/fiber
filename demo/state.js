@@ -30,6 +30,7 @@ export const users = [
 		id: 1,
 		name: 'sergeyt',
 		avatar_url: 'stodyshev@gmail.com',
+		online: true,
 	},
 	{
 		id: 2,
