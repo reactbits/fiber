@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { Message, MessageInput, getTime } from '../message';
+import { Message, MessageInput, getTime, Counter } from '../message';
 import ContributorList from './contributors';
 import Avatar from '../avatar';
 import Day from './day';
@@ -15,6 +15,7 @@ const Header = props => {
 	return (
 		<a className={className} onClick={props.onClick}>
 			<span>{props.text}</span>
+			<Counter count={props.count || 0}/>
 		</a>
 	);
 };
@@ -26,7 +27,21 @@ const getDay = time => {
 
 const getMsgDay = msg => getDay(getTime(msg));
 
-function countDayMessages(messages, start) {
+function getDayMessages(messages, start) {
+	const msg = messages[start];
+	const result = [msg];
+	const day = getMsgDay(msg);
+	for (let i = start + 1; i < messages.length; i++) {
+		if (day !== getMsgDay(messages[i])) {
+			i--;
+			break;
+		}
+		result.push(messages[i]);
+	}
+	return result;
+}
+
+function countMessages(messages) {
 	const countIt = m => {
 		let n = 1;
 		if (Array.isArray(m.replies)) {
@@ -34,17 +49,7 @@ function countDayMessages(messages, start) {
 		}
 		return n;
 	};
-	const msg = messages[start];
-	let result = countIt(msg);
-	const day = getMsgDay(msg);
-	for (let i = start + 1; i < messages.length; i++) {
-		if (day !== getMsgDay(messages[i])) {
-			i--;
-			break;
-		}
-		result += countIt(messages[i]);
-	}
-	return result;
+	return messages.reduce((a, m) => a + countIt(m), 0);
 }
 
 function collectContributors(users, messages, fetchUser) {
@@ -145,7 +150,8 @@ export class Thread extends Component {
 				const day = getDay(time);
 				if (moment.isDate(time) && (i === 0 || day !== getMsgDay(messages[i - 1]))) {
 					collaseMessages = isCollapsedDay(time);
-					const msgcount = countDayMessages(messages, i);
+					const dayMessages = getDayMessages(messages, i);
+					const msgcount = countMessages(dayMessages);
 					items.push(makeDay(time, msgcount));
 				}
 				if (collaseMessages) continue;
@@ -164,10 +170,15 @@ export class Thread extends Component {
 		const collapse = () => {
 			this.setState({ collapsed: !this.state.collapsed });
 		};
+		const headerProps = {
+			text: subject,
+			onClick: collapse,
+			count: countMessages(messages),
+		};
 
 		return (
 			<div className={className}>
-				{subject ? <Header text={subject} onClick={collapse}/> : null}
+				{subject ? <Header {...headerProps}/> : null}
 				{items}
 			</div>
 		);
