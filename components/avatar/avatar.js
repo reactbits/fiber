@@ -117,7 +117,7 @@ export class Avatar extends Component {
 	render() {
 		// TODO shadow
 		const props = this.props;
-		const shape = props.shape || 'circle';
+		const shape = style[props.shape || 'circle'];
 		const hoverEffect = hover(props.hover);
 		const className = classNames(
 			props.className,
