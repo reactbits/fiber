@@ -94,7 +94,9 @@ export class Avatar extends Component {
 	}
 
 	online() {
-		if (this.props.online) return true;
+		if (this.props.hasOwnProperty('online')) {
+			return this.props.online;
+		}
 		const user = this.state.user;
 		return user && _.isObject(user) && user.online;
 	}

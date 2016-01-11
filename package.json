@@ -35,6 +35,7 @@
     "lodash": "^3.10.1",
     "md5": "^2.0.0",
     "moment": "^2.11.1",
+    "observable": "^2.1.4",
     "query-string": "^3.0.0",
     "react": "^0.14.6",
     "react-bootstrap": "^0.28.2",

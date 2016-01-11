@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { Message, MessageInput, getTime } from '../message';
+import ContributorList from './contributors';
 import Avatar from '../avatar';
 import Day from './day';
 import style from './style';
 import moment from 'moment';
+import observable from 'observable';
 import _ from 'lodash';
+import { toPromise, promiseOnce } from '../util';
 
 const Header = props => {
 	const className = classNames('thread-header', style.thread_header);
@@ -44,6 +47,27 @@ function countDayMessages(messages, start) {
 	return result;
 }
 
+function collectContributors(users, messages, fetchUser) {
+	function push(user) {
+		const arr = users();
+		if (_.find(arr, u => u.id === user.id)) return;
+		users([...arr, user]);
+	}
+	messages.forEach(m => {
+		if (_.isObject(m.user)) {
+			push(m.user);
+		} else if (m.fetchUser || fetchUser) {
+			const promise = toPromise(promiseOnce(m.fetchUser || fetchUser, m));
+			if (promise) {
+				promise.then(push);
+			}
+		}
+		if (_.isArray(m.replies)) {
+			collectContributors(users, m.replies, fetchUser);
+		}
+	});
+}
+
 // TODO allow to use custom MessageInput component
 export class Thread extends Component {
 	static propTypes = {
@@ -74,7 +98,13 @@ export class Thread extends Component {
 		const messages = props.messages || [];
 		const items = [];
 
-		if (!this.state.collapsed) {
+		if (this.state.collapsed) {
+			const users = observable([]);
+			collectContributors(users, messages, props.fetchUser);
+			items.push(
+				<ContributorList key={`cl-${props.id}`} users={users}/>
+			);
+		} else {
 			const collapseDay = (time) => {
 				const k = 'collapsedDay' + (+time);
 				this.setState({ [k]: !this.state[k] });
