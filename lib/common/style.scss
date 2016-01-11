@@ -1,1 +1,15 @@
 @import "../_base";
+
+$spinner-color: transparentize($input-focus-color, 0.4);
+
+.loader {
+	text-align: center;
+}
+
+.loader_inner {
+	display: inline-block;
+}
+
+.loader .loader_inner > div {
+	background-color: $spinner-color;
+}

@@ -15,6 +15,9 @@ export class ContributorList extends Component {
 	componentDidMount() {
 		const { users } = this.props;
 		if (_.isFunction(users)) {
+			setTimeout(() => {
+				this.setState({ users: users() });
+			}, 0);
 			this.unsubscribe = users(list => {
 				this.setState({ users: list });
 			});
@@ -30,7 +33,7 @@ export class ContributorList extends Component {
 
 	render() {
 		const { users } = this.props;
-		if (_.isFunction(users) && users() !== this.state.users) {
+		if (_.isFunction(users)) {
 			setTimeout(() => {
 				this.setState({ users: users() });
 			}, 0);
