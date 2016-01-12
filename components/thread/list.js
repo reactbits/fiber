@@ -47,26 +47,23 @@ export const Topic = (props) => {
 	);
 };
 
-function selectProps(props, ...names) {
-	const pairs = names.map(k => props.hasOwnProperty(k) ? { [k]: props[k] } : undefined);
-	return pairs.filter(t => t !== undefined).reduce((a, b) => Object.assign(a, b), { });
-}
-
 // TODO render only topic in collapsed mode
+
+const threadPropNames = [
+	'avatarSize',
+	'iconSet',
+	'fetchUser',
+	'sendMessage',
+	'updateMessage',
+	'onSelect',
+	'onAction',
+	'canExecute',
+];
 
 export const ThreadList = (props) => {
 	const className = classNames('thread-list', style.thread_list);
 	// TODO use propTypes of Thread component
-	const options = selectProps(props,
-		'avatarSize',
-		'iconSet',
-		'fetchUser',
-		'sendMessage',
-		'updateMessage',
-		'onSelect',
-		'onAction',
-		'canExecute',
-	);
+	const options = _.pick(props, ...threadPropNames);
 	const items = props.threads.map(t => {
 		return <Thread key={t.id} {...t} {...options}/>;
 		// return <Topic key={t.id} thread={t} {...t} onSelect={props.onSelect}/>;

@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { Button } from 'react-bootstrap';
 import { Input } from '../common';
 import Help from '../markdown/help';
+import UploadButton from './uploadbutton';
 import style from './style';
 import _ from 'lodash';
 
@@ -93,9 +94,7 @@ export class MessageInput extends Component {
 				<Help/>
 				<Input {...inputProps}/>
 				<div className={style.reply_controls}>
-					<a className={style.upload_button} data-toggle="tooltip" title="Upload images">
-						<i className="ion-camera"/>
-					</a>
+					<UploadButton/>
 					<Button {...submitProps}>Post</Button>
 				</div>
 			</div>

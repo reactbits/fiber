@@ -30,6 +30,7 @@
   "homepage": "https://github.com/reactbits/fiber#readme",
   "dependencies": {
     "classnames": "^2.2.3",
+    "component-upload": "^0.3.0",
     "hover.css": "^2.0.2",
     "is_js": "^0.7.6",
     "loaders.css": "^0.1.1",
@@ -46,6 +47,7 @@
     "react-popover": "^0.4.4"
   },
   "devDependencies": {
+    "apiproxy": "^0.1.0",
     "autoprefixer": "^6.2.3",
     "babel": "^6.3.26",
     "babel-core": "^6.4.0",

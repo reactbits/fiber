@@ -20,6 +20,10 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
+// proxying of api requests
+const makeProxy = require('apiproxy');
+app.all('/api/*', makeProxy({ port: 3000 }));
+
 function proxy(path, url) {
 	app.get(path, function (req, res) {
 		res.header('Content-Type', 'application/json');
