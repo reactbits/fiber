@@ -89,12 +89,23 @@ export class MessageInput extends Component {
 			className: classNames(style.reply_form, { [style.focused]: this.state.focused }),
 			style: (props.formStyle || {}),
 		};
+		const onUpload = data => {
+			let content = this.state.value || '';
+			if (content) {
+				content += '\r\n';
+			}
+			content += `[${data.name}](${data.url})`;
+			this.setState({ value: content });
+		};
+		const uploadProps = {
+			onSuccess: onUpload,
+		};
 		return (
 			<div {...formProps}>
 				<Help/>
 				<Input {...inputProps}/>
 				<div className={style.reply_controls}>
-					<UploadButton/>
+					<UploadButton {...uploadProps}/>
 					<Button {...submitProps}>Post</Button>
 				</div>
 			</div>
