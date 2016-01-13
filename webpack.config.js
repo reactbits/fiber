@@ -16,6 +16,12 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx', '.json', '.scss'],
+		alias: {
+			'dev/raphael.core.js': './dev/raphael.core.js',
+			'raphael.core': './raphael.core.js',
+			'raphael.svg': './dev/raphael.svg.js',
+			'raphael.vml': './dev/raphael.vml.js',
+		},
 	},
 	module: {
 		loaders: [
@@ -38,6 +44,11 @@ module.exports = {
 		new ExtractTextPlugin('styles.css', { allChunks: true }),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin(),
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'window.jQuery': 'jquery',
+		}),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: JSON.stringify('development'),
