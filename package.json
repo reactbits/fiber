@@ -43,7 +43,7 @@
     "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.5.0",
+    "react-markdown2": "^0.5.1",
     "react-popover": "^0.4.4",
     "tus-js-client": "^1.1.3"
   },
