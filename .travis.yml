@@ -1,5 +1,11 @@
 language: node_js
 node_js:
-  - "4.2.1"
+- 4.2.1
+env:
+  global:
+  - GH_REF: github.com/reactbits/fiber.git
+  - secure: FB4oP9AX77IBVhPRTwSqoDmUX6xE1uk8nACcgRvM4oZXVBEh+dV4a4wDltg1Zli+Unbkl4U9pSKwLjAyQkiHntutmUvOxk2F1ZUq/qL7M4JbBpA93Xzb7+ecaXviomkQ5E7kXqvmgoLMI9TtSnf6oOnJ7RCUfu04pxVO+gpvcvOAk8V/hRKyJvNSS6FBKfUHZobDj93pxF51Jnr5JOH5nrpP3nYz/iaSj5lgT7+yeESYwXCfzgF9VPEmnLZykq4kOAIhwpm3yvxLM3zpt51TUaDZKAoljjcJEoE73BLwkmTthffL4pbRQ0odLIIGai5cUnsB2mDHBnwMYpyvO2tSwZcJhAXKp4yLL4r9oz99Zx5mSS+7PJ/EZ+inJ29DpcO03pfGoctIcdBWrwGTAwiHUbKKZselBQ1Vbugnn93vViOl+eLfeb9ERI4U8nsDe7ZacuZ0vEfwjaQ5LI+KDcnmsYhs3KvQu5COK82juj3sZbNbhSQPGGioIWAQcxaM69onIUK+TO9yz3J21qeHN4GD7GE0rYhakVyh2X2hJPdQwwVcwuzk38raMXsLnLZ6/Wj/5v82GKWgjWyO/wI0bALV5Apjc6f6zEDP+K69Tel+uKsP3baaiIUSOatyBiJY2rTjYfATYPmsv0mTIqShsfAIY+nOhu0sMZ28H56s2uPWNew=
 script:
-  - npm test
+- npm run lint
+- npm test
+- bash ./deploy.sh

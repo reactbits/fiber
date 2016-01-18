@@ -3,19 +3,22 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const cssLoader = 'css?sourceMap&modules&importLoaders=1&localIdentName=[local]';
+
 module.exports = {
-	devtool: 'cheap-module-eval-source-map',
+	devtool: 'source-map',
 	entry: [
 		'webpack-hot-middleware/client',
 		'./demo/index',
 	],
 	output: {
-		path: path.join(__dirname, 'build'),
+		path: path.join(__dirname, 'static'),
 		filename: 'bundle.js',
-		publicPath: '/build/',
+		publicPath: '/static/',
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx', '.json', '.scss'],
+		extensions: ['', '.js', '.jsx', '.json', '.css', '.scss'],
 		alias: {
 			'dev/raphael.core.js': './dev/raphael.core.js',
 			'raphael.core': './raphael.core.js',
@@ -35,8 +38,8 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
-				test: /(\.scss|\.css)$/,
-				loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[local]!postcss!sass?sourceMap'), // eslint-disable-line max-len
+				test: /\.(scss|css)$/,
+				loader: ExtractTextPlugin.extract('style', [cssLoader, 'postcss', 'sass?sourceMap']),
 			},
 		],
 	},
@@ -51,7 +54,7 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {
-				NODE_ENV: JSON.stringify('development'),
+				NODE_ENV: JSON.stringify(NODE_ENV),
 			},
 		}),
 	],
