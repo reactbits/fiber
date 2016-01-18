@@ -1,7 +1,7 @@
 import store from './store';
 import { nextDate } from './state';
 import * as actions from './state';
-import qwest from 'qwest';
+import { randomUser, randomJoke } from './api';
 import _ from 'lodash';
 
 function randomIndex(arr) {
@@ -13,11 +13,10 @@ function rnd(min, max) {
 }
 
 // TODO support multiple sources
-const source = '/jokes/random';
 let nextId = 1;
 
 function makeMessage() {
-	return qwest.get(source).then((xhr, response) => {
+	return randomJoke().then(response => {
 		const data = response.value;
 		const { users } = store.getState();
 		const i = randomIndex(users);
@@ -70,7 +69,7 @@ function fetchQuote() {
 const maxUsers = 10;
 
 function fetchUser() {
-	qwest.get('/randomuser').then((xhr, response) => {
+	randomUser().then(response => {
 		const data = response.results[0].user;
 		const name = data.name.first + ' ' + data.name.last;
 		const { users } = store.getState();

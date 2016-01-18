@@ -1,4 +1,4 @@
-@import "_mixins";
+@import "./_mixins";
 
 @mixin heart($size:24px, $color:red) {
 	position: relative;

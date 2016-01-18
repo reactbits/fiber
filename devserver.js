@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const got = require('got');
 const webpack = require('webpack');
 
 const config = require('./webpack.config');
@@ -23,21 +22,6 @@ app.use(require('webpack-hot-middleware')(compiler));
 // proxying of api requests
 const makeProxy = require('apiproxy');
 app.all('/api/*', makeProxy({ port: 3000, serverPort: port }));
-
-function proxy(path, url) {
-	app.get(path, function (req, res) {
-		res.header('Content-Type', 'application/json');
-		got.stream(url)
-			.on('error', err => {
-				console.log(err);
-			})
-			.pipe(res);
-	});
-}
-
-proxy('/randomface', 'http://uifaces.com/api/v1/random');
-proxy('/randomuser', 'https://randomuser.me/api/');
-proxy('/jokes/random', 'http://api.icndb.com/jokes/random');
 
 app.listen(port, '0.0.0.0', (err) => {
 	if (err) {
