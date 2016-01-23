@@ -8,7 +8,6 @@ const app = express();
 const compiler = webpack(config);
 
 app.use(morgan('dev'));
-app.use(express.static(process.cwd()));
 
 app.use(require('webpack-dev-middleware')(compiler, {
 	publicPath: config.output.publicPath,
@@ -18,6 +17,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
+
+app.use(express.static(process.cwd()));
 
 // proxying of api requests
 const makeProxy = require('apiproxy');
