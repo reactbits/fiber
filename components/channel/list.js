@@ -11,9 +11,13 @@ export const ChannelList = (props) => {
 	});
 	const selectedId = (props.selectedChannel || {}).id;
 	const channels = props.channels.map(cn => {
-		return (
-			<Channel key={cn.id} data={cn} selected={cn.id === selectedId} select={props.selectChannel}/>
-		);
+		const cnprops = {
+			key: cn.id,
+			data: cn,
+			selected: cn.id === selectedId,
+			select: props.selectChannel,
+		};
+		return <Channel {...cnprops}/>;
 	});
 	return (
 		<div className={className}>

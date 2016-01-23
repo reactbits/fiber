@@ -42,9 +42,7 @@ const Body = (props) => {
 		sendMessage,
 		updateMessage,
 	};
-	const spinners = loaderTypes.map(t => {
-		return <Spinner key={t} type={t}/>;
-	});
+	const spinners = loaderTypes.map(t => <Spinner key={t} type={t}/>);
 	return (
 		<div className="app container">
 			<Row>
@@ -72,7 +70,7 @@ const Body = (props) => {
 
 const App = connect(_.identity)(Body);
 
-export default (props) => {
+export default function Root(props) {
 	return (
 		<Provider store={store}>
 			<div>
@@ -81,4 +79,4 @@ export default (props) => {
 			</div>
 		</Provider>
 	);
-};
+}

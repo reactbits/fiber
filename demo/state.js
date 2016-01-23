@@ -112,11 +112,12 @@ function replaceById(list, obj) {
 export const reducer = makeReducer(initialState);
 
 export const addUser = reducer.on('ADD_USER', (state, user) => {
-	return { ...state, users: [...state.users, user] };
+	const list = [...state.users, user];
+	return { ...state, users: list };
 });
 
-export const selectChannel = reducer.on('SELECT_CHANNEL', (state, cn) => {
-	return { ...state, selectedChannel: cn };
+export const selectChannel = reducer.on('SELECT_CHANNEL', (state, selectedChannel) => { // eslint-disable-line
+	return { ...state, selectedChannel };
 });
 
 export const addChannel = reducer.on('ADD_CHANNEL', (state, cn) => {
@@ -125,7 +126,8 @@ export const addChannel = reducer.on('ADD_CHANNEL', (state, cn) => {
 });
 
 export const addThread = reducer.on('ADD_THREAD', (state, thread) => {
-	return { ...state, threads: [...state.threads, thread] };
+	const threads = [...state.threads, thread];
+	return { ...state, threads };
 });
 
 function rnd(min, max) {
@@ -144,10 +146,8 @@ export const addMessage = reducer.on('ADD_MESSAGE', (state, message) => {
 		if (t.id !== msg.thread_id) return t;
 		if (msg.in_reply_to) {
 			const messages = updateArray(t.messages, m => {
-				return {
-					...m,
-					replies: [...(m.replies || []), msg],
-				};
+				const replies = [...(m.replies || []), msg];
+				return { ...m, replies };
 			}, m => m.hasOwnProperty('body') && m.id === msg.in_reply_to);
 			return { ...t, messages };
 		}
@@ -158,10 +158,8 @@ export const addMessage = reducer.on('ADD_MESSAGE', (state, message) => {
 
 export const removeMessage = reducer.on('REMOVE_MESSAGE', (state, id) => {
 	const threads = state.threads.map(t => {
-		return {
-			...t,
-			messages: removeById(t.messages, id),
-		};
+		const messages = removeById(t.messages, id);
+		return { ...t, messages };
 	});
 	return { ...state, threads };
 });

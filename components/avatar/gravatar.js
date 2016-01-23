@@ -21,7 +21,7 @@ export default function gravatarURL(email, size = 32, options = defaultOptions) 
 
 	const qs = queryString.stringify({ s: size, ...options });
 	if (qs) {
-		url += '?' + qs;
+		url += `?${qs}`;
 	}
 
 	return url;

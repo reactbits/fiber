@@ -42,7 +42,8 @@ export class ThreadForm extends Component {
 	render() {
 		const props = this.props;
 		const canSubmit = () => {
-			return this.state.subject.length > 0 && this.state.body.length > 0;
+			const { subject, body } = this.state;
+			return subject.length > 0 && body.length > 0;
 		};
 		const submit = () => {
 			const subject = this.state.subject;

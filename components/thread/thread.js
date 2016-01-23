@@ -90,13 +90,13 @@ export class Thread extends Component {
 				<ContributorList key={`cl-${props.id}`} users={users}/>
 			);
 		} else {
-			const collapseDay = (time) => {
-				const k = 'collapsedDay' + (+time);
+			const collapseDay = time => {
+				const k = `collapsedDay${+time}`;
 				this.setState({ [k]: !this.state[k] });
 			};
 
-			const isCollapsedDay = (time) => {
-				const k = 'collapsedDay' + (+time);
+			const isCollapsedDay = time => {
+				const k = `collapsedDay${+time}`;
 				return !!this.state[k];
 			};
 

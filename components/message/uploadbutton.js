@@ -27,7 +27,7 @@ function uploadFile(file, callback = _.noop) {
 		},
 		onProgress(bytesUploaded, bytesTotal) {
 			const percentage = (bytesUploaded / bytesTotal * 100).toFixed(2);
-			console.log('progress %s/%s, %s', bytesUploaded, bytesTotal, percentage + '%');
+			console.log('progress %s/%s, %s', bytesUploaded, bytesTotal, `${percentage}%`);
 		},
 		onSuccess() {
 			console.log('download %s from %s', upload.file.name, upload.url);

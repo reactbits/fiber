@@ -43,9 +43,7 @@ export function getOrFetch(fetch, obj, ...keys) {
 	if (val) return val;
 	const promise = toPromise(fetch);
 	if (promise) {
-		return promise.then(t => {
-			return firstOrDefault(t, ...keys);
-		});
+		return promise.then(t => firstOrDefault(t, ...keys));
 	}
 	return null;
 }

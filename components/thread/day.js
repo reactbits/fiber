@@ -5,13 +5,13 @@ import moment from 'moment';
 import { Counter } from '../message';
 
 // TODO move to common components
-export const TextBlock = (props) => {
+export function TextBlock(props) {
 	return (
 		<div className={props.className} onClick={props.onClick}>
 			{props.text || ''}
 		</div>
 	);
-};
+}
 
 const formatDay = (time) => {
 	const now = moment();

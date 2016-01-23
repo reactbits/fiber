@@ -38,9 +38,9 @@ function makeMessage() {
 export function fetchMessageUser(msg) {
 	const { users } = store.getState();
 	const user = _.find(users, u => u.id === msg.user_id);
-	return new Promise((resolve) => {
-		return setTimeout(() => resolve(user), 100);
-	});
+	return new Promise(resolve =>
+		setTimeout(() => resolve(user), 100)
+	);
 }
 
 const maxMessages = 10;
@@ -71,12 +71,12 @@ const maxUsers = 10;
 function fetchUser() {
 	randomUser().then(response => {
 		const data = response.results[0].user;
-		const name = data.name.first + ' ' + data.name.last;
+		const name = `${data.name.first} ${data.name.last}`;
 		const { users } = store.getState();
 		const user = {
 			id: users.length + 1,
 			name,
-			avatar_url: 'https://robohash.org/' + name,
+			avatar_url: `https://robohash.org/${name}`,
 			// avatar_url: user.picture.large,
 		};
 		store.dispatch(actions.addUser(user));
