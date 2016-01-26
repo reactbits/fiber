@@ -5,10 +5,7 @@ import AddChannel from './addchannel';
 import style from './style';
 
 export const ChannelList = (props) => {
-	const className = classNames({
-		'channel-list': true,
-		[style.channel_list]: true,
-	});
+	const className = classNames(props.className, style.channel_list);
 	const selectedId = (props.selectedChannel || {}).id;
 	const channels = props.channels.map(cn => {
 		const cnprops = {

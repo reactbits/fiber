@@ -25,12 +25,14 @@ export class Thread extends Component {
 		messages: PropTypes.array,
 		avatarSize: Avatar.propTypes.size,
 		fetchUser: PropTypes.func,
+		theme: PropTypes.string,
 	};
 
 	static defaultProps = {
 		className: '',
 		topic: '',
 		messages: [],
+		theme: 'plain',
 	};
 
 	constructor(props) {
@@ -61,7 +63,7 @@ export class Thread extends Component {
 	renderHeader() {
 		const props = this.props;
 		const subject = props.subject || props.topic;
-		const className = classNames('thread-header', style.thread_header);
+		const className = classNames(style.thread_header);
 		const count = countMessages(props.messages || []);
 		const collapse = () => {
 			this.setState({ collapsed: !this.state.collapsed });
@@ -70,7 +72,7 @@ export class Thread extends Component {
 			<div className={className}>
 				<a onClick={collapse}>{subject}</a>
 				<Counter count={count || 0}/>
-				<span className={classNames('actions', style.actions)}>
+				<span className={classNames(style.actions)}>
 					{this.renderActions()}
 				</span>
 			</div>
@@ -79,7 +81,7 @@ export class Thread extends Component {
 
 	render() {
 		const props = this.props;
-		const className = classNames('thread', style.thread, props.className);
+		const className = classNames(style.thread, props.className);
 		const messages = props.messages || [];
 		const items = [];
 
@@ -119,6 +121,7 @@ export class Thread extends Component {
 					canExecute: props.canExecute,
 					sendMessage: props.sendMessage,
 					updateMessage: props.updateMessage,
+					theme: props.theme,
 				};
 				return <Message key={msg.id} {...msgProps}/>;
 			};

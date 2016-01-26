@@ -1,0 +1,37 @@
+$mc-border-color: #9197a3;
+
+.message_count {
+	margin: 0 8px;
+  display: inline-block;
+  position: relative;
+  padding: 0px 4px;
+  background: white;
+  color: #4e5665;
+  border: $mc-border-color solid 1px;
+  border-radius: 2px;
+	font-size: 11px;
+  font-weight: normal;
+	text-align: center;
+	white-space: nowrap;
+	min-width: 15px;
+	cursor: pointer;
+	text-decoration: none;
+  @include arrow-left($width: 4px, $length: 4px, $background-color: white, $border-color: $mc-border-color);
+}
+
+.message_count:hover {
+	text-decoration: none;
+}
+
+.like_count {
+	display: inline-block;
+	cursor: pointer;
+	white-space: nowrap;
+	text-align: center;
+	text-decoration: none;
+	@include heart($size: 20px);
+}
+
+.like_count:hover {
+	text-decoration: none;
+}

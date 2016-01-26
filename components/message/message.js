@@ -27,6 +27,7 @@ export class Message extends Component {
 		data: PropTypes.object,
 		avatarSize: Avatar.propTypes.size,
 		isReply: PropTypes.bool,
+		theme: PropTypes.string,
 	};
 
 	static defaultProps = {
@@ -34,6 +35,7 @@ export class Message extends Component {
 		data: {},
 		avatarSize: '',
 		isReply: false,
+		theme: 'plain',
 	};
 
 	constructor(props) {
@@ -108,7 +110,7 @@ export class Message extends Component {
 
 	render() {
 		const props = this.props;
-		const className = classNames('message', style.message, props.className, {
+		const className = classNames(style.message, props.className, style[props.theme], {
 			[style.reply]: !!props.isReply,
 		});
 		const data = props.data || props;
@@ -117,17 +119,18 @@ export class Message extends Component {
 		const fetchUser = promiseOnce(data.fetchUser || props.fetchUser, data);
 		const userName = getOrFetch(fetchUser, user, 'name', 'login');
 
+		const outerAvatar = props.theme === 'github';
 		const avatarProps = {
 			user: user || fetchUser,
 			size: props.avatarSize,
-			circled: true,
+			circled: props.theme === 'plain',
 			style: {
 				float: 'left',
 			},
 		};
 
 		const bodyProps = {
-			className: classNames('message-body', style.message_body),
+			className: classNames(style.message_body),
 			style: {
 				minHeight: avatarSize(props.avatarSize) - 16,
 			},
@@ -150,26 +153,30 @@ export class Message extends Component {
 				canExecute: props.canExecute,
 				sendMessage: props.sendMessage,
 				updateMessage: props.updateMessage,
+				theme: props.theme,
 			};
 			return <Message key={d.id} {...replyProps}/>;
 		});
 
 		return (
-			<div className={className} data-id={data.id}>
-				<Avatar {...avatarProps}/>
-				<div className={classNames('meta', style.meta)}>
-					{userName ? <UserName name={userName}/> : null}
-					{time ? <Age time={time}/> : null}
-					<span className={classNames('actions', style.actions)}>
-						{this.renderActions()}
-					</span>
+			<div className={classNames(style.message_wrapper, style[props.theme])}>
+				{outerAvatar ? <Avatar {...avatarProps}/> : null}
+				<div className={className} data-id={data.id}>
+					{outerAvatar ? null : <Avatar {...avatarProps}/>}
+					<div className={classNames(style.meta)}>
+						{userName ? <UserName name={userName}/> : null}
+						{time ? <Age time={time}/> : null}
+						<span className={classNames(style.actions)}>
+							{this.renderActions()}
+						</span>
+					</div>
+					<div {...bodyProps}>
+						<Markdown source={data.body}/>
+					</div>
+					{this.renderReplyInput()}
+					{this.renderEditor()}
+					{replyElements}
 				</div>
-				<div {...bodyProps}>
-					<Markdown source={data.body}/>
-				</div>
-				{this.renderReplyInput()}
-				{this.renderEditor()}
-				{replyElements}
 			</div>
 		);
 	}

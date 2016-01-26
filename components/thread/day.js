@@ -37,7 +37,7 @@ const formatDay = (time) => {
 };
 
 export const Day = (props) => {
-	const className = classNames('day', style.day);
+	const className = classNames(style.day);
 	const text = formatDay(props.time);
 	return (
 		<div className={className}>

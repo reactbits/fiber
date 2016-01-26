@@ -26,9 +26,7 @@ const formatTime = (value) => {
 
 export const Age = ({ time }) => {
 	const text = formatTime(time);
-	const className = classNames({
-		time: true,
-		[style.time]: true,
+	const className = classNames(style.time, {
 		[style.today]: isToday(time),
 	});
 	const attrs = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Avatar from '../avatar';
 import Thread from './thread';
@@ -16,9 +16,9 @@ const formatTime = (value) => {
 // TODO reuse rendering of user name from message component
 
 export const Topic = (props) => {
-	let className = `topic ${style.topic}`;
-	if (props.selected) className += ` ${style.topic_selected}`;
-
+	const className = classNames(style.topic, {
+		[style.topic_selected]: !!props.selected,
+	});
 	const msg = props.last_message || props.message || {};
 	const user = msg.user;
 	const unread = props.unread ? `${props.unread > 10 ? '10+' : props.unread} new` : '';
@@ -58,10 +58,11 @@ const threadPropNames = [
 	'onSelect',
 	'onAction',
 	'canExecute',
+	'theme',
 ];
 
 export const ThreadList = (props) => {
-	const className = classNames('thread-list', style.thread_list);
+	const className = classNames(style.thread_list);
 	// TODO use propTypes of Thread component
 	const options = _.pick(props, ...threadPropNames);
 	const items = props.threads.map(t =>
@@ -73,6 +74,14 @@ export const ThreadList = (props) => {
 			{items}
 		</div>
 	);
+};
+
+ThreadList.propTypes = {
+	theme: PropTypes.string,
+};
+
+ThreadList.defaultProps = {
+	theme: 'plain',
 };
 
 export default ThreadList;

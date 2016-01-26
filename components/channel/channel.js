@@ -5,9 +5,7 @@ import _ from 'lodash';
 
 // TODO render channel actions
 export const Channel = (props) => {
-	const className = classNames({
-		channel: true,
-		[style.channel]: true,
+	const className = classNames(style.channel, {
 		[style.selected_channel]: props.selected,
 	});
 	const select = () => {

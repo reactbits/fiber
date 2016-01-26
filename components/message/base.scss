@@ -1,0 +1,37 @@
+.message {
+	margin: 2px 0px;
+	padding: 0px 20px 0px 80px;
+}
+
+.message_body {
+	min-height: 44px;
+}
+
+.reply {
+	padding: 0px 0px 0px 40px;
+}
+
+.name {
+  color: #bbb;
+}
+
+.time {
+	color: #bbb;
+	font-weight: 400;
+	margin: 0 0 0 6px;
+}
+
+.today {
+	color: #36a5d9;
+}
+
+.meta span, .meta a, .meta i {
+	margin-right: 0.3em;
+}
+
+.action, .action:hover {
+	font-size: 14px;
+	text-decoration: none;
+	cursor: pointer;
+	margin-right: 0.3em;
+}

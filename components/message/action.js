@@ -68,7 +68,6 @@ export function Action(props) {
 	}
 
 	const className = classNames({
-		action: true,
 		[action]: true,
 		[style.action]: true,
 		'pull-right': props.right,

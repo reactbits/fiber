@@ -68,7 +68,7 @@ export class MessageInput extends Component {
 			props.submit(value);
 		};
 		const inputProps = {
-			className: classNames('message-input', style.input, style.message_input),
+			className: classNames(style.input, style.message_input),
 			placeholder: props.placeholder || 'Reply...',
 			value: this.state.value,
 			onChange: this.onChange,

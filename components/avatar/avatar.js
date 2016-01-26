@@ -121,7 +121,6 @@ export class Avatar extends Component {
 		const hoverEffect = hover(props.hover);
 		const className = classNames(
 			props.className,
-			'avatar',
 			style.avatar,
 			{
 				[shape]: true,

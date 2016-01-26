@@ -1,0 +1,34 @@
+@import "../_mixins";
+
+.message_wrapper.github {
+	padding-left: 64px;
+}
+
+.message_wrapper.github .avatar {
+	margin-left: -64px;
+}
+
+.message.github {
+	position: relative;
+	padding: 0;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	@include arrow-left($position: 11px, $width: 5px, $length: 5px, $background-color: #f7f7f7, $border-color: #ddd);
+}
+
+.message.github .meta {
+	padding: 10px 15px;
+	background-color: #f7f7f7;
+	border-bottom: 1px solid #eee;
+	border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.message.github .meta .name {
+	color: #767676;
+	font-weight: bold;
+}
+
+.message.github .message_body {
+	padding: 15px;
+}

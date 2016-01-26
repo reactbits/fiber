@@ -28,7 +28,6 @@ export default class UserName extends Component {
 			// TODO render small spinner
 			value = '';
 		}
-		const className = classNames('name', style.name);
-		return <a className={className}>{value}</a>;
+		return <a className={classNames(style.name)}>{value}</a>;
 	}
 }
