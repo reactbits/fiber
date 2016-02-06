@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import style from './style';
 import _ from 'lodash';
 import Counter from './counter';
+import hint from '../hint';
 
 // TODO configurable icons
 export const ionIconSet = {
@@ -68,6 +69,7 @@ export function Action(props) {
 	}
 
 	const className = classNames({
+		[hint()]: true,
 		[action]: true,
 		[style.action]: true,
 		'pull-right': props.right,
@@ -75,7 +77,7 @@ export function Action(props) {
 	const iconSet = getIconSet(props.iconSet);
 
 	return (
-		<a className={className} onClick={onClick} data-toggle="tooltip" title={tips[action]}>
+		<a className={className} onClick={onClick} data-hint={tips[action]}>
 			<i className={iconSet[action]}/>
 			{count > 0 ? <span className="count">{count}</span> : null}
 		</a>

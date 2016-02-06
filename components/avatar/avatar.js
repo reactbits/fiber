@@ -6,7 +6,7 @@ import style from './style';
 import _ from 'lodash';
 import is from 'is_js';
 import gravatarURL from './gravatar';
-import '../tooltip';
+import hint from '../hint';
 import { toPromise } from '../util';
 import hover from '../hover';
 
@@ -61,7 +61,9 @@ function makeWrapper(props) {
 	return (sourceProps, content) => {
 		const attrs = { ...sourceProps, ...props };
 		if (props.title) {
-			attrs['data-toggle'] = 'tooltip';
+			delete attrs.title;
+			attrs.className = hint();
+			attrs['data-hint'] = props.title;
 		}
 		return (
 			<div {...attrs}>{content}</div>
