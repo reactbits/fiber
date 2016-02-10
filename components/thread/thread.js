@@ -64,14 +64,14 @@ export class Thread extends Component {
 		const props = this.props;
 		const subject = props.subject || props.topic;
 		const className = classNames(style.thread_header);
-		const count = countMessages(props.messages || []);
+		const count = countMessages(props.messages || []) || 0;
 		const collapse = () => {
 			this.setState({ collapsed: !this.state.collapsed });
 		};
 		return (
 			<div className={className}>
 				<a onClick={collapse}>{subject}</a>
-				<Counter count={count || 0}/>
+				<Counter count={count} title={`${count} messages`}/>
 				<span className={classNames(style.actions)}>
 					{this.renderActions()}
 				</span>

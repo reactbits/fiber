@@ -10,7 +10,6 @@
     "babel": "babel components --out-dir lib",
     "build": "NODE_ENV=production npm run babel && npm run sass",
     "build:demo": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch",
     "test": "npm run lint"
   },
   "repository": {
@@ -31,8 +30,7 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "component-upload": "^0.3.0",
-    "hint.css": "^2.0.0",
-    "hover.css": "^2.0.2",
+    "css-effects": "^0.1.1",
     "is_js": "^0.8.0",
     "jquery": "^2.2.0",
     "loaders.css": "^0.1.2",
@@ -45,7 +43,7 @@
     "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.7",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.10.17",
+    "react-markdown2": "^0.10.18",
     "react-popover": "^0.4.4",
     "tus-js-client": "^1.1.3"
   },

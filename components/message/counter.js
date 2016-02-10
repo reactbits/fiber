@@ -1,19 +1,13 @@
 import React from 'react';
-import classNames from 'classnames';
 import style from './style';
+import { hint } from 'css-effects';
 
-export const Counter = (props) => {
-	const className = props.className || classNames('message-count', style.message_count);
-	const elem = props.element || React.DOM.span;
-	let attrs = { className, onClick: props.onClick };
+export default function Counter(props) {
+	const className = props.className || style.message_count;
+	const attrs = { className, onClick: props.onClick };
+	const counter = <span {...attrs}>{props.count}</span>;
 	if (props.title) {
-		attrs = {
-			...attrs,
-			'data-toggle': 'tooltip',
-			title: props.title,
-		};
+		return <span className={hint()} data-hint={props.title}>{counter}</span>;
 	}
-	return elem(attrs, props.count);
-};
-
-export default Counter;
+	return counter;
+}

@@ -6,9 +6,8 @@ import style from './style';
 import _ from 'lodash';
 import is from 'is_js';
 import gravatarURL from './gravatar';
-import hint from '../hint';
+import { hover, hint } from 'css-effects';
 import { toPromise } from '../util';
-import hover from '../hover';
 
 const avatarSizes = {
 	small: 24,
@@ -62,7 +61,7 @@ function makeWrapper(props) {
 		const attrs = { ...sourceProps, ...props };
 		if (props.title) {
 			delete attrs.title;
-			attrs.className = hint();
+			attrs.className = classNames(attrs.className, hint());
 			attrs['data-hint'] = props.title;
 		}
 		return (

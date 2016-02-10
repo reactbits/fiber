@@ -5,7 +5,6 @@ import { Thread, ThreadList, ThreadForm } from './thread';
 import { Channel, ChannelList } from './channel';
 import { UserList } from './user';
 import { Spinner } from './common';
-import hover from './hover';
 
 export {
 	Markdown,
@@ -18,5 +17,4 @@ export {
 	ChannelList,
 	UserList,
 	Spinner,
-	hover,
 };

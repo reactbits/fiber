@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import style from './style';
 import _ from 'lodash';
 import Counter from './counter';
-import hint from '../hint';
+import { hint } from 'css-effects';
 
 // TODO configurable icons
 export const ionIconSet = {
