@@ -43,6 +43,7 @@ export class Message extends Component {
 		this.state = {
 			showReplyInput: false,
 			showEdit: false,
+			collapsed: false,
 		};
 	}
 
@@ -108,6 +109,28 @@ export class Message extends Component {
 		return renderActions(actions, 'message', data, actionProps);
 	}
 
+	renderReplies(fetchUser) {
+		const props = this.props;
+		const data = props.data || props;
+		// TODO support data.replies as promise
+		const replies = data.replies || [];
+
+		return (this.state.collapsed ? [] : replies).map(d => {
+			const replyProps = {
+				data: d,
+				isReply: true,
+				avatarSize: props.avatarSize,
+				fetchUser,
+				onAction: props.onAction,
+				canExecute: props.canExecute,
+				sendMessage: props.sendMessage,
+				updateMessage: props.updateMessage,
+				theme: props.theme,
+			};
+			return <Message key={d.id} {...replyProps}/>;
+		});
+	}
+
 	render() {
 		const props = this.props;
 		const className = classNames(style.message, props.className, style[props.theme], {
@@ -136,27 +159,12 @@ export class Message extends Component {
 			},
 		};
 
-		// TODO support data.replies as promise
-		const replies = data.replies || [];
-
-		// TODO render admin badge
+		// TODO render badges
 		// TODO spam icon
-		// TODO render replies on reply count click or message click
-
-		const replyElements = replies.map(d => {
-			const replyProps = {
-				data: d,
-				isReply: true,
-				avatarSize: props.avatarSize,
-				fetchUser,
-				onAction: props.onAction,
-				canExecute: props.canExecute,
-				sendMessage: props.sendMessage,
-				updateMessage: props.updateMessage,
-				theme: props.theme,
-			};
-			return <Message key={d.id} {...replyProps}/>;
-		});
+		const toggleIconProps = {
+			className: this.state.collapsed ? 'fa fa-plus-square-o' : 'fa fa-minus-square-o',
+			onClick: () => this.setState({ collapsed: !this.state.collapsed }),
+		};
 
 		return (
 			<div className={classNames(style.message_wrapper, style[props.theme])}>
@@ -164,18 +172,22 @@ export class Message extends Component {
 				<div className={className} data-id={data.id}>
 					{outerAvatar ? null : <Avatar {...avatarProps}/>}
 					<div className={classNames(style.meta)}>
+						<i {...toggleIconProps}/>
 						{userName ? <UserName name={userName}/> : null}
 						{time ? <Age time={time}/> : null}
 						<span className={classNames(style.actions)}>
 							{this.renderActions()}
 						</span>
 					</div>
-					<div {...bodyProps}>
-						<Markdown source={data.body}/>
-					</div>
+					{
+						this.state.collapsed ? null :
+						<div {...bodyProps}>
+							<Markdown source={data.body}/>
+						</div>
+					}
 					{this.renderReplyInput()}
 					{this.renderEditor()}
-					{replyElements}
+					{this.renderReplies(fetchUser)}
 				</div>
 			</div>
 		);
