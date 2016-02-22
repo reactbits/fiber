@@ -119,7 +119,7 @@ function dots(props) {
 		if (props.top) {
 			style.top = props.top;
 		}
-		return <div key={i} {...attrs}/>;
+		return <div key={i} {...attrs} />;
 	});
 }
 

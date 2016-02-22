@@ -33,7 +33,7 @@ export const Topic = (props) => {
 
 	return (
 		<div className={className} onClick={onClick}>
-			{avatarURL ? <Avatar source={avatarURL} size={props.avatarSize} name={user.name}/> : null}
+			{avatarURL ? <Avatar source={avatarURL} size={props.avatarSize} name={user.name} /> : null}
 			<div className={`header ${style.header}`}>
 				<span>{props.topic}</span>
 				{unread ? <span className={`unread ${style.unread}`}>{unread}</span> : null}
@@ -66,7 +66,7 @@ export const ThreadList = (props) => {
 	// TODO use propTypes of Thread component
 	const options = _.pick(props, ...threadPropNames);
 	const items = props.threads.map(t =>
-		<Thread key={t.id} {...t} {...options}/>
+		<Thread key={t.id} {...t} {...options} />
 		// <Topic key={t.id} thread={t} {...t} onSelect={props.onSelect}/>
 	);
 	return (

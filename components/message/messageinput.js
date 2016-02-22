@@ -102,10 +102,10 @@ export class MessageInput extends Component {
 		};
 		return (
 			<div {...formProps}>
-				<Help/>
-				<Input {...inputProps}/>
+				<Help />
+				<Input {...inputProps} />
 				<div className={style.reply_controls}>
-					<UploadButton {...uploadProps}/>
+					<UploadButton {...uploadProps} />
 					<Button {...submitProps}>Post</Button>
 				</div>
 			</div>

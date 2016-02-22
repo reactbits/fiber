@@ -56,7 +56,7 @@ class App extends Component {
 			updateMessage,
 			theme: this.state.theme,
 		};
-		const spinners = loaderTypes.map(t => <Spinner key={t} type={t}/>);
+		const spinners = loaderTypes.map(t => <Spinner key={t} type={t} />);
 
 		const makeThemeItem = (theme, label) => {
 			const itemProps = {
@@ -71,8 +71,8 @@ class App extends Component {
 				<Row>
 					<Col md={4}>
 						<Panel>
-							<ChannelList {...channelListProps}/>
-							<UserList users={props.users}/>
+							<ChannelList {...channelListProps} />
+							<UserList users={props.users} />
 						</Panel>
 					</Col>
 					<Col md={8}>
@@ -83,8 +83,8 @@ class App extends Component {
 									{makeThemeItem('github', 'GitHub')}
 								</DropdownButton>
 							</ButtonToolbar>
-							<ThreadForm submit={createThread}/>
-							<ThreadList {...threadListProps}/>
+							<ThreadForm submit={createThread} />
+							<ThreadList {...threadListProps} />
 						</Panel>
 					</Col>
 				</Row>
@@ -104,8 +104,8 @@ export default function Root(props) {
 	return (
 		<Provider store={store}>
 			<div>
-				<AppConnected {...props}/>
-				<DevTools/>
+				<AppConnected {...props} />
+				<DevTools />
 			</div>
 		</Provider>
 	);

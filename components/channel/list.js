@@ -14,7 +14,7 @@ export const ChannelList = (props) => {
 			selected: cn.id === selectedId,
 			select: props.selectChannel,
 		};
-		return <Channel {...cnprops}/>;
+		return <Channel {...cnprops} />;
 	});
 	return (
 		<div className={className}>
@@ -24,7 +24,7 @@ export const ChannelList = (props) => {
 			<div className="body">
 				{channels}
 			</div>
-			<AddChannel createChannel={props.createChannel}/>
+			<AddChannel createChannel={props.createChannel} />
 		</div>
 	);
 };

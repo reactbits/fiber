@@ -84,8 +84,8 @@ export class ThreadForm extends Component {
 		if (this.state.subjectFocused || this.state.bodyFocused) {
 			return (
 				<div {...formProps}>
-					<Input {...subjectProps}/>
-					<MessageInput {...bodyProps}/>
+					<Input {...subjectProps} />
+					<MessageInput {...bodyProps} />
 				</div>
 			);
 		}
@@ -97,7 +97,7 @@ export class ThreadForm extends Component {
 		};
 		return (
 			<div {...formProps}>
-				<Input {...placeholderProps}/>
+				<Input {...placeholderProps} />
 			</div>
 		);
 	}

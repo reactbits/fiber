@@ -10,16 +10,16 @@ function helpContent() {
 	return (
 		<div>
 			<div className={style.help_format}>
-				<span><b>*bold*</b></span><br/>
-				<span><i>_italic_</i></span><br/>
-				<span>{quote}{'quoted'}</span><br/>
-				<span className={style.monospaced}>{monospaced}{'monospaced'}{monospaced}</span><br/>
-				<span>[title](link)</span><br/>
+				<span><b>*bold*</b></span><br />
+				<span><i>_italic_</i></span><br />
+				<span>{quote}{'quoted'}</span><br />
+				<span className={style.monospaced}>{monospaced}{'monospaced'}{monospaced}</span><br />
+				<span>[title](link)</span><br />
 			</div>
 			<div className={style.help_code}>
-				<span>{'```js'}</span><br/>
-				<span>javascript code</span><br/>
-				<span>{'```'}</span><br/>
+				<span>{'```js'}</span><br />
+				<span>javascript code</span><br />
+				<span>{'```'}</span><br />
 			</div>
 			<div className={style.help_post}>
 				<em>ctrl</em>

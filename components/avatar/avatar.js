@@ -42,7 +42,7 @@ function makePreloader(size) {
 		};
 		return (
 			<div className={style.preloader} style={css}>
-				<Spinner size={size}/>
+				<Spinner size={size} />
 			</div>
 		);
 	};
@@ -52,7 +52,7 @@ function RandomAvatar(props) {
 	// TODO render random avatar
 	const size = props.size;
 	return (
-		<img src={gravatarURL(props.src)} width={size} height={size}/>
+		<img src={gravatarURL(props.src)} width={size} height={size} />
 	);
 }
 
@@ -194,7 +194,7 @@ export class Avatar extends Component {
 
 		return (
 			<ImageLoader className={className} style={avatarStyle} {...loaderProps}>
-				<RandomAvatar src={src} size={size}/>
+				<RandomAvatar src={src} size={size} />
 			</ImageLoader>
 		);
 	}

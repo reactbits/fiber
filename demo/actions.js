@@ -53,7 +53,7 @@ function pushMessage(msg) {
 }
 
 function fetchQuote() {
-	makeMessage().then((msg) => {
+	makeMessage().then(msg => {
 		const n = rnd(0, 3);
 		if (n > 0) {
 			// TODO async loading of replies
@@ -62,6 +62,7 @@ function fetchQuote() {
 			});
 		}
 		pushMessage(msg);
+		return msg;
 	});
 }
 

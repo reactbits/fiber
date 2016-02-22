@@ -43,7 +43,7 @@ export const Day = (props) => {
 		<div className={className}>
 			<a onClick={props.onClick}>
 				<span>{text}</span>
-				<Counter count={props.count}/>
+				<Counter count={props.count} />
 			</a>
 		</div>
 	);

@@ -65,7 +65,7 @@ export function Action(props) {
 			title: tips[action],
 			element: React.DOM.a,
 		};
-		return <Counter {...attrs}/>;
+		return <Counter {...attrs} />;
 	}
 
 	const className = classNames({
@@ -78,7 +78,7 @@ export function Action(props) {
 
 	return (
 		<a className={className} onClick={onClick} data-hint={tips[action]}>
-			<i className={iconSet[action]}/>
+			<i className={iconSet[action]} />
 			{count > 0 ? <span className="count">{count}</span> : null}
 		</a>
 	);
@@ -101,6 +101,6 @@ export function renderActions(actions, type, data, options) {
 				iconSet: options.iconSet,
 				...actions[key],
 			};
-			return <Action key={`${data.id}/${key}`} {...props}/>;
+			return <Action key={`${data.id}/${key}`} {...props} />;
 		});
 }

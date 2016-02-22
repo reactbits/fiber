@@ -21,7 +21,7 @@ export const AddChannel = (props) => {
 	const btnClassName = classNames('ion-plus-circled', style.btn_add_channel);
 	return (
 		<div className="add-channel-container">
-			<input type="text" className="channel-name-input" onKeyDown={onKeyDown}/>
+			<input type="text" className="channel-name-input" onKeyDown={onKeyDown} />
 			<i className={btnClassName} title="Add channel" onClick={onAddClick}></i>
 		</div>
 	);

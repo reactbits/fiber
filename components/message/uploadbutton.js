@@ -71,6 +71,6 @@ export default function UploadButton(props) {
 		onMouseDown: onClick,
 	};
 	return (
-		<a {...btnProps}><i className="ion-camera"/></a>
+		<a {...btnProps}><i className="ion-camera" /></a>
 	);
 }

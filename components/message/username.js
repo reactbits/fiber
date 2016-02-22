@@ -18,7 +18,7 @@ export default class UserName extends Component {
 	render() {
 		let value = this.state.name;
 		if (!value) {
-			return <span/>;
+			return <span />;
 		}
 		if (!_.isString(value)) {
 			const promise = toPromise(value);

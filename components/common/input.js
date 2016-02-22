@@ -36,7 +36,7 @@ export class Input extends Component {
 			onMouseDown,
 			...props,
 		};
-		return <textarea ref="input" {...attrs}/>;
+		return <textarea ref="input" {...attrs} />;
 	}
 }
 

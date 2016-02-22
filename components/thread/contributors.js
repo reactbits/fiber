@@ -50,7 +50,7 @@ export class ContributorList extends Component {
 					margin: '0px',
 				},
 			};
-			return <Avatar key={user.id} {...avatarProps}/>;
+			return <Avatar key={user.id} {...avatarProps} />;
 		});
 		return (
 			<div className={style.contributor_list}>

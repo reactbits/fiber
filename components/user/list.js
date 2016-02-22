@@ -16,12 +16,12 @@ export function UserList(props) {
 				margin: 0,
 			},
 		};
-		return <Avatar key={user.id} {...avatarProps}/>;
+		return <Avatar key={user.id} {...avatarProps} />;
 	});
 	return (
 		<div className={style.user_list}>
 			<div className={style.user_list_header}>
-				<i className="ion-ios-people"/>
+				<i className="ion-ios-people" />
 				<span>Online</span>
 				<em className={style.online_count}>{online}</em>
 			</div>

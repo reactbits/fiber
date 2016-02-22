@@ -71,7 +71,7 @@ export class Thread extends Component {
 		return (
 			<div className={className}>
 				<a onClick={collapse}>{subject}</a>
-				<Counter count={count} title={`${count} messages`}/>
+				<Counter count={count} title={`${count} messages`} />
 				<span className={classNames(style.actions)}>
 					{this.renderActions()}
 				</span>
@@ -89,7 +89,7 @@ export class Thread extends Component {
 			const users = observable([]);
 			collectContributors(users, messages, props.fetchUser);
 			items.push(
-				<ContributorList key={`cl-${props.id}`} users={users}/>
+				<ContributorList key={`cl-${props.id}`} users={users} />
 			);
 		} else {
 			const collapseDay = time => {
@@ -108,7 +108,7 @@ export class Thread extends Component {
 					count: msgcount,
 					onClick: () => collapseDay(time),
 				};
-				return <Day key={`day-${props.id}-${+time}`} {...dayProps}/>;
+				return <Day key={`day-${props.id}-${+time}`} {...dayProps} />;
 			};
 
 			const renderMessage = (msg) => {
@@ -123,7 +123,7 @@ export class Thread extends Component {
 					updateMessage: props.updateMessage,
 					theme: props.theme,
 				};
-				return <Message key={msg.id} {...msgProps}/>;
+				return <Message key={msg.id} {...msgProps} />;
 			};
 
 			let collaseMessages = false;
@@ -147,7 +147,7 @@ export class Thread extends Component {
 				}
 			};
 
-			items.push(<MessageInput key={`message-input-${props.id}`} submit={sendMessage}/>);
+			items.push(<MessageInput key={`message-input-${props.id}`} submit={sendMessage} />);
 		}
 
 		return (

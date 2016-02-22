@@ -60,7 +60,7 @@ export class Message extends Component {
 				props.sendMessage({ thread_id: data.thread_id, in_reply_to: data.id, body: text });
 			}
 		};
-		return <MessageInput submit={sendReply} cancel={hideReplyInput} focused/>;
+		return <MessageInput submit={sendReply} cancel={hideReplyInput} focused />;
 	}
 
 	renderEditor() {
@@ -76,7 +76,7 @@ export class Message extends Component {
 				props.updateMessage({ thread_id: data.thread_id, id: data.id, body: text });
 			}
 		};
-		return <MessageInput submit={updateMessage} cancel={hideEdit} focused value={data.body}/>;
+		return <MessageInput submit={updateMessage} cancel={hideEdit} focused value={data.body} />;
 	}
 
 	renderActions() {
@@ -127,7 +127,7 @@ export class Message extends Component {
 				updateMessage: props.updateMessage,
 				theme: props.theme,
 			};
-			return <Message key={d.id} {...replyProps}/>;
+			return <Message key={d.id} {...replyProps} />;
 		});
 	}
 
@@ -168,13 +168,13 @@ export class Message extends Component {
 
 		return (
 			<div className={classNames(style.message_wrapper, style[props.theme])}>
-				{outerAvatar ? <Avatar {...avatarProps}/> : null}
+				{outerAvatar ? <Avatar {...avatarProps} /> : null}
 				<div className={className} data-id={data.id}>
-					{outerAvatar ? null : <Avatar {...avatarProps}/>}
+					{outerAvatar ? null : <Avatar {...avatarProps} />}
 					<div className={classNames(style.meta)}>
-						<i {...toggleIconProps}/>
-						{userName ? <UserName name={userName}/> : null}
-						{time ? <Age time={time}/> : null}
+						<i {...toggleIconProps} />
+						{userName ? <UserName name={userName} /> : null}
+						{time ? <Age time={time} /> : null}
 						<span className={classNames(style.actions)}>
 							{this.renderActions()}
 						</span>
@@ -182,7 +182,7 @@ export class Message extends Component {
 					{
 						this.state.collapsed ? null :
 						<div {...bodyProps}>
-							<Markdown source={data.body}/>
+							<Markdown source={data.body} />
 						</div>
 					}
 					{this.renderReplyInput()}
