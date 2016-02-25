@@ -4,6 +4,7 @@ import {
 	ThreadForm,
 	ChannelList,
 	UserList,
+	UserMenu,
 	Spinner,
 } from '../components';
 import { loaderTypes } from '../components/common/spinner';
@@ -38,7 +39,7 @@ class App extends Component {
 
 	render() {
 		const props = this.props;
-		const { dispatch } = props;
+		const { dispatch, currentUser } = props;
 		const channelListProps = {
 			channels: props.channels,
 			selectedChannel: props.selectedChannel,
@@ -71,6 +72,9 @@ class App extends Component {
 				<Row>
 					<Col md={4}>
 						<Panel>
+							<UserMenu user={currentUser}>
+								<span>Logout</span>
+							</UserMenu>
 							<ChannelList {...channelListProps} />
 							<UserList users={props.users} />
 						</Panel>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import PopoverClass from 'react-popover';
 import style from './style';
-
-const popover = React.createFactory(PopoverClass);
+import { ContextMenu } from '../common';
 
 function helpContent() {
 	const quote = '> ';
@@ -31,7 +29,7 @@ function helpContent() {
 	);
 }
 
-export class Help extends Component {
+export default class Help extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -39,31 +37,16 @@ export class Help extends Component {
 		};
 	}
 	render() {
-		const showHelp = (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			this.setState({ helpVisible: true });
-			return false;
+		const menuProps = {
+			button: {
+				className: style.show_help,
+				content: '?',
+			},
 		};
-		const showHelpButton = <a className={style.show_help} onMouseDown={showHelp}>?</a>;
-
-		const helpProps = {
-			className: style.help,
-			isOpen: this.state.helpVisible,
-			preferPlace: 'below',
-			place: 'below',
-			onOuterAction: () => this.setState({ helpVisible: false }),
-			body: helpContent(),
-		};
-		const help = popover(helpProps, showHelpButton);
-
 		return (
-			<span>
-				{showHelpButton}
-				{help}
-			</span>
+			<ContextMenu {...menuProps}>
+				{helpContent()}
+			</ContextMenu>
 		);
 	}
 }
-
-export default Help;

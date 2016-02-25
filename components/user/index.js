@@ -1,3 +1,4 @@
 import UserList from './list';
-export { UserList };
+import UserMenu from './menu.js';
+export { UserList, UserMenu };
 export default UserList;

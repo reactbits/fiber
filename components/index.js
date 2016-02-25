@@ -3,8 +3,8 @@ import Avatar from './avatar';
 import Message from './message';
 import { Thread, ThreadList, ThreadForm } from './thread';
 import { Channel, ChannelList } from './channel';
-import { UserList } from './user';
-import { Spinner } from './common';
+import { UserList, UserMenu } from './user';
+import { Spinner, ContextMenu } from './common';
 
 export {
 	Markdown,
@@ -16,5 +16,7 @@ export {
 	Channel,
 	ChannelList,
 	UserList,
+	UserMenu,
 	Spinner,
+	ContextMenu,
 };
