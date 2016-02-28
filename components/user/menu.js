@@ -18,12 +18,18 @@ export default class UserMenu extends Component {
 		};
 		const menuProps = {
 			button: {
-				content: <i className="fa fa-caret-down" />,
+				content: (
+					<span>
+						&nbsp;
+						<i className="fa fa-caret-down" />
+					</span>
+				),
 			},
 		};
 		return (
 			<span>
 				<Avatar {...avatarProps} />
+				&nbsp;
 				{user.name || user.login}
 				<ContextMenu {...menuProps}>
 					{this.props.children}

@@ -73,7 +73,9 @@ class App extends Component {
 					<Col md={4}>
 						<Panel>
 							<UserMenu user={currentUser}>
-								<span>Logout</span>
+								<div className="clearfix">
+									<MenuItem>Logout</MenuItem>
+								</div>
 							</UserMenu>
 							<ChannelList {...channelListProps} />
 							<UserList users={props.users} />
