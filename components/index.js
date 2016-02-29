@@ -4,7 +4,7 @@ import Message from './message';
 import { Thread, ThreadList, ThreadForm } from './thread';
 import { Channel, ChannelList } from './channel';
 import { UserList, UserMenu } from './user';
-import { Spinner, ContextMenu } from './common';
+import { Spinner, ContextMenu, ContextMenuItem } from './common';
 
 export {
 	Markdown,
@@ -19,4 +19,5 @@ export {
 	UserMenu,
 	Spinner,
 	ContextMenu,
+	ContextMenuItem,
 };

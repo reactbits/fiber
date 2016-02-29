@@ -6,7 +6,7 @@ function helpContent() {
 	const quote = '> ';
 	const monospaced = '`';
 	return (
-		<div>
+		<div className={style.help_content}>
 			<div className={style.help_format}>
 				<span><b>*bold*</b></span><br />
 				<span><i>_italic_</i></span><br />

@@ -6,6 +6,7 @@ import {
 	UserList,
 	UserMenu,
 	Spinner,
+	ContextMenuItem,
 } from '../components';
 import { loaderTypes } from '../components/common/spinner';
 import {
@@ -67,15 +68,19 @@ class App extends Component {
 			return <MenuItem {...itemProps}>{label}</MenuItem>;
 		};
 
+		const logout = () => {
+			console.log('logout');
+		};
+
 		return (
 			<div className="app container">
 				<Row>
 					<Col md={4}>
 						<Panel>
 							<UserMenu user={currentUser}>
-								<div className="clearfix">
-									<MenuItem>Logout</MenuItem>
-								</div>
+								<ContextMenuItem header>You</ContextMenuItem>
+								<ContextMenuItem onClick={logout}>Preferences</ContextMenuItem>
+								<ContextMenuItem onClick={logout}>Logout</ContextMenuItem>
 							</UserMenu>
 							<ChannelList {...channelListProps} />
 							<UserList users={props.users} />

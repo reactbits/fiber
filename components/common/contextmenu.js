@@ -12,15 +12,10 @@ export default class ContextMenu extends Component {
 		};
 	}
 
-	dropdownContent() {
-		return (
-			<div>{this.props.children}</div>
-		);
-	}
-
 	render() {
 		const { button } = this.props;
 
+		const hide = () => this.setState({ dropdownVisible: false });
 		const showDropdown = (e) => {
 			e.preventDefault();
 			e.stopPropagation();
@@ -39,8 +34,9 @@ export default class ContextMenu extends Component {
 			isOpen: this.state.dropdownVisible,
 			preferPlace: 'below',
 			place: 'below',
-			onOuterAction: () => this.setState({ dropdownVisible: false }),
-			body: this.props.children,
+			onOuterAction: hide,
+			body: <ul className={styles.menu_items} onClick={hide}>{this.props.children}</ul>,
+			refreshIntervalMs: false,
 		};
 
 		return (
