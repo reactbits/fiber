@@ -35,7 +35,7 @@
     "jquery": "^2.2.1",
     "loaders.css": "^0.1.2",
     "lodash": "^4.6.0",
-    "md5": "^2.0.0",
+    "md5": "^2.1.0",
     "moment": "^2.11.2",
     "observable": "^2.1.4",
     "query-string": "^3.0.1",
