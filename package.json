@@ -85,7 +85,7 @@
     "update-it": "0.1.5",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
-    "webpack-hot-middleware": "^2.9.0",
+    "webpack-hot-middleware": "^2.10.0",
     "webpack-sources": "^0.1.1"
   }
 }
