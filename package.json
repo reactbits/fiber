@@ -71,7 +71,7 @@
     "morgan": "^1.7.0",
     "node-sass": "^3.4.2",
     "normalize.css": "^3.0.3",
-    "postcss-loader": "^0.8.1",
+    "postcss-loader": "^0.8.2",
     "react-bootstrap": "^0.28.3",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
