@@ -1,32 +1,14 @@
-const express = require('express');
-const morgan = require('morgan');
-const webpack = require('webpack');
+const startServer = require('react-devpack').startServer;
 
-const config = require('./webpack.config');
-const port = 7000;
-const app = express();
-const compiler = webpack(config);
+const port = 8000 || process.env.PORT;
 
-app.use(morgan('dev'));
+function extendApp(app) {
+	// proxying of api requests
+	const makeProxy = require('apiproxy');
+	app.all('/api/*', makeProxy({ port: 3000, serverPort: port }));
+}
 
-app.use(require('webpack-dev-middleware')(compiler, {
-	noInfo: true,
-	publicPath: config.output.publicPath,
-	stats: 'errors-only',
-}));
-
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.use(express.static(process.cwd()));
-
-// proxying of api requests
-const makeProxy = require('apiproxy');
-app.all('/api/*', makeProxy({ port: 3000, serverPort: port }));
-
-app.listen(port, '0.0.0.0', (err) => {
-	if (err) {
-		console.log(err);
-		return;
-	}
-	console.log('Listening at http://0.0.0.0:%s', port);
+startServer({
+	port: port, // eslint-disable-line
+	extendApp: extendApp, // eslint-disable-line
 });
