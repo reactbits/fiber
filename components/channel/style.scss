@@ -1,6 +1,6 @@
 @import "../_base";
 
-$selected-channel-background-color: #4cbe00;
+$selected-channel-background-color: $lightgreen;
 
 .channel {
 	margin: 4px 0px;
@@ -13,19 +13,19 @@ $selected-channel-background-color: #4cbe00;
 	cursor: pointer;
 	text-decoration: none;
 	line-height: 1;
-}
 
-.channel a:hover {
-	background-color: #ddd;
+	&:hover {
+		background-color: #ddd;
+	}
 }
 
 .selected_channel a {
 	color: white;
 	background-color: $selected-channel-background-color;
-}
 
-.selected_channel a:hover {
-	background-color: $selected-channel-background-color;
+	&:hover {
+		background-color: $selected-channel-background-color;
+	}
 }
 
 .btn_add_channel {

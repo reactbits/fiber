@@ -1,0 +1,23 @@
+@import "../_base";
+
+.nav_item a {
+	padding: .25em 0.5em;
+	border-radius: .5em;
+	color: #333;
+	cursor: pointer;
+	text-decoration: none;
+	line-height: 1;
+
+	&:hover {
+		background-color: #ddd;
+	}
+}
+
+.nav_selected_item a {
+	color: white;
+	background-color: $lightgreen;
+
+	&:hover {
+		background-color: $lightgreen;
+	}
+}

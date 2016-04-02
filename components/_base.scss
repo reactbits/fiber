@@ -1,6 +1,9 @@
 @import "./_mixins";
 
-$input-focus-color: #1fadc5;
+$lightgreen: #42aa42;
+$lightblue: #1fadc5;
+
+$input-focus-color: $lightblue;
 
 .input {
 	border: 1px solid rgba(0,0,0,0.1);
