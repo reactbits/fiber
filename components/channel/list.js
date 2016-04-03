@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Channel from './channel';
 import AddChannel from './addchannel';
 import style from './style';
+import { NavSection, NavBody, NavHeader, NavHeaderButtons, PlusButton } from '../common';
 
 export const ChannelList = (props) => {
 	const className = classNames(props.className, style.channel_list);
@@ -17,15 +18,17 @@ export const ChannelList = (props) => {
 		return <Channel {...cnprops} />;
 	});
 	return (
-		<div className={className}>
-			<div className="header">
-				<span>Channels</span>
-			</div>
-			<div className="body">
+		<NavSection className={className}>
+			<NavHeader title="CHANNELS">
+				<NavHeaderButtons>
+					<PlusButton tip="Create new channel" />
+				</NavHeaderButtons>
+			</NavHeader>
+			<NavBody>
 				{channels}
-			</div>
+			</NavBody>
 			<AddChannel createChannel={props.createChannel} />
-		</div>
+		</NavSection>
 	);
 };
 

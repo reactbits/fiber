@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import style from './style';
 import _ from 'lodash';
+import { NavItem } from '../common';
 
 // TODO render channel actions
 export const Channel = (props) => {
@@ -14,9 +15,9 @@ export const Channel = (props) => {
 		}
 	};
 	return (
-		<div className={className}>
-			<a onClick={select}>{props.data.name}</a>
-		</div>
+		<NavItem className={className} onClick={select} selected={props.selected}>
+			{props.data.name}
+		</NavItem>
 	);
 };
 

@@ -3,25 +3,27 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { hint } from 'css-effects';
 import styles from './navsection.scss';
+import _ from 'lodash';
 
 export function NavItem(props) {
 	const selected = props.selected || location.pathname === props.to;
 	const className = classNames(props.className, styles.nav_item, {
 		[styles.nav_item_selected]: selected,
 	});
+	const link = _.isFunction(props.onClick)
+		? <a onClick={props.onClick}>{props.children}</a>
+		: <Link to={props.to}>{props.children}</Link>;
 	return (
-		<div className={className}>
-			<Link to={props.to}>{props.children}</Link>
-		</div>
+		<div className={className}>{link}</div>
 	);
 }
 
 export function IconButton(props) {
 	const className = classNames(styles.icon_button, hint());
 	return (
-		<div className={className} onClick={props.onClick} data-hint={props.tip}>
+		<span className={className} onClick={props.onClick} data-hint={props.tip}>
 			<i className={props.iconClass} />
-		</div>
+		</span>
 	);
 }
 
@@ -31,14 +33,25 @@ export function PlusButton(props) {
 
 export function NavHeaderButtons(props) {
 	return (
-		<div className={styles.nav_buttons}>
+		<span className={styles.nav_buttons}>
 			{props.children}
-		</div>
+		</span>
 	);
 }
 
 export function NavHeader(props) {
 	const className = classNames(props.className, styles.nav_header);
+	const title = props.title ? <span className={styles.nav_title}>{props.title}</span> : null;
+	return (
+		<div className={className}>
+			{title}
+			{props.children}
+		</div>
+	);
+}
+
+export function NavBody(props) {
+	const className = classNames(props.className, styles.nav_body);
 	return (
 		<div className={className}>
 			{props.children}

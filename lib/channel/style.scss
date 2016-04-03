@@ -1,33 +1,5 @@
 @import "../_base";
 
-$selected-channel-background-color: #4cbe00;
-
-.channel {
-	margin: 4px 0px;
-}
-
-.channel a {
-	padding: .25em 0.5em;
-	border-radius: .5em;
-	color: #333;
-	cursor: pointer;
-	text-decoration: none;
-	line-height: 1;
-}
-
-.channel a:hover {
-	background-color: #ddd;
-}
-
-.selected_channel a {
-	color: white;
-	background-color: $selected-channel-background-color;
-}
-
-.selected_channel a:hover {
-	background-color: $selected-channel-background-color;
-}
-
 .btn_add_channel {
 	font-size: 20px;
 }
