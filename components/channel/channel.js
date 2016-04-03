@@ -14,8 +14,14 @@ export const Channel = (props) => {
 			props.select(props.data);
 		}
 	};
+	const itemProps = {
+		className,
+		onClick: select,
+		selected: props.selected,
+		to: props.to,
+	};
 	return (
-		<NavItem className={className} onClick={select} selected={props.selected}>
+		<NavItem {...itemProps}>
 			{props.data.name}
 		</NavItem>
 	);

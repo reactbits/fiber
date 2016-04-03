@@ -10,9 +10,9 @@ export function NavItem(props) {
 	const className = classNames(props.className, styles.nav_item, {
 		[styles.nav_item_selected]: selected,
 	});
-	const link = _.isFunction(props.onClick)
-		? <a onClick={props.onClick}>{props.children}</a>
-		: <Link to={props.to}>{props.children}</Link>;
+	const link = props.to
+		? <Link to={props.to}>{props.children}</Link>
+		: <a onClick={props.onClick || _.noop}>{props.children}</a>;
 	return (
 		<div className={className}>{link}</div>
 	);
