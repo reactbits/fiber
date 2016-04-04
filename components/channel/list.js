@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Channel from './channel';
-import AddChannel from './addchannel';
+import newChannelDialog from './addchannel';
 import style from './style';
 import { NavSection, NavBody, NavHeader, NavHeaderButtons, PlusButton } from '../common';
 
@@ -18,17 +18,19 @@ export const ChannelList = (props) => {
 		};
 		return <Channel {...cnprops} />;
 	});
+	const onPlusClick = () => {
+		newChannelDialog(props.createChannel);
+	};
 	return (
 		<NavSection className={className}>
 			<NavHeader title="CHANNELS">
 				<NavHeaderButtons>
-					<PlusButton tip="Create new channel" />
+					<PlusButton tip="Create new channel" onClick={onPlusClick} />
 				</NavHeaderButtons>
 			</NavHeader>
 			<NavBody>
 				{channels}
 			</NavBody>
-			<AddChannel createChannel={props.createChannel} />
 		</NavSection>
 	);
 };
