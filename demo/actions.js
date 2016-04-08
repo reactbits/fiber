@@ -71,7 +71,7 @@ const maxUsers = 10;
 
 function fetchUser() {
 	randomUser().then(response => {
-		const data = response.results[0].user;
+		const data = response.results[0];
 		const name = `${data.name.first} ${data.name.last}`;
 		const { users } = store.getState();
 		const user = {

@@ -89,7 +89,7 @@ class App extends Component {
 					<Col md={8}>
 						<Panel>
 							<ButtonToolbar>
-								<DropdownButton bsStyle="default" title="Theme">
+								<DropdownButton id="theme-dropdown" bsStyle="default" title="Theme">
 									{makeThemeItem('plain', 'Plain')}
 									{makeThemeItem('github', 'GitHub')}
 								</DropdownButton>
