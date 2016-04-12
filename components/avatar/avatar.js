@@ -52,7 +52,7 @@ function RandomAvatar(props) {
 	// TODO render random avatar
 	const size = props.size;
 	return (
-		<img src={gravatarURL(props.src)} width={size} height={size} />
+		<img src={gravatarURL(props.src)} width={size} height={size} alt="avatar" />
 	);
 }
 
