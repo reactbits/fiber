@@ -46,7 +46,7 @@
     "react-markdown2": "^0.10.32",
     "react-popover": "^0.4.4",
     "react-router": "^2.2.2",
-    "reactbits-input": "^0.0.10",
+    "reactbits-input": "^0.0.11",
     "reflexbox": "^1.1.2",
     "tus-js-client": "^1.1.4"
   },
