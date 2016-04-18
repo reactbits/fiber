@@ -43,7 +43,7 @@
     "react-bootstrap": "^0.28.5",
     "react-dom": "^15.0.1",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.10.32",
+    "react-markdown2": "^0.10.33",
     "react-popover": "^0.4.4",
     "react-router": "^2.2.4",
     "reactbits-input": "^0.0.11",
