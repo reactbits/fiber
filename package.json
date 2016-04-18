@@ -51,7 +51,7 @@
     "tus-js-client": "^1.1.4"
   },
   "devDependencies": {
-    "http-proxy-middleware": "^0.13.0",
+    "http-proxy-middleware": "^0.14.0",
     "make-reducer": "^0.4.5",
     "react-devpack": "^0.1.19",
     "react-redux": "^4.4.5",
