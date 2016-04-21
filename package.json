@@ -53,7 +53,7 @@
   "devDependencies": {
     "http-proxy-middleware": "^0.14.0",
     "make-reducer": "^0.4.5",
-    "react-devpack": "^0.1.19",
+    "react-devpack": "^0.1.20",
     "react-redux": "^4.4.5",
     "redux": "^3.5.1",
     "redux-devtools": "^3.2.0",
