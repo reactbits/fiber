@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 import tus from 'tus-js-client';
 // import Upload from 'component-upload';
 import _ from 'lodash';

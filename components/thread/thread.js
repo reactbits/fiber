@@ -5,7 +5,7 @@ import { renderActions } from '../message/action';
 import ContributorList from './contributors';
 import Avatar from '../avatar';
 import Day from './day';
-import style from './style';
+import style from './style.scss';
 import moment from 'moment';
 import observable from 'observable';
 import _ from 'lodash';

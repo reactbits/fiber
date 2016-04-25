@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { Input } from '../common';
 import Help from '../markdown/help';
 import UploadButton from './uploadbutton';
-import style from './style';
+import style from './style.scss';
 import _ from 'lodash';
 
 // TODO render user avatar

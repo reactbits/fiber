@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import ImageLoader from 'react-imageloader';
 import { Spinner } from '../common';
-import style from './style';
+import style from './style.scss';
 import _ from 'lodash';
 import is from 'is_js';
 import gravatarURL from './gravatar';

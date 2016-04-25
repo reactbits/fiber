@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Avatar from '../avatar';
-import style from './style';
+import style from './style.scss';
 import _ from 'lodash';
 
 export class ContributorList extends Component {

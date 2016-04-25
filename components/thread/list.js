@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Avatar from '../avatar';
 import Thread from './thread';
-import style from './style';
+import style from './style.scss';
 import moment from 'moment';
 import _ from 'lodash';
 

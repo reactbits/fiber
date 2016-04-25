@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Flex, Box } from 'reflexbox';
 import { Modal, Button } from 'react-bootstrap';
 import { Form, Input } from 'reactbits-input';
-import style from './style';
+import style from './style.scss';
 
 class Dialog extends Component {
 	constructor(props) {

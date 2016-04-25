@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import style from './style';
+import style from './style.scss';
 import moment from 'moment';
 import { Counter } from '../message';
 

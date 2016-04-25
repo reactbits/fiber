@@ -31,7 +31,7 @@ import {
 	createThread,
 } from './actions';
 import _ from 'lodash';
-import style from './style';
+import style from './style.scss';
 
 class App extends Component {
 	state = {

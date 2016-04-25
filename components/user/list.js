@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from '../avatar';
-import style from './style';
+import style from './style.scss';
 
 export function UserList(props) {
 	const users = props.users || [];

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import style from './style';
+import style from './style.scss';
 import _ from 'lodash';
 import { NavItem } from '../common';
 

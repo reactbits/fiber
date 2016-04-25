@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import css from 'loaders.css/src/loaders';
-import styles from './style';
+import css from 'loaders.css/src/loaders.scss';
+import styles from './style.scss';
 import _ from 'lodash';
 
 // const defaultType = 'ball-beat';

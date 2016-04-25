@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './style';
+import style from './style.scss';
 import { ContextMenu } from '../common';
 
 function helpContent() {

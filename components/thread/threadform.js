@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Input } from '../common';
 import MessageInput from '../message/messageinput';
-import style from './style';
+import style from './style.scss';
 
 export class ThreadForm extends Component {
 	constructor(props) {

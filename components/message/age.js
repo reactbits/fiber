@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
-import style from './style';
+import style from './style.scss';
 import _ from 'lodash';
 
 const isToday = (value) => {

@@ -6,7 +6,7 @@ import UserName from './username';
 import Age from './age';
 import MessageInput from './messageinput';
 import { renderActions } from './action';
-import style from './style';
+import style from './style.scss';
 import { promiseOnce, getOrFetch } from '../util';
 import _ from 'lodash';
 
@@ -181,9 +181,9 @@ export class Message extends Component {
 					</div>
 					{
 						this.state.collapsed ? null :
-						<div {...bodyProps}>
-							<Markdown source={data.body} />
-						</div>
+							<div {...bodyProps}>
+								<Markdown source={data.body} />
+							</div>
 					}
 					{this.renderReplyInput()}
 					{this.renderEditor()}

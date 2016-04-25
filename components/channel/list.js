@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Channel from './channel';
 import newChannelDialog from './addchannel';
-import style from './style';
+import style from './style.scss';
 import { NavSection, NavBody, NavHeader, NavHeaderButtons, PlusButton } from '../common';
 
 export const ChannelList = (props) => {
