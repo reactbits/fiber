@@ -1,6 +1,6 @@
 {
   "name": "react-fiber",
-  "version": "0.2.74",
+  "version": "0.2.75",
   "description": "React components to use in messaging applications.",
   "main": "lib/index.js",
   "scripts": {
