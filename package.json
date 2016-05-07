@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "make-reducer": "^0.4.5",
-    "react-devpack": "^0.1.26",
+    "react-devpack": "^0.1.27",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-devtools": "^3.2.0",
