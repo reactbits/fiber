@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 5.9.0
+- 6.1.0
 env:
   global:
   - GH_REF: github.com/reactbits/fiber.git
