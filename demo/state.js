@@ -5,17 +5,41 @@ import { updateArray } from 'update-it';
 
 const timeline = [
 	// previous year
-	moment().subtract(1, 'years').subtract(45, 'minutes').toDate(),
-	moment().subtract(1, 'years').subtract(53, 'minutes').toDate(),
+	moment()
+		.subtract(1, 'years')
+		.subtract(45, 'minutes')
+		.toDate(),
+	moment()
+		.subtract(1, 'years')
+		.subtract(53, 'minutes')
+		.toDate(),
 	// previous week
-	moment().subtract(7, 'days').subtract(45, 'minutes').toDate(),
-	moment().subtract(7, 'days').subtract(53, 'minutes').toDate(),
+	moment()
+		.subtract(7, 'days')
+		.subtract(45, 'minutes')
+		.toDate(),
+	moment()
+		.subtract(7, 'days')
+		.subtract(53, 'minutes')
+		.toDate(),
 	// yesterday
-	moment().subtract(2, 'days').subtract(45, 'minutes').toDate(),
-	moment().subtract(2, 'days').subtract(53, 'minutes').toDate(),
+	moment()
+		.subtract(2, 'days')
+		.subtract(45, 'minutes')
+		.toDate(),
+	moment()
+		.subtract(2, 'days')
+		.subtract(53, 'minutes')
+		.toDate(),
 	// today
-	moment().subtract(1, 'days').subtract(32, 'minutes').toDate(),
-	moment().subtract(1, 'days').subtract(42, 'minutes').toDate(),
+	moment()
+		.subtract(1, 'days')
+		.subtract(32, 'minutes')
+		.toDate(),
+	moment()
+		.subtract(1, 'days')
+		.subtract(42, 'minutes')
+		.toDate(),
 ];
 
 export function nextDate(i) {
