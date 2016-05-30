@@ -38,7 +38,7 @@
     "md5": "^2.1.0",
     "moment": "^2.13.0",
     "observable": "^2.1.4",
-    "query-string": "^4.1.0",
+    "query-string": "^4.2.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",
