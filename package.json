@@ -43,7 +43,7 @@
     "react-bootstrap": "^0.29.5",
     "react-dom": "^15.2.1",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.10.45",
+    "react-markdown2": "^0.10.47",
     "react-popover": "^0.4.4",
     "react-router": "^2.5.2",
     "reactbits-input": "^0.0.16",
@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "make-reducer": "^0.4.5",
-    "react-devpack": "^0.1.43",
+    "react-devpack": "^0.1.44",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-devtools": "^3.3.1",
