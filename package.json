@@ -40,7 +40,7 @@
     "observable": "^2.1.4",
     "query-string": "^4.2.2",
     "react": "^15.2.1",
-    "react-bootstrap": "^0.29.5",
+    "react-bootstrap": "^0.30.0",
     "react-dom": "^15.2.1",
     "react-imageloader": "^2.1.0",
     "react-markdown2": "^0.10.48",
