@@ -1,6 +1,5 @@
 import store from './store';
-import * as actions from './state';
-const { nextDate } = actions;
+import { actions, nextDate } from './state';
 import { randomUser, randomJoke } from './api';
 import _ from 'lodash';
 

@@ -119,6 +119,10 @@ const initialState = {
 	],
 };
 
+function rnd(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function removeById(list, id) {
 	return list.filter(t => t.id !== id);
 }
@@ -133,65 +137,68 @@ function replaceById(list, obj) {
 	return list;
 }
 
-export const reducer = makeReducer(initialState);
-
-export const addUser = reducer.on('ADD_USER', (state, user) => {
-	const list = [...state.users, user];
-	return { ...state, users: list };
-});
-
-export const selectChannel = reducer.on('SELECT_CHANNEL', (state, selectedChannel) => { // eslint-disable-line
-	return { ...state, selectedChannel };
-});
-
-export const addChannel = reducer.on('ADD_CHANNEL', (state, cn) => {
-	const t = { ...cn, id: state.channels.length + 1 };
-	return { ...state, channels: [...state.channels, t] };
-});
-
-export const addThread = reducer.on('ADD_THREAD', (state, thread) => {
-	const threads = [...state.threads, thread];
-	return { ...state, threads };
-});
-
-function rnd(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function setThread(state, msg) {
 	if (msg.thread_id) return msg;
 	const i = rnd(0, state.threads.length - 1);
 	return { ...msg, thread_id: state.threads[i].id };
 }
 
-export const addMessage = reducer.on('ADD_MESSAGE', (state, message) => {
-	const msg = setThread(state, message);
-	const threads = state.threads.map(t => {
-		if (t.id !== msg.thread_id) return t;
-		if (msg.in_reply_to) {
-			const messages = updateArray(t.messages, m => {
-				const replies = [...(m.replies || []), msg];
-				return { ...m, replies };
-			}, m => m.hasOwnProperty('body') && m.id === msg.in_reply_to);
+export const actions = {
+	addUser(state, user) {
+		const list = [...state.users, user];
+		return { ...state, users: list };
+	},
+
+	selectChannel(state, selectedChannel) {
+		return { ...state, selectedChannel };
+	},
+
+	addChannel(state, cn) {
+		const t = { ...cn, id: state.channels.length + 1 };
+		return { ...state, channels: [...state.channels, t] };
+	},
+
+	removeChannel(state, id) {
+		return { ...state, channels: removeById(state.channels, id) };
+	},
+
+	addThread(state, thread) {
+		const threads = [...state.threads, thread];
+		return { ...state, threads };
+	},
+
+
+	addMessage(state, message) {
+		const msg = setThread(state, message);
+		const threads = state.threads.map(t => {
+			if (t.id !== msg.thread_id) return t;
+			if (msg.in_reply_to) {
+				const messages = updateArray(t.messages, m => {
+					const replies = [...(m.replies || []), msg];
+					return { ...m, replies };
+				}, m => m.hasOwnProperty('body') && m.id === msg.in_reply_to);
+				return { ...t, messages };
+			}
+			return { ...t, messages: [...t.messages, msg] };
+		});
+		return { ...state, threads };
+	},
+
+	removeMessage(state, id) {
+		const threads = state.threads.map(t => {
+			const messages = removeById(t.messages, id);
 			return { ...t, messages };
-		}
-		return { ...t, messages: [...t.messages, msg] };
-	});
-	return { ...state, threads };
-});
+		});
+		return { ...state, threads };
+	},
 
-export const removeMessage = reducer.on('REMOVE_MESSAGE', (state, id) => {
-	const threads = state.threads.map(t => {
-		const messages = removeById(t.messages, id);
-		return { ...t, messages };
-	});
-	return { ...state, threads };
-});
+	updateMessage(state, msg) {
+		const threads = state.threads.map(t => {
+			if (t.id !== msg.thread_id) return t;
+			return { ...t, messages: replaceById(t.messages, msg) };
+		});
+		return { ...state, threads };
+	},
+};
 
-export const updateMessage = reducer.on('UPDATE_MESSAGE', (state, msg) => {
-	const threads = state.threads.map(t => {
-		if (t.id !== msg.thread_id) return t;
-		return { ...t, messages: replaceById(t.messages, msg) };
-	});
-	return { ...state, threads };
-});
+export const reducer = makeReducer(initialState, actions);

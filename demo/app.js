@@ -20,7 +20,7 @@ import {
 import { connect, Provider } from 'react-redux';
 import DevTools from './devtools';
 import store from './store';
-import * as actions from './state';
+import { actions } from './state';
 import {
 	selectThread,
 	fetchMessageUser,
@@ -46,6 +46,7 @@ class App extends Component {
 			selectedChannel: props.selectedChannel,
 			selectChannel: (cn) => dispatch(actions.selectChannel(cn)),
 			createChannel: (cn) => dispatch(actions.addChannel(cn)),
+			removeChannel: (cn) => dispatch(actions.removeChannel(cn.id)),
 		};
 		const threadListProps = {
 			threads: props.threads,
