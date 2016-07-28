@@ -6,18 +6,21 @@
 
 .nav_item {
 	margin: 4px 0;
-}
 
-.nav_item a {
-	padding: .25em 0.5em;
-	border-radius: .5em;
-	color: #333;
-	cursor: pointer;
-	text-decoration: none;
-	line-height: 1;
+	a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: .25em 0.5em;
+		border-radius: .5em;
+		color: #333;
+		cursor: pointer;
+		text-decoration: none;
+		line-height: 1;
 
-	&:hover {
-		background-color: #ccc;
+		&:hover {
+			background-color: #ccc;
+		}
 	}
 }
 
