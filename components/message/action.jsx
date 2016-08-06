@@ -1,9 +1,9 @@
+import _ from 'lodash';
 import React from 'react';
 import classNames from 'classnames';
-import style from './style.scss';
-import _ from 'lodash';
-import Counter from './counter';
 import { hint } from 'css-effects';
+import style from './style.scss';
+import Counter from './counter';
 
 // TODO configurable icons
 export const ionIconSet = {

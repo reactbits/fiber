@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import style from './style.scss';
 import moment from 'moment';
+import style from './style.scss';
 import { Counter } from '../message';
 
 // TODO move to common components
@@ -36,7 +36,7 @@ const formatDay = (time) => {
 	return m.format('MMMM D YYYY, dddd');
 };
 
-export const Day = (props) => {
+export default function Day(props) {
 	const className = classNames(style.day);
 	const text = formatDay(props.time);
 	return (
@@ -47,6 +47,4 @@ export const Day = (props) => {
 			</a>
 		</div>
 	);
-};
-
-export default Day;
+}

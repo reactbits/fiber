@@ -1,9 +1,2 @@
-import Channel from './channel';
-import ChannelList from './list';
-
-export {
-	Channel,
-	ChannelList,
-};
-
-export default ChannelList;
+export { default as Channel } from './channel';
+export { default as ChannelList } from './list';

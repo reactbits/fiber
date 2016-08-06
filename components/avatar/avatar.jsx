@@ -1,12 +1,12 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import ImageLoader from 'react-imageloader';
+import { hover, hint } from 'css-effects';
+import is from 'is_js';
 import { Spinner } from '../common';
 import style from './style.scss';
-import _ from 'lodash';
-import is from 'is_js';
 import gravatarURL from './gravatar';
-import { hover, hint } from 'css-effects';
 import { toPromise } from '../util';
 
 const avatarSizes = {
@@ -70,7 +70,7 @@ function makeWrapper(props) {
 	};
 }
 
-export class Avatar extends Component {
+export default class Avatar extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -98,7 +98,7 @@ export class Avatar extends Component {
 	}
 
 	online() {
-		if (this.props.hasOwnProperty('online')) {
+		if (this.props.online) {
 			return this.props.online;
 		}
 		const user = this.state.user;
@@ -199,5 +199,3 @@ export class Avatar extends Component {
 		);
 	}
 }
-
-export default Avatar;

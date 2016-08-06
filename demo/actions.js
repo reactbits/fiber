@@ -1,14 +1,14 @@
+import _ from 'lodash';
 import store from './store';
 import { actions, nextDate } from './state';
 import { randomUser, randomJoke } from './api';
-import _ from 'lodash';
 
 function randomIndex(arr) {
 	return Math.floor(Math.random() * arr.length);
 }
 
 function rnd(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
+	return Math.floor(Math.random() * ((max - min) + 1)) + min;
 }
 
 // TODO support multiple sources

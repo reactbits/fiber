@@ -1,11 +1,3 @@
-import Thread from './thread';
-import ThreadList from './list';
-import ThreadForm from './threadform';
-
-export {
-	Thread,
-	ThreadList,
-	ThreadForm,
-};
-
-export default Thread;
+export { default, default as Thread } from './thread';
+export { default as ThreadList } from './list';
+export { default as ThreadForm } from './threadform';

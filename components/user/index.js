@@ -1,4 +1,2 @@
-import UserList from './list';
-import UserMenu from './menu.js';
-export { UserList, UserMenu };
-export default UserList;
+export { default, default as UserList } from './list';
+export { default as UserMenu } from './menu.jsx';

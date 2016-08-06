@@ -4,7 +4,7 @@ import { Input } from '../common';
 import MessageInput from '../message/messageinput';
 import style from './style.scss';
 
-export class ThreadForm extends Component {
+export default class ThreadForm extends Component {
 	constructor(props) {
 		super(props);
 
@@ -102,5 +102,3 @@ export class ThreadForm extends Component {
 		);
 	}
 }
-
-export default ThreadForm;

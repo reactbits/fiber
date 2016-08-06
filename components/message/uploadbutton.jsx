@@ -1,8 +1,8 @@
+import _ from 'lodash';
 import React from 'react';
-import style from './style.scss';
 import tus from 'tus-js-client';
 // import Upload from 'component-upload';
-import _ from 'lodash';
+import style from './style.scss';
 
 // TODO configurable upload client: tus, component-upload, etc
 
@@ -26,7 +26,7 @@ function uploadFile(file, callback = _.noop) {
 			callback(null, err);
 		},
 		onProgress(bytesUploaded, bytesTotal) {
-			const percentage = (bytesUploaded / bytesTotal * 100).toFixed(2);
+			const percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
 			console.log('progress %s/%s, %s', bytesUploaded, bytesTotal, `${percentage}%`);
 		},
 		onSuccess() {

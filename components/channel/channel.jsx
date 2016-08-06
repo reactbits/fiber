@@ -1,7 +1,7 @@
+import _ from 'lodash';
 import React from 'react';
 import classNames from 'classnames';
 import style from './style.scss';
-import _ from 'lodash';
 import { NavItem } from '../common';
 
 function removeButton(onClick) {
@@ -9,7 +9,7 @@ function removeButton(onClick) {
 }
 
 // TODO render channel actions
-export function Channel(props) {
+export default function Channel(props) {
 	const canRemove = _.isFunction(props.remove);
 	const className = classNames(style.channel, {
 		[style.selected_channel]: props.selected,
@@ -37,5 +37,3 @@ export function Channel(props) {
 		</NavItem>
 	);
 }
-
-export default Channel;

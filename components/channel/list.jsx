@@ -6,7 +6,7 @@ import newChannelDialog from './addchannel';
 import style from './style.scss';
 import { NavSection, NavBody, NavHeader, NavHeaderButtons, PlusButton } from '../common';
 
-export function ChannelList(props) {
+export default function ChannelList(props) {
 	const className = classNames(props.className, style.channel_list);
 	const selectedId = (props.selectedChannel || {}).id;
 	const channels = props.channels.map((cn, i) => {
@@ -36,5 +36,3 @@ export function ChannelList(props) {
 		</NavSection>
 	);
 }
-
-export default ChannelList;

@@ -1,10 +1,10 @@
-import Markdown from './markdown';
-import Avatar from './avatar';
-import Message from './message';
-import { Thread, ThreadList, ThreadForm } from './thread';
-import { Channel, ChannelList } from './channel';
-import { UserList, UserMenu } from './user';
-import {
+export { default as Markdown } from './markdown';
+export { default as Avatar } from './avatar';
+export { default as Message } from './message';
+export { Thread, ThreadList, ThreadForm } from './thread';
+export { Channel, ChannelList } from './channel';
+export { UserList, UserMenu } from './user';
+export {
 	Spinner,
 	ContextMenu,
 	ContextMenuItem,
@@ -15,25 +15,3 @@ import {
 	IconButton,
 	PlusButton,
 } from './common';
-
-export {
-	Markdown,
-	Avatar,
-	Message,
-	Thread,
-	ThreadList,
-	ThreadForm,
-	Channel,
-	ChannelList,
-	UserList,
-	UserMenu,
-	Spinner,
-	ContextMenu,
-	ContextMenuItem,
-	NavSection,
-	NavHeader,
-	NavHeaderButtons,
-	NavItem,
-	IconButton,
-	PlusButton,
-};

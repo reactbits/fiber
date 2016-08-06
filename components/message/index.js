@@ -1,12 +1,4 @@
-import { Message, getTime } from './message';
-import MessageInput from './messageinput';
-import Counter from './counter';
-
-export {
-	Message,
-	MessageInput,
-	Counter,
-	getTime,
-};
-
-export default Message;
+export { Message, getTime } from './message';
+export { default as MessageInput } from './messageinput';
+export { default as Counter } from './counter';
+export { default } from './message';

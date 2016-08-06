@@ -1,4 +1,14 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
+import {
+	Row,
+	Col,
+	Panel,
+	ButtonToolbar,
+	DropdownButton,
+	MenuItem,
+} from 'react-bootstrap';
+import { connect, Provider } from 'react-redux';
 import {
 	ThreadList,
 	ThreadForm,
@@ -9,15 +19,6 @@ import {
 	ContextMenuItem,
 } from '../components';
 import { loaderTypes } from '../components/common/spinner';
-import {
-	Row,
-	Col,
-	Panel,
-	ButtonToolbar,
-	DropdownButton,
-	MenuItem,
-} from 'react-bootstrap';
-import { connect, Provider } from 'react-redux';
 import DevTools from './devtools';
 import store from './store';
 import { actions } from './state';
@@ -30,7 +31,6 @@ import {
 	updateMessage,
 	createThread,
 } from './actions';
-import _ from 'lodash';
 import style from './style.scss';
 
 class App extends Component {

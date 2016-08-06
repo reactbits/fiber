@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import PopoverClass from 'react-popover';
 import styles from './contextmenu.scss';
+
 const popover = React.createFactory(PopoverClass);
 
 export default class ContextMenu extends Component {

@@ -1,6 +1,6 @@
 import React from 'react';
-import style from './style.scss';
 import { hint } from 'css-effects';
+import style from './style.scss';
 
 export default function Counter(props) {
 	const className = props.className || style.message_count;

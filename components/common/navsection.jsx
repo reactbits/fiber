@@ -1,9 +1,9 @@
+import _ from 'lodash';
 import React from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import { hint } from 'css-effects';
 import styles from './navsection.scss';
-import _ from 'lodash';
 
 export function NavItem(props) {
 	const selected = props.selected || location.pathname === props.to;
@@ -67,5 +67,3 @@ export function NavSection(props) {
 		</div>
 	);
 }
-
-export default NavSection;

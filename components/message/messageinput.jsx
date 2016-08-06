@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { Button } from 'react-bootstrap';
@@ -5,12 +6,11 @@ import { Input } from '../common';
 import Help from '../markdown/help';
 import UploadButton from './uploadbutton';
 import style from './style.scss';
-import _ from 'lodash';
 
 // TODO render user avatar
 // TODO configure submit shortcut, ctrl-enter is default
 
-export class MessageInput extends Component {
+export default class MessageInput extends Component {
 	static propTypes = {
 		submit: PropTypes.func,
 		cancel: PropTypes.func,
@@ -112,5 +112,3 @@ export class MessageInput extends Component {
 		);
 	}
 }
-
-export default MessageInput;

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { Avatar, avatarSize } from '../avatar';
@@ -8,7 +9,6 @@ import MessageInput from './messageinput';
 import { renderActions } from './action';
 import style from './style.scss';
 import { promiseOnce, getOrFetch } from '../util';
-import _ from 'lodash';
 
 // TODO unread style
 // TODO custom background

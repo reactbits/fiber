@@ -1,8 +1,8 @@
-import Input from './input';
-import Spinner from './spinner';
-import ContextMenu from './contextmenu.js';
-import ContextMenuItem from './menuitem';
-import {
+export { default as Input } from './input';
+export { default as Spinner } from './spinner';
+export { default as ContextMenu } from './contextmenu.jsx';
+export { default as ContextMenuItem } from './menuitem';
+export {
 	NavSection,
 	NavHeader,
 	NavHeaderButtons,
@@ -11,17 +11,3 @@ import {
 	IconButton,
 	PlusButton,
 } from './navsection';
-
-export {
-	Input,
-	Spinner,
-	ContextMenu,
-	ContextMenuItem,
-	NavSection,
-	NavHeader,
-	NavHeaderButtons,
-	NavBody,
-	NavItem,
-	IconButton,
-	PlusButton,
-};

@@ -1,17 +1,14 @@
+import _ from 'lodash';
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import moment from 'moment';
 import Avatar from '../avatar';
 import Thread from './thread';
 import style from './style.scss';
-import moment from 'moment';
-import _ from 'lodash';
 
-const formatTime = (value) => {
-	if (!value) {
-		return '';
-	}
-	return moment(value).format('HH:mm');
-};
+function formatTime(value) {
+	return value ? moment(value).format('HH:mm') : '';
+}
 
 // TODO reuse rendering of user name from message component
 
@@ -61,7 +58,7 @@ const threadPropNames = [
 	'theme',
 ];
 
-export const ThreadList = (props) => {
+export default function ThreadList(props) {
 	const className = classNames(style.thread_list);
 	// TODO use propTypes of Thread component
 	const options = _.pick(props, ...threadPropNames);
@@ -74,7 +71,7 @@ export const ThreadList = (props) => {
 			{items}
 		</div>
 	);
-};
+}
 
 ThreadList.propTypes = {
 	theme: PropTypes.string,
@@ -83,5 +80,3 @@ ThreadList.propTypes = {
 ThreadList.defaultProps = {
 	theme: 'plain',
 };
-
-export default ThreadList;

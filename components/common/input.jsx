@@ -1,8 +1,8 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import style from './style.scss';
-import _ from 'lodash';
 
-export class Input extends Component {
+export default class Input extends Component {
 	componentDidMount() {
 		if (this.props.focused) {
 			$(this.refs.input).focus();
@@ -39,5 +39,3 @@ export class Input extends Component {
 		return <textarea ref="input" {...attrs} />;
 	}
 }
-
-export default Input;

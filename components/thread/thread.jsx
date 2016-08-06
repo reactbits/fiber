@@ -1,14 +1,14 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import moment from 'moment';
+import observable from 'observable';
 import { Message, MessageInput, getTime, Counter } from '../message';
 import { renderActions } from '../message/action';
 import ContributorList from './contributors';
 import Avatar from '../avatar';
 import Day from './day';
 import style from './style.scss';
-import moment from 'moment';
-import observable from 'observable';
-import _ from 'lodash';
 import {
 	getDay,
 	getMsgDay,
@@ -18,7 +18,7 @@ import {
 } from './util';
 
 // TODO allow to use custom MessageInput component
-export class Thread extends Component {
+export default class Thread extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		topic: PropTypes.string,
@@ -158,5 +158,3 @@ export class Thread extends Component {
 		);
 	}
 }
-
-export default Thread;

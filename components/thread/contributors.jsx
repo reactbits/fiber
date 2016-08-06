@@ -1,9 +1,9 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import Avatar from '../avatar';
 import style from './style.scss';
-import _ from 'lodash';
 
-export class ContributorList extends Component {
+export default class ContributorList extends Component {
 	constructor(props) {
 		super(props);
 		const { users } = props;
@@ -59,5 +59,3 @@ export class ContributorList extends Component {
 		);
 	}
 }
-
-export default ContributorList;
