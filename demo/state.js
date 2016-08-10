@@ -176,7 +176,7 @@ export const actions = {
 				const messages = updateArray(t.messages, m => {
 					const replies = [...(m.replies || []), msg];
 					return { ...m, replies };
-				}, m => m.hasOwnProperty('body') && m.id === msg.in_reply_to);
+				}, m => m.body && m.id === msg.in_reply_to);
 				return { ...t, messages };
 			}
 			return { ...t, messages: [...t.messages, msg] };

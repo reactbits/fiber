@@ -51,6 +51,7 @@
     "tus-js-client": "^1.1.4"
   },
   "devDependencies": {
+    "bootstrap": "^3.3.7",
     "make-reducer": "^0.4.5",
     "react-devpack": "^0.1.51",
     "react-redux": "^4.4.5",

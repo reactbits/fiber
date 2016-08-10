@@ -126,19 +126,20 @@ export default class Thread extends Component {
 				return <Message key={msg.id} {...msgProps} />;
 			};
 
-			let collaseMessages = false;
+			let collapseMessages = false;
 			for (let i = 0; i < messages.length; i++) {
 				const msg = messages[i];
 				const time = getTime(msg);
 				const day = getDay(time);
 				if (moment.isDate(time) && (i === 0 || day !== getMsgDay(messages[i - 1]))) {
-					collaseMessages = isCollapsedDay(time);
+					collapseMessages = isCollapsedDay(time);
 					const dayMessages = getDayMessages(messages, i);
 					const msgcount = countMessages(dayMessages);
 					items.push(makeDay(time, msgcount));
 				}
-				if (collaseMessages) continue;
-				items.push(renderMessage(msg));
+				if (!collapseMessages) {
+					items.push(renderMessage(msg));
+				}
 			}
 
 			const sendMessage = (body) => {
