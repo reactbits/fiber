@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "bootstrap": "^3.3.7",
-    "make-reducer": "^0.4.5",
+    "make-reducer": "^0.5.0",
     "react-devpack": "^0.1.51",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
