@@ -34,11 +34,11 @@
     "is_js": "^0.8.0",
     "jquery": "^3.1.0",
     "loaders.css": "^0.1.2",
-    "lodash": "^4.14.2",
+    "lodash": "^4.15.0",
     "md5": "^2.1.0",
     "moment": "^2.14.1",
     "observable": "^2.1.4",
-    "query-string": "^4.2.2",
+    "query-string": "^4.2.3",
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.2",
     "react-dom": "^15.3.0",
@@ -53,14 +53,14 @@
   "devDependencies": {
     "bootstrap": "^3.3.7",
     "make-reducer": "^0.5.0",
-    "react-devpack": "^0.1.51",
+    "react-devpack": "^0.1.52",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
     "sweetalert": "^1.1.3",
-    "tus-js-client": "^1.1.3",
+    "tus-js-client": "^1.1.4",
     "update-it": "0.1.9"
   }
 }
