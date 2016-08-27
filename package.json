@@ -40,27 +40,27 @@
     "observable": "^2.1.4",
     "query-string": "^4.2.3",
     "react": "^15.3.1",
-    "react-bootstrap": "^0.30.2",
+    "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.1",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.10.53",
+    "react-markdown2": "^0.10.54",
     "react-popover": "^0.4.4",
-    "react-router": "^2.6.1",
+    "react-router": "^2.7.0",
     "reactbits-input": "^0.0.18",
     "reflexbox": "^2.1.0",
-    "tus-js-client": "^1.1.4"
+    "tus-js-client": "^1.2.1"
   },
   "devDependencies": {
     "bootstrap": "^3.3.7",
     "make-reducer": "^0.5.0",
-    "react-devpack": "^0.1.53",
+    "react-devpack": "^0.1.54",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
     "sweetalert": "^1.1.3",
-    "tus-js-client": "^1.1.4",
+    "tus-js-client": "^1.2.1",
     "update-it": "0.1.9"
   }
 }
