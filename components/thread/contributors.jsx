@@ -4,6 +4,8 @@ import Avatar from '../avatar';
 import style from './style.scss';
 
 export default class ContributorList extends Component {
+	mounted = false;
+
 	constructor(props) {
 		super(props);
 		const { users } = props;
@@ -13,32 +15,47 @@ export default class ContributorList extends Component {
 	}
 
 	componentDidMount() {
-		const { users } = this.props;
-		if (_.isFunction(users)) {
-			setTimeout(() => {
-				this.setState({ users: users() });
-			}, 0);
-			this.unsubscribe = users(list => {
-				this.setState({ users: list });
-			});
-		}
+		this.mounted = true;
+		this.update(this.props);
 	}
 
 	componentWillUnmount() {
+		this.mounted = false;
 		if (_.isFunction(this.unsubscribe)) {
 			this.unsubscribe();
 			this.unsubscribe = null;
 		}
 	}
 
-	render() {
-		const { users } = this.props;
-		if (_.isFunction(users)) {
-			setTimeout(() => {
-				this.setState({ users: users() });
-			}, 0);
+	componentWillReceiveProps(nextProps) {
+		this.update(nextProps);
+	}
+
+	update(props) {
+		if (_.isFunction(this.unsubscribe)) {
+			this.unsubscribe();
+			this.unsubscribe = null;
 		}
-		const items = this.state.users.map(user => {
+
+		const { users } = props;
+
+		if (_.isFunction(users)) {
+			const result = users(list => {
+				if (!this.mounted) return;
+				this.setState({ users: list });
+			});
+			if (_.isFunction(result)) {
+				this.unsubscribe = result;
+			} else if (_.isArray(result)) {
+				this.setState({ users: result });
+			}
+		} else {
+			this.setState({ users });
+		}
+	}
+
+	render() {
+		const items = _.map(this.state.users, user => {
 			const avatarProps = {
 				hover: 'grow',
 				user,
