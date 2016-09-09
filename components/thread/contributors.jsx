@@ -4,8 +4,6 @@ import Avatar from '../avatar';
 import style from './style.scss';
 
 export default class ContributorList extends Component {
-	mounted = false;
-
 	constructor(props) {
 		super(props);
 		const { users } = props;
@@ -19,6 +17,10 @@ export default class ContributorList extends Component {
 		this.update(this.props);
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.update(nextProps);
+	}
+
 	componentWillUnmount() {
 		this.mounted = false;
 		if (_.isFunction(this.unsubscribe)) {
@@ -27,9 +29,7 @@ export default class ContributorList extends Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.update(nextProps);
-	}
+	mounted = false;
 
 	update(props) {
 		if (_.isFunction(this.unsubscribe)) {

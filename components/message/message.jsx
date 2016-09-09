@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import Avatar, { avatarSize } from '../avatar';
 import Markdown from 'react-markdown2';
+import Avatar, { avatarSize } from '../avatar';
 import UserName from './username';
 import Age from './age';
 import MessageInput from './messageinput';
