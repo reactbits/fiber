@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from './style.scss';
 import { ContextMenu } from '../common';
 
-function helpContent() {
+function Content() {
 	const quote = '> ';
 	const monospaced = '`';
 	return (
@@ -29,24 +29,16 @@ function helpContent() {
 	);
 }
 
-export default class Help extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			helpVisible: false,
-		};
-	}
-	render() {
-		const menuProps = {
-			button: {
-				className: style.show_help,
-				content: '?',
-			},
-		};
-		return (
-			<ContextMenu {...menuProps}>
-				{helpContent()}
-			</ContextMenu>
-		);
-	}
+export default function Help() {
+	const menuProps = {
+		button: {
+			className: style.show_help,
+			content: '?',
+		},
+	};
+	return (
+		<ContextMenu {...menuProps}>
+			<Content />
+		</ContextMenu>
+	);
 }

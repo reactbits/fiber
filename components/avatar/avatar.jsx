@@ -74,7 +74,6 @@ export default class Avatar extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-		style: PropTypes.object,
 	};
 
 	static defaultProps = {
@@ -121,7 +120,7 @@ export default class Avatar extends Component {
 		const shape = style[props.shape || 'circle'];
 		const hoverEffect = hover(props.hover);
 		const className = classNames(
-			props.className,
+			this.props.className,
 			style.avatar,
 			{
 				[shape]: true,
