@@ -27,7 +27,7 @@ function makeMessage() {
 			time: nextDate(nextId - 1),
 			likes: rnd(0, 10),
 		};
-		if ((nextId & 1) === 0) {
+		if ((nextId & 1) === 0) { // eslint-disable-line
 			msg.user = user;
 		}
 		return msg;

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 import Avatar from '../avatar';
@@ -72,10 +72,6 @@ export default function ThreadList(props) {
 		</div>
 	);
 }
-
-ThreadList.propTypes = {
-	theme: PropTypes.string,
-};
 
 ThreadList.defaultProps = {
 	theme: 'plain',

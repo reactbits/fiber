@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import Avatar, { avatarSize } from '../avatar';
-import Markdown from '../markdown';
+import Markdown from 'react-markdown2';
 import UserName from './username';
 import Age from './age';
 import MessageInput from './messageinput';
@@ -24,7 +24,6 @@ export const getTime = (msg) => {
 export class Message extends Component {
 	static propTypes = {
 		className: PropTypes.string,
-		data: PropTypes.object,
 		avatarSize: Avatar.propTypes.size,
 		isReply: PropTypes.bool,
 		theme: PropTypes.string,
@@ -132,21 +131,20 @@ export class Message extends Component {
 	}
 
 	render() {
-		const props = this.props;
-		const className = classNames(style.message, props.className, style[props.theme], {
-			[style.reply]: !!props.isReply,
+		const className = classNames(style.message, this.props.className, style[this.props.theme], {
+			[style.reply]: !!this.props.isReply,
 		});
-		const data = props.data || props;
+		const data = this.props.data || this.props;
 		const user = data.user;
 		const time = getTime(data);
-		const fetchUser = promiseOnce(data.fetchUser || props.fetchUser, data);
+		const fetchUser = promiseOnce(data.fetchUser || this.props.fetchUser, data);
 		const userName = getOrFetch(fetchUser, user, 'name', 'login');
 
-		const outerAvatar = props.theme === 'github';
+		const outerAvatar = this.props.theme === 'github';
 		const avatarProps = {
 			user: user || fetchUser,
-			size: props.avatarSize,
-			circled: props.theme === 'plain',
+			size: this.props.avatarSize,
+			circled: this.props.theme === 'plain',
 			style: {
 				float: 'left',
 			},
@@ -155,7 +153,7 @@ export class Message extends Component {
 		const bodyProps = {
 			className: classNames(style.message_body),
 			style: {
-				minHeight: avatarSize(props.avatarSize) - 16,
+				minHeight: avatarSize(this.props.avatarSize) - 16,
 			},
 		};
 
@@ -167,7 +165,7 @@ export class Message extends Component {
 		};
 
 		return (
-			<div className={classNames(style.message_wrapper, style[props.theme])}>
+			<div className={classNames(style.message_wrapper, style[this.props.theme])}>
 				{outerAvatar ? <Avatar {...avatarProps} /> : null}
 				<div className={className} data-id={data.id}>
 					{outerAvatar ? null : <Avatar {...avatarProps} />}

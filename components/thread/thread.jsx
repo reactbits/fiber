@@ -21,8 +21,6 @@ import {
 export default class Thread extends Component {
 	static propTypes = {
 		className: PropTypes.string,
-		topic: PropTypes.string,
-		messages: PropTypes.array,
 		avatarSize: Avatar.propTypes.size,
 		fetchUser: PropTypes.func,
 		theme: PropTypes.string,
@@ -80,16 +78,15 @@ export default class Thread extends Component {
 	}
 
 	render() {
-		const props = this.props;
-		const className = classNames(style.thread, props.className);
-		const messages = props.messages || [];
+		const className = classNames(style.thread, this.props.className);
+		const messages = this.props.messages || [];
 		const items = [];
 
 		if (this.state.collapsed) {
 			const users = observable([]);
-			collectContributors(users, messages, props.fetchUser);
+			collectContributors(users, messages, this.props.fetchUser);
 			items.push(
-				<ContributorList key={`cl-${props.id}`} users={users} />
+				<ContributorList key={`cl-${this.props.id}`} users={users} />
 			);
 		} else {
 			const collapseDay = time => {
@@ -108,26 +105,27 @@ export default class Thread extends Component {
 					count: msgcount,
 					onClick: () => collapseDay(time),
 				};
-				return <Day key={`day-${props.id}-${+time}`} {...dayProps} />;
+				return <Day key={`day-${this.props.id}-${+time}`} {...dayProps} />;
 			};
 
+			// TODO make renderMessage as method
 			const renderMessage = (msg) => {
 				const msgProps = {
 					data: msg,
-					avatarSize: props.avatarSize,
-					iconSet: props.iconSet,
-					fetchUser: props.fetchUser,
-					onAction: props.onAction,
-					canExecute: props.canExecute,
-					sendMessage: props.sendMessage,
-					updateMessage: props.updateMessage,
-					theme: props.theme,
+					avatarSize: this.props.avatarSize,
+					iconSet: this.props.iconSet,
+					fetchUser: this.props.fetchUser,
+					onAction: this.props.onAction,
+					canExecute: this.props.canExecute,
+					sendMessage: this.props.sendMessage,
+					updateMessage: this.props.updateMessage,
+					theme: this.props.theme,
 				};
 				return <Message key={msg.id} {...msgProps} />;
 			};
 
 			let collapseMessages = false;
-			for (let i = 0; i < messages.length; i++) {
+			for (let i = 0; i < messages.length; i += 1) {
 				const msg = messages[i];
 				const time = getTime(msg);
 				const day = getDay(time);
@@ -143,12 +141,12 @@ export default class Thread extends Component {
 			}
 
 			const sendMessage = (body) => {
-				if (_.isFunction(props.sendMessage)) {
-					props.sendMessage({ thread_id: props.id, body });
+				if (_.isFunction(this.props.sendMessage)) {
+					this.props.sendMessage({ thread_id: this.props.id, body });
 				}
 			};
 
-			items.push(<MessageInput key={`message-input-${props.id}`} submit={sendMessage} />);
+			items.push(<MessageInput key={`message-input-${this.props.id}`} submit={sendMessage} />);
 		}
 
 		return (

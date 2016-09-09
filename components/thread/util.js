@@ -14,9 +14,9 @@ export function getDayMessages(messages, start) {
 	const msg = messages[start];
 	const result = [msg];
 	const day = getMsgDay(msg);
-	for (let i = start + 1; i < messages.length; i++) {
+	for (let i = start + 1; i < messages.length; i += 1) {
 		if (day !== getMsgDay(messages[i])) {
-			i--;
+			i -= 1;
 			break;
 		}
 		result.push(messages[i]);

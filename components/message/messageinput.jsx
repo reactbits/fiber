@@ -57,24 +57,23 @@ export default class MessageInput extends Component {
 	}
 
 	render() {
-		const props = this.props;
-		const canSubmit = _.isFunction(props.canSubmit) ?
-												props.canSubmit
+		const canSubmit = _.isFunction(this.props.canSubmit) ?
+												this.props.canSubmit
 												: () => this.state.value.length > 0;
 		const submit = () => {
 			const { value } = this.state;
 			if (!value) return;
 			this.setState({ value: '' });
-			props.submit(value);
+			this.props.submit(value);
 		};
 		const inputProps = {
 			className: classNames(style.input, style.message_input),
-			placeholder: props.placeholder || 'Reply...',
+			placeholder: this.props.placeholder || 'Reply...',
 			value: this.state.value,
 			onChange: this.onChange,
 			onFocus: this.onFocus,
 			onBlur: this.onBlur,
-			cancel: props.cancel,
+			cancel: this.props.cancel,
 			submit,
 			focused: this.state.focused,
 		};
@@ -87,7 +86,7 @@ export default class MessageInput extends Component {
 		};
 		const formProps = {
 			className: classNames(style.reply_form, { [style.focused]: this.state.focused }),
-			style: (props.formStyle || {}),
+			style: (this.props.formStyle || {}),
 		};
 		const onUpload = data => {
 			let content = this.state.value || '';
