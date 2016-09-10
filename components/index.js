@@ -5,13 +5,13 @@ export { Thread, ThreadList, ThreadForm } from './thread';
 export { Channel, ChannelList } from './channel';
 export { UserList, UserMenu } from './user';
 export {
-	Spinner,
-	ContextMenu,
-	ContextMenuItem,
-	NavSection,
-	NavHeader,
-	NavHeaderButtons,
-	NavItem,
-	IconButton,
-	PlusButton,
+  Spinner,
+  ContextMenu,
+  ContextMenuItem,
+  NavSection,
+  NavHeader,
+  NavHeaderButtons,
+  NavItem,
+  IconButton,
+  PlusButton,
 } from './common';

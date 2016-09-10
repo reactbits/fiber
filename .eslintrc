@@ -16,9 +16,8 @@
 
   "rules": {
     "id-length": 0,
-    "indent": [2, "tab"],
+    "indent": ["error", 2, {"SwitchCase": 1}],
     "no-console": 0,
-    "no-tabs": 0,
     "no-plusplus": 0,
     "func-names": 0,
     "no-use-before-define": 0,
@@ -26,7 +25,7 @@
     "import/no-extraneous-dependencies": 0,
     "react/no-multi-comp": 0,
     "react/prop-types": 0,
-    "react/jsx-indent": [2, "tab"],
+    "react/jsx-indent": ["error", 2],
     "jsx-a11y/no-static-element-interactions": 0
   }
 }

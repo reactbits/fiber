@@ -2,7 +2,7 @@
 root = true
 
 [*]
-indent_style = tab
+indent_style = space
 indent_size = 2
 end_of_line = crlf
 charset = utf-8
@@ -11,9 +11,3 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
-
-[.*rc]
-indent_style = space
-
-[.json]
-indent_style = space

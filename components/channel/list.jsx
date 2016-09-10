@@ -7,32 +7,32 @@ import style from './style.scss';
 import { NavSection, NavBody, NavHeader, NavHeaderButtons, PlusButton } from '../common';
 
 export default function ChannelList(props) {
-	const className = classNames(props.className, style.channel_list);
-	const selectedId = (props.selectedChannel || {}).id;
-	const channels = props.channels.map((cn, i) => {
-		const cnprops = {
-			key: cn.id || i,
-			data: cn,
-			selected: cn.id === selectedId,
-			select: props.selectChannel,
-			remove: _.isFunction(props.removeChannel) ? props.removeChannel.bind(null, cn) : undefined,
-			to: cn.id && props.basePath ? `${props.basePath}/${cn.id}` : undefined,
-		};
-		return <Channel {...cnprops} />;
-	});
-	const onPlusClick = () => {
-		newChannelDialog(props.createChannel);
-	};
-	return (
-		<NavSection className={className}>
-			<NavHeader title="CHANNELS">
-				<NavHeaderButtons>
-					<PlusButton tip="Create new channel" onClick={onPlusClick} />
-				</NavHeaderButtons>
-			</NavHeader>
-			<NavBody>
-				{channels}
-			</NavBody>
-		</NavSection>
-	);
+  const className = classNames(props.className, style.channel_list);
+  const selectedId = (props.selectedChannel || {}).id;
+  const channels = props.channels.map((cn, i) => {
+    const cnprops = {
+      key: cn.id || i,
+      data: cn,
+      selected: cn.id === selectedId,
+      select: props.selectChannel,
+      remove: _.isFunction(props.removeChannel) ? props.removeChannel.bind(null, cn) : undefined,
+      to: cn.id && props.basePath ? `${props.basePath}/${cn.id}` : undefined,
+    };
+    return <Channel {...cnprops} />;
+  });
+  const onPlusClick = () => {
+    newChannelDialog(props.createChannel);
+  };
+  return (
+    <NavSection className={className}>
+      <NavHeader title="CHANNELS">
+        <NavHeaderButtons>
+          <PlusButton tip="Create new channel" onClick={onPlusClick} />
+        </NavHeaderButtons>
+      </NavHeader>
+      <NavBody>
+        {channels}
+      </NavBody>
+    </NavSection>
+  );
 }
