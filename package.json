@@ -41,7 +41,7 @@
     "query-string": "^4.2.3",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
-    "react-dom": "^15.3.1",
+    "react-dom": "^15.3.2",
     "react-imageloader": "^2.1.0",
     "react-markdown2": "^0.10.57",
     "react-popover": "^0.4.4",
