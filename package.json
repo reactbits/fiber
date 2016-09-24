@@ -47,7 +47,7 @@
     "react-popover": "^0.4.4",
     "react-router": "^2.8.1",
     "reactbits-input": "^0.0.19",
-    "reflexbox": "^2.2.1",
+    "reflexbox": "^2.2.2",
     "tus-js-client": "^1.3.0"
   },
   "devDependencies": {
