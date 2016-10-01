@@ -170,10 +170,10 @@ export const actions = {
 
   addMessage(state, message) {
     const msg = setThread(state, message);
-    const threads = state.threads.map(t => {
+    const threads = state.threads.map((t) => {
       if (t.id !== msg.thread_id) return t;
       if (msg.in_reply_to) {
-        const messages = updateArray(t.messages, m => {
+        const messages = updateArray(t.messages, (m) => {
           const replies = [...(m.replies || []), msg];
           return { ...m, replies };
         }, m => m.body && m.id === msg.in_reply_to);
@@ -185,7 +185,7 @@ export const actions = {
   },
 
   removeMessage(state, id) {
-    const threads = state.threads.map(t => {
+    const threads = state.threads.map((t) => {
       const messages = removeById(t.messages, id);
       return { ...t, messages };
     });
@@ -193,7 +193,7 @@ export const actions = {
   },
 
   updateMessage(state, msg) {
-    const threads = state.threads.map(t => {
+    const threads = state.threads.map((t) => {
       if (t.id !== msg.thread_id) return t;
       return { ...t, messages: replaceById(t.messages, msg) };
     });

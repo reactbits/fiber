@@ -88,7 +88,7 @@ export default class MessageInput extends Component {
       className: classNames(style.reply_form, { [style.focused]: this.state.focused }),
       style: (this.props.formStyle || {}),
     };
-    const onUpload = data => {
+    const onUpload = (data) => {
       let content = this.state.value || '';
       if (content) {
         content += '\r\n';

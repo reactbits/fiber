@@ -5,7 +5,7 @@ import style from './style.scss';
 export function UserList(props) {
   const users = props.users || [];
   const online = users.filter(u => !!u.online).length;
-  const items = users.map(user => {
+  const items = users.map((user) => {
     const avatarProps = {
       user,
       className: style.user_item,

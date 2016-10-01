@@ -160,7 +160,8 @@ export default class Avatar extends Component {
 
     const sourcePromise = toPromise(src);
     if (sourcePromise) {
-      sourcePromise.then(value => {
+      sourcePromise.then((value) => {
+        // TODO fix possible call of setState after unmount
         this.setState({ source: value });
       });
       return empty();
@@ -169,7 +170,8 @@ export default class Avatar extends Component {
     if (!src && this.props.user) {
       const userPromise = toPromise(this.props.user);
       if (userPromise) {
-        userPromise.then(user => {
+        userPromise.then((user) => {
+          // TODO fix possible call of setState after unmount
           this.setState({
             user,
             source: user.avatar_url || user.avatar,

@@ -44,9 +44,9 @@ class App extends Component {
     const channelListProps = {
       channels: props.channels,
       selectedChannel: props.selectedChannel,
-      selectChannel: (cn) => dispatch(actions.selectChannel(cn)),
-      createChannel: (cn) => dispatch(actions.addChannel(cn)),
-      removeChannel: (cn) => dispatch(actions.removeChannel(cn.id)),
+      selectChannel: cn => dispatch(actions.selectChannel(cn)),
+      createChannel: cn => dispatch(actions.addChannel(cn)),
+      removeChannel: cn => dispatch(actions.removeChannel(cn.id)),
     };
     const threadListProps = {
       threads: props.threads,

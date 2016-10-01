@@ -89,12 +89,12 @@ export default class Thread extends Component {
         <ContributorList key={`cl-${this.props.id}`} users={users} />
       );
     } else {
-      const collapseDay = time => {
+      const collapseDay = (time) => {
         const k = `collapsedDay${+time}`;
         this.setState({ [k]: !this.state[k] });
       };
 
-      const isCollapsedDay = time => {
+      const isCollapsedDay = (time) => {
         const k = `collapsedDay${+time}`;
         return !!this.state[k];
       };

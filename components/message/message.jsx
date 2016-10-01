@@ -114,7 +114,7 @@ export class Message extends Component {
     // TODO support data.replies as promise
     const replies = data.replies || [];
 
-    return (this.state.collapsed ? [] : replies).map(d => {
+    return (this.state.collapsed ? [] : replies).map((d) => {
       const replyProps = {
         data: d,
         isReply: true,

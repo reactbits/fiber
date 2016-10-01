@@ -25,7 +25,7 @@ export function getDayMessages(messages, start) {
 }
 
 export function countMessages(messages) {
-  const countIt = m => {
+  const countIt = (m) => {
     let n = 1;
     if (Array.isArray(m.replies)) {
       n += m.replies.reduce((a, b) => a + countIt(b), 0);
@@ -41,7 +41,7 @@ export function collectContributors(users, messages, fetchUser) {
     if (_.find(arr, u => u.id === user.id)) return;
     users([...arr, user]);
   }
-  messages.forEach(m => {
+  messages.forEach((m) => {
     if (_.isObject(m.user)) {
       push(m.user);
     } else if (m.fetchUser || fetchUser) {

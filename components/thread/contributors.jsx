@@ -40,7 +40,7 @@ export default class ContributorList extends Component {
     const { users } = props;
 
     if (_.isFunction(users)) {
-      const result = users(list => {
+      const result = users((list) => {
         if (!this.mounted) return;
         this.setState({ users: list });
       });
@@ -55,7 +55,7 @@ export default class ContributorList extends Component {
   }
 
   render() {
-    const items = _.map(this.state.users, user => {
+    const items = _.map(this.state.users, (user) => {
       const avatarProps = {
         hover: 'grow',
         user,

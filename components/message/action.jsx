@@ -88,11 +88,11 @@ export default Action;
 
 export function renderActions(actions, type, data, options) {
   return Object.keys(actions)
-    .filter(key => {
+    .filter((key) => {
       if (!_.isFunction(options.canExecute)) return true;
       return options.canExecute(type, key, data);
     })
-    .map(key => {
+    .map((key) => {
       const props = {
         data,
         type,

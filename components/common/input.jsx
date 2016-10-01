@@ -13,7 +13,9 @@ export default class Input extends Component {
   input = null;
 
   focus() {
-    findDOMNode(this.input).focus(); // eslint-disable-line
+    if (this.input) {
+      findDOMNode(this.input).focus(); // eslint-disable-line
+    }
   }
 
   render() {
@@ -36,7 +38,7 @@ export default class Input extends Component {
     };
 
     const attrs = {
-      ref: c => { this.input = c; },
+      ref: (c) => { this.input = c; },
       className: props.className || style.input,
       type: 'text',
       onKeyUp,

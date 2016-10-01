@@ -52,10 +52,12 @@ class Dialog extends Component {
 
 export default function newChannelDialog(callback) {
   let wrapper = null;
-  const submit = data => {
-    ReactDOM.unmountComponentAtNode(wrapper);
-    wrapper.remove();
-    callback(data);
+  const submit = (data) => {
+    setTimeout(() => {
+      ReactDOM.unmountComponentAtNode(wrapper);
+      wrapper.remove();
+      callback(data);
+    }, 100);
   };
   wrapper = document.body.appendChild(document.createElement('div'));
   ReactDOM.render(<Dialog submit={submit} />, wrapper);

@@ -15,7 +15,7 @@ function rnd(min, max) {
 let nextId = 1;
 
 function makeMessage() {
-  return randomJoke().then(response => {
+  return randomJoke().then((response) => {
     const data = response.value;
     const { users } = store.getState();
     const i = randomIndex(users);
@@ -52,7 +52,7 @@ function pushMessage(msg) {
 }
 
 function fetchQuote() {
-  makeMessage().then(msg => {
+  makeMessage().then((msg) => {
     const n = rnd(0, 3);
     if (n > 0) {
       // TODO async loading of replies
@@ -69,7 +69,7 @@ function fetchQuote() {
 const maxUsers = 10;
 
 function fetchUser() {
-  randomUser().then(response => {
+  randomUser().then((response) => {
     const data = response.results[0];
     const name = `${data.name.first} ${data.name.last}`;
     const { users } = store.getState();

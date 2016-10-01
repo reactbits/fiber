@@ -106,7 +106,7 @@ const loaders = {
 export const loaderTypes = Object.keys(loaders);
 
 function dots(props) {
-  return _.range(props.dots).map(i => {
+  return _.range(props.dots).map((i) => {
     const style = {};
     const attrs = { style };
     if (props.size) {
