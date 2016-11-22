@@ -36,7 +36,7 @@
     "loaders.css": "^0.1.2",
     "lodash": "^4.17.1",
     "md5": "^2.2.1",
-    "moment": "^2.15.2",
+    "moment": "^2.17.0",
     "observable": "^2.1.4",
     "query-string": "^4.2.3",
     "react": "^15.4.0",
