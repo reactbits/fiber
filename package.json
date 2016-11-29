@@ -61,6 +61,6 @@
     "redux-devtools-log-monitor": "^1.1.1",
     "sweetalert": "^1.1.3",
     "tus-js-client": "^1.4.1",
-    "update-it": "0.2.1"
+    "update-it": "0.2.2"
   }
 }
