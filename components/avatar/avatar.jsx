@@ -121,13 +121,12 @@ export default class Avatar extends Component {
     const hoverEffect = hover(props.hover);
     const className = classNames(
       this.props.className,
-      style.avatar,
-      {
+      style.avatar, {
         [shape]: true,
         [style.online]: this.online(),
         [style.circled]: props.circled,
         [hoverEffect]: true,
-      }
+      },
     );
 
     const src = avatarURL(this.state.source);

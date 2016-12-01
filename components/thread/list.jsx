@@ -62,10 +62,7 @@ export default function ThreadList(props) {
   const className = classNames(style.thread_list);
   // TODO use propTypes of Thread component
   const options = _.pick(props, ...threadPropNames);
-  const items = props.threads.map(t =>
-    <Thread key={t.id} {...t} {...options} />
-    // <Topic key={t.id} thread={t} {...t} onSelect={props.onSelect}/>
-  );
+  const items = props.threads.map(t => <Thread key={t.id} {...t} {...options} />);
   return (
     <div className={className}>
       {items}

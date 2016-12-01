@@ -179,9 +179,9 @@ export class Message extends Component {
           </div>
           {
             this.state.collapsed ? null :
-              <div {...bodyProps}>
-                <Markdown source={data.body} />
-              </div>
+            <div {...bodyProps}>
+              <Markdown source={data.body} />
+            </div>
           }
           {this.renderReplyInput()}
           {this.renderEditor()}

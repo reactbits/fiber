@@ -12,8 +12,10 @@ const devToolsProps = {
   changePositionKey: 'ctrl-q',
 };
 
-export default createDevTools(
+const monitor = (
   <DockMonitor {...devToolsProps}>
     <LogMonitor theme="tomorrow" />
   </DockMonitor>
 );
+
+export default createDevTools(monitor);

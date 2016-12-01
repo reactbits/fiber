@@ -5,7 +5,7 @@ import { reducer } from './state';
 
 const makeStore = compose(
   DevTools.instrument(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
 )(createStore);
 
 const store = makeStore(reducer);

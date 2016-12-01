@@ -37,9 +37,7 @@ function makeMessage() {
 export function fetchMessageUser(msg) {
   const { users } = store.getState();
   const user = _.find(users, u => u.id === msg.user_id);
-  return new Promise(resolve =>
-    setTimeout(() => resolve(user), 100)
-  );
+  return new Promise(resolve => setTimeout(() => resolve(user), 100));
 }
 
 const maxMessages = 10;

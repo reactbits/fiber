@@ -85,9 +85,7 @@ export default class Thread extends Component {
     if (this.state.collapsed) {
       const users = observable([]);
       collectContributors(users, messages, this.props.fetchUser);
-      items.push(
-        <ContributorList key={`cl-${this.props.id}`} users={users} />
-      );
+      items.push(<ContributorList key={`cl-${this.props.id}`} users={users} />);
     } else {
       const collapseDay = (time) => {
         const k = `collapsedDay${+time}`;
