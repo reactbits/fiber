@@ -54,7 +54,7 @@
     "bootstrap": "^3.3.7",
     "make-reducer": "^0.5.0",
     "react-devpack": "^0.2.4",
-    "react-redux": "^4.4.6",
+    "react-redux": "^5.0.0",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
