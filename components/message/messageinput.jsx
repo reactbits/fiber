@@ -48,6 +48,12 @@ export default class MessageInput extends Component {
     this.onBlur = makeFocusTransition(false);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.focused !== nextProps.focused) {
+      this.setState({ focused: nextProps.focused });
+    }
+  }
+
   onChange(event) {
     const value = event.target.value || '';
     if (_.isFunction(this.props.onChange)) {

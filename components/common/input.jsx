@@ -10,11 +10,20 @@ export default class Input extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.focused) {
+      this.focus();
+    }
+  }
+
   input = null;
 
   focus() {
     if (this.input) {
-      findDOMNode(this.input).focus(); // eslint-disable-line
+      const node = findDOMNode(this.input);
+      if (node) {
+        node.focus();
+      }
     }
   }
 
@@ -22,9 +31,9 @@ export default class Input extends Component {
     // eslint-disable-next-line no-unused-vars
     const { cancel, submit, focused, ...props } = this.props || {};
 
-    const onKeyUp = (e) => {
-      if (e.which === 27) {
-        const input = $(e.target);
+    const onKeyUp = (event) => {
+      if (event.which === 27) {
+        const input = $(event.target);
         input.blur();
         if (_.isFunction(props.cancel)) {
           cancel();
@@ -32,9 +41,13 @@ export default class Input extends Component {
         }
         return;
       }
-      if (e.ctrlKey && e.which === 13 && _.isFunction(submit)) {
+      if (event.ctrlKey && event.which === 13 && _.isFunction(submit)) {
         submit();
       }
+    };
+
+    const onMouseDown = () => {
+      this.focus();
     };
 
     const attrs = {
@@ -42,7 +55,7 @@ export default class Input extends Component {
       className: props.className || style.input,
       type: 'text',
       onKeyUp,
-      autoFocus: true,
+      onMouseDown,
       ...props,
     };
 

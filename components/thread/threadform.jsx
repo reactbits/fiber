@@ -14,30 +14,32 @@ export default class ThreadForm extends Component {
       subjectFocused: false,
       bodyFocused: false,
     };
-
-    this.onSubjectChange = this.onSubjectChange.bind(this);
-    this.onBodyChange = this.onBodyChange.bind(this);
-
-    const self = this;
-    function makeTransition(state) {
-      return () => {
-        self.setState(state);
-      };
-    }
-    this.onSubjectFocus = makeTransition({ subjectFocused: true });
-    this.onSubjectBlur = makeTransition({ subjectFocused: false });
-    this.onBodyFocus = makeTransition({ bodyFocused: true });
-    this.onBodyBlur = makeTransition({ bodyFocused: false });
   }
 
-  onSubjectChange(event) {
+  onSubjectFocus = () => {
+    this.setState({ subjectFocused: true });
+  };
+
+  onSubjectBlur = () => {
+    this.setState({ subjectFocused: false });
+  };
+
+  onBodyFocus = () => {
+    this.setState({ bodyFocused: true });
+  };
+
+  onBodyBlur = () => {
+    this.setState({ bodyFocused: false });
+  };
+
+  onSubjectChange = (event) => {
     const value = event.target.value || '';
     this.setState({ subject: value });
-  }
+  };
 
-  onBodyChange(body) {
+  onBodyChange = (body) => {
     this.setState({ body });
-  }
+  };
 
   render() {
     const props = this.props;
@@ -63,6 +65,7 @@ export default class ThreadForm extends Component {
       onChange: this.onSubjectChange,
       onFocus: this.onSubjectFocus,
       onBlur: this.onSubjectBlur,
+      focused: this.state.subjectFocused,
     };
     const bodyProps = {
       placeholder: 'Write your message here...',
@@ -76,6 +79,7 @@ export default class ThreadForm extends Component {
         margin: '0px',
         padding: '0px',
       },
+      focused: this.state.bodyFocused,
     };
     const formProps = {
       className: style.thread_form,
