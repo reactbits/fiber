@@ -9,7 +9,7 @@ import { NavSection, NavBody, NavHeader, NavHeaderButtons, PlusButton } from '..
 export default function ChannelList(props) {
   const className = classNames(props.className, style.channel_list);
   const selectedId = (props.selectedChannel || {}).id;
-  const channels = props.channels.map((cn, i) => {
+  const channels = _.map(props.channels, (cn, i) => {
     const cnprops = {
       key: cn.id || i,
       data: cn,
