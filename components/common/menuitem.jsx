@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import styles from './contextmenu.scss';
+import styles from './contextMenuStyle.scss';
 
 export default class MenuItem extends Component {
   renderContent() {

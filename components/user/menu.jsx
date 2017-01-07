@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Avatar from '../avatar';
 import { ContextMenu } from '../common';
-import style from './menu.scss';
+import style from './menuStyle.scss';
 
 // TODO use UserName component to render user name
 
