@@ -19,6 +19,8 @@ export default class MessageInput extends Component {
 
   static defaultProps = {
     focused: false,
+    submit: _.noop,
+    cancel: _.noop,
   };
 
   constructor(props) {

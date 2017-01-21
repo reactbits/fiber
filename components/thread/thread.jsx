@@ -31,6 +31,8 @@ export default class Thread extends Component {
     topic: '',
     messages: [],
     theme: 'plain',
+    avatarSize: 'normal',
+    fetchUser: null,
   };
 
   constructor(props) {
