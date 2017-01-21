@@ -43,9 +43,9 @@
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
     "react-imageloader": "^2.1.0",
-    "react-markdown2": "^0.11.4",
+    "react-markdown2": "^0.11.5",
     "react-popover": "^0.4.4",
-    "react-router": "^3.0.1",
+    "react-router": "^3.0.2",
     "reactbits-input": "^0.0.24",
     "reflexbox": "^2.2.3",
     "tus-js-client": "^1.4.2"
@@ -53,7 +53,7 @@
   "devDependencies": {
     "bootstrap": "^3.3.7",
     "make-reducer": "^0.5.1",
-    "react-devpack": "^0.2.13",
+    "react-devpack": "^0.2.15",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.2",
